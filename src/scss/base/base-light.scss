@@ -1,0 +1,311 @@
+/*
+CSS file for light theme overrides
+*/
+body:has(.theme.light) {
+  --bg: #eeeeee;
+  --color: #333333;
+  background-color: var(--bg);
+  color: var(--color);
+}
+
+.theme.light {
+  .affected-assets-table .soca-table {
+    background-color: transparent;
+  }
+  
+  .highcharts-axis-labels text {
+      font-size: 0.75em;
+      fill: #333 !important;
+  }
+}
+
+.app-container {
+  &:has(.theme-container-light) {
+    background-color: #fafafa;
+    --chart-selected-source-label: '#333'
+    .highcharts-axis-labels text {
+        font-size: 0.75em;
+        fill: #333 !important;
+    }
+  }
+}
+
+.theme.light, .light {
+    --bg: #EEEEEE;
+//    --bg: #DADADA;
+    --color: #333;
+
+    --btnbg: rgba(58, 75, 75, 0.5);
+    --btncolor: #eee;
+    --stripebgeven: rgba(58, 75, 75, 0.1);
+    --stripebgodd: rgba(255, 255, 255, 1);
+
+    .login-form-card {
+        input[type="input"],
+        input[type="password"],
+        input[type="email"] {
+            border: none;
+            color: #5A5A5A !important;
+            background-color: rgb(255, 255, 255) !important;
+            opacity: 1;
+        }  
+    }
+
+    #login-page-forgot-btn {
+        color: var(--textcolor);
+    }
+    /* 
+      Login page is always dark theme as we don't know who is logging and what their preferred theme is 
+      Could change this with a localStorage var
+    */
+    :has(.login-container) {
+        background-color: #3A4B4B;
+        color: #EEE;
+    }
+    
+
+    // .login-form-card {
+    //     background-color: #fff;
+    //     padding: 4px;
+    //     border-radius: 5px;
+    // }
+
+    .sidebar {
+        background-color: #3a4b4b;
+        box-shadow: 0px 0px 29px -8px #000;
+        width: 32px;
+    }
+
+    .topbar {
+        background-color: #3a4b4b;
+        box-shadow: 15px 0px 29px -8px #000;
+        width: 32px;
+    }
+    .card {
+        --bg: #FFFFFF;
+        --color: #333;
+        --textcolor: #5A5A5A;
+        box-shadow: 2px 2px 2px #888888;
+    }
+
+    .dash-cards {
+        // Luke Fix for cards being wonky
+        height: 100%;
+        .chart-card {
+            span {
+                --color: #5A5A5A;
+            }
+        }
+    }
+
+    .soca-table {
+        #map {
+            background-color: transparent;
+            box-shadow: none;
+        }
+    }
+
+    #map {
+        background-color: #ffffff !important;
+        box-shadow: 2px 2px 4px #888888;
+    }
+
+    .title {
+        color: #333;
+    }
+
+    .desc {
+        color: #333;
+    }
+
+    a {
+        color: #333;
+        text-decoration-color: #333;
+    }
+
+    .Toastify__toast {
+        margin-top: 5px;
+        color: #333;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .Toastify__toast .Toastify__close-button {
+        color: #333;
+        opacity: 0.6
+    }
+
+    .highcharts-axis-labels {
+        .highcharts-xaxis-labels {
+            color: #333 !important;
+        }
+    }
+
+    svg {
+     .highcharts-root {
+            text {
+                color: #333;
+            }
+        }   
+    }
+
+    .filter-row {
+        background-color: rgb(252, 252, 252) !important;
+        .selector-body {
+            background-color: rgb(219, 219, 219) !important;
+        }
+    }
+
+    .analyzer {
+        .card {
+          box-shadow: none !important;
+        }
+      }
+    
+      .analyzer-body {
+        .analyzer-textarea-wrapper {
+          margin-top: 10px;
+          .analyzer-textarea {
+            color: #333;
+          }
+        }
+      }
+    
+      .analyzer-body.card {
+        margin-top: 10px !important;
+      }
+    
+      .analyzer-header.card-header {
+        background-color: #d4d4d4 !important;
+      }
+    
+      .analyzer-body.card-body {
+        background-color: #f2f2f2 !important;
+        box-shadow: none !important;
+        .name {
+          color: rgb(255, 153, 0);
+        //   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+          font-weight: bold;
+          svg {
+            fill: rgb(255, 153, 0) !important;
+            color: rgb(255, 153, 0) !important;
+          }
+        }
+      }
+
+      .circular-progress-box {
+        color: #333;
+      }
+
+      .subtabs-row {
+        background-color: #FFFFFF;
+        .tab-btn {
+          color: #333;
+          hr {
+            background-color: #333 !important;
+          }
+        }
+      }
+      .datahelix-affliction-map {
+        background-color: transparent !important;
+        box-shadow: none !important;
+      }
+}
+
+.theme-container-light .card {
+  color: #555 !important;
+  background: var(--dashbkg) !important;
+
+  * {
+    color: inherit;
+  }
+
+  table * {
+    color: inherit !important;
+  }
+
+  .soca-table .control-row * {
+    color: #555 !important;
+  }
+}
+
+/* Luke Dev - Updated some colours and styling for the light theme */
+.theme-container-light  {
+    .title-toolbar .title-row{
+        color:#333!important;
+        background: var(--dashbkg) !important;
+    }
+    
+    .soca-table {
+        .table-search-wrapper {
+            border: 1px solid #d7dadd;
+        }
+        
+        .table-pg-size-select {
+            border: 1px solid #d1d5db;
+            background: none !important;
+            /* border-radius: 6px; */
+            /* padding: 8px 12px; */
+            outline: none;
+            
+            &:focus {
+                border-color: #9ca3af; // slightly darker on focus
+              }
+        }
+    
+    }
+
+    .tabs-row {
+        background: var(--dashbkg) !important;
+        border-bottom: 1px solid #BBB;
+        padding-top: 3px;
+
+        .tab-btn .label  {
+            color:#333!important;
+            /* background-color: rgba(58, 75, 75, 0.2); */
+            border-radius: 6px;
+        }
+
+        .tab-btn hr {
+            /* height: 0!important; */
+            // margin-top: 1px;
+            /* background: transparent !important; */
+            background: #9b7028
+        }
+        
+        .tab-btn hr.selected {
+            background: #e8a83c
+        }
+
+        .soca-select div > div[class*="css-"] {
+            color:#333!important;
+        }
+    }
+    
+    /* .hover-shade.hovered {
+        cursor:pointer;
+        background-color: rgba(58, 75, 75, 0.5);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    } */
+    
+    .hover-chart .highcharts-axis-labels text {
+        stroke: #333 !important
+    }
+}
+
+/**
+  Even the evil React fuckers that think CSS-in-JS is in any way proper coding,
+  they cannot defeat this heavy hacky shit!
+*/
+body:has(.theme-container-light) {
+    div:has(#react-select-3-listbox) {
+        background-color: rgba(58, 75, 75, 0.35)!important;
+         div[class*="css-"] {
+            color:#666!important;
+            font-weight: bold;
+            [aria-selected="true"] {
+                background-color: rgba(58, 75, 75, 0.3);
+                color: rgb(58, 75, 75) !important;
+            }
+         }
+    }
+}

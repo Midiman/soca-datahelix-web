@@ -1,0 +1,337 @@
+  @mixin flex-container($height) {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: $height;
+    gap: 0.5rem 1rem;
+    align-items: flex-start;
+    align-content: flex-start;
+
+    // display: grid;
+    // grid-template-columns: repeat(2, 1fr);
+    // grid-template-rows: auto;
+    // grid-gap: 10px
+  }
+    
+  @mixin flex-item {
+    height: auto;
+    min-height: 68px;
+    align-content: center;
+    width: 49%;
+    flex-basis: auto;
+    // height: auto;
+    // min-height: 68px;
+    // grid-column: span 1;
+    // grid-row: span 1;
+  }
+
+  // Luke Dev - Variable definitions
+  $lightThemeTextColor: #333;
+  $darkThemeColor: white;
+  $error-color: rgb(221, 118, 0);
+
+  .soca-form {
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    border-radius: 6px;
+    width: 100%;
+
+    .textfield {
+      width: 100%;
+      height: 36px;
+      border-radius: 4px;
+      background-color: #cfcfd0;
+      border: transparent;
+      color: #5a5a5a;
+      padding-left: 8px;
+      // box-sizing is added to stop it from increasing the width.
+      -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+      -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+      box-sizing: border-box;         /* Opera/IE 8+ */
+    }
+
+    .textfield:read-only {
+      opacity: 50%;
+      cursor: not-allowed;
+    }
+
+    .radio-item {
+      padding-right: 5px;
+      text-transform: capitalize;
+      margin-left: 0.5rem;
+    }
+
+    .checkbox {
+      input[type="checkbox"] {
+        vertical-align: middle;
+        margin-left: 5px;
+        width: 20px;
+        height: 20px;
+        accent-color: #6a949c;
+      }
+    }
+    .infotip {
+        cursor: pointer;
+        svg {
+          vertical-align: middle;
+        }
+    }
+    .profile-image {
+      margin-bottom: 1rem;
+    }
+
+    #form-button {
+      display: flex;
+      button {
+        background-color: #6a949c;
+        border: transparent;
+        border-radius: 5px;
+        font-size: 1rem;
+        padding: 1em;
+        cursor: pointer;
+        font-weight: 600;
+        color: white;
+      }
+    }
+
+    .tooltip-info .customInfotip {
+      background-color: red !important;
+    }
+
+    h1 {
+      font-size: 2em;
+      line-height: 1.1;
+    }
+
+    hr {
+      width: 90%;
+    }
+
+    // this button should inherit the styling from the base btn class & btn-primary
+    .button-area {
+      text-align: right;
+      // margin-bottom: 5px;
+      padding-top: 0.5rem;
+      border-radius: 4px;
+      height: 45px;
+      // padding-right: 0.5rem;
+      // padding-left: 0.5rem;
+      // background-color: rgba(255, 255, 255, 0.1);
+      button {
+        margin-bottom: 0.5rem;
+      }
+      .submit-button {
+        display: inline-block;
+        float: right;
+      }
+    }
+
+    section {
+      text-align: left;
+      margin: 16px;
+      p {
+        margin-bottom: 4px;
+        margin-top: 4px;
+      }
+    }
+
+    input[type="radio"] {
+      accent-color: #6a949c;
+    }
+  }
+  
+  .soca-form-container {
+    .switch {
+      min-height: auto !important;
+      span {
+        span {
+          background-color: #eee !important;
+          border-color: #eee !important;
+        }
+      }
+    }
+
+    .checkbox {
+      min-height: auto !important;
+    }
+  }
+  
+  .soca-form .switch {
+    .switch {
+      vertical-align: middle;
+      height: 20px !important;
+      width: 32px !important;
+      span {
+        height: 20px !important;
+        width: 20px !important;
+        margin-top: -1px !important;
+      }
+    }
+  
+    .switch-on {
+      span {
+        left: 11px !important;
+      }
+    }
+  
+    .switch-off {
+      span {
+        left: -1px !important;
+      }
+    }
+  }
+  
+  .soca-form-dropdown {
+    width: 100%;
+    max-width: 5em;
+    color: white;
+    border-radius: 4px;
+    border: transparent;
+  }
+  
+  .soca-form select,
+  .soca-form option {
+    padding: 0.5em;
+  }
+  
+  .soca-form .form-section label {
+    margin-top: 10px;
+  }
+  
+  .soca-form .radio-item:not(:first-child) {
+    padding-left: 1rem;
+  }
+  
+  .read-only-indicator {
+    color: orange;
+    vertical-align: top;
+  }
+    
+  .soca-form .empty-form {
+    margin: 2rem;
+  }
+  
+  .soca-form {
+    .form-errors {
+      .errorSymbol {
+        margin-right: 3px;
+      }
+    }
+  }
+
+  // Dark & Light Theming
+
+  .theme.dark, .dark {
+    .soca-form {
+      background-color: #434b4b;
+      .form-errors {
+        color: $error-color;
+      }
+      .textfield {
+        border: transparent;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: $darkThemeColor;
+      }
+
+      .textfield:read-only {
+        opacity: 50%;
+        cursor: not-allowed;
+      }
+
+      .textfield:focus {
+        border: 2px solid #333;
+      }
+    }
+  }
+
+  .dark {
+    // Fixes a Modal input issue
+    .soca-superAdmin-multiStep-wrapper {
+      .soca-form {
+        .textfield {
+          background-color: rgba(255, 255, 255, 0.8) !important;
+          color: $darkThemeColor;
+        }
+      }
+    }
+  }
+
+  .theme.light, .light {
+    .soca-form {
+      .form-errors {
+        color: $error-color;
+      }
+
+      .textfield {
+        border: transparent;
+        background-color: #d8d8d8;
+        color: $lightThemeTextColor;
+      }
+
+      .textfield:focus {
+        border: 1px solid #333;
+      }
+    }
+  }
+  
+  /* large devices */
+  @media (min-width: 640px) {
+    .soca-form {
+      .soca-form-container {
+        @include flex-container(30rem);
+      }
+  
+      .flex-item {
+        @include flex-item;
+        
+      }
+  
+      .inner-flex p {
+        width: 50%;
+        margin: 3em 0;
+      }
+
+    }
+  }
+  
+  /* small devices */
+  @media (max-width: 639px) {
+    .soca-form {
+      width: auto;
+      padding: 0;
+      margin: 0;
+  
+      .form-container {
+        @include flex-container(100%) ;
+      }
+  
+      .flex-item {
+        padding-top: 1em;
+        margin-bottom: 2em;
+        .checkbox {
+          input[type="checkbox"] {
+            width: 100%;
+            height: 20px;
+          }
+        }
+      }
+      .profile-form {
+        .button-area {
+          margin-top: 0;
+          display: flex;
+          flex-direction: column;
+          button {
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+          }
+        }
+      }
+      
+    }
+  
+  }
+  

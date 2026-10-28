@@ -1,0 +1,91 @@
+/**
+  HCChart css
+*/
+/* Wrapping etc for highcharts data labels */
+.highcharts-data-labels span, 
+.highcharts-data-label span {
+  font-family: Arial, "Roboto Light", sans-serif !important;
+  line-height: normal !important;
+  font-size: 0.5em;
+  font-weight:normal;
+}
+
+.highcharts-column-series .highcharts-data-labels span, 
+.highcharts-column-series .highcharts-data-label span {
+  min-width: 40px; 
+  text-align:center;
+}
+
+.highcharts-bar-series .highcharts-data-labels span, 
+.highcharts-bar-series .highcharts-data-label span {
+  min-width: 120px !important; 
+}
+
+.pie-options .highcharts-data-labels span, 
+.pie-options .highcharts-data-label span {  
+  word-break: break-all !important;
+  white-space: normal !important;
+}
+
+.highcharts-column-series .highcharts-data-label span {
+  left: 5 !important;
+  font-weight: bolder !important;
+  text-align: center !important; 
+}
+
+.pie-options .highcharts-data-label span {
+  width: 100px !important; 
+}
+
+/* Wrapping etc for highcharts X Axis labels */
+.highcharts-xaxis-labels span {
+  font-family: Arial, "Roboto Light", sans-serif !important;
+  font-size: 0.70em !important;
+  line-height: normal;
+  min-width: 60px !important; 
+  word-break: break-word !important;
+  white-space: normal !important;
+}
+
+/* Wrapping etc for highcharts Y Axis labels */
+.highcharts-yaxis-labels span {
+  font-family: Arial, "Roboto Light", sans-serif !important;
+  text-align: right;
+  font-size: 0.70em !important;
+  line-height: normal;
+  min-width: 60px !important; 
+  word-break: break-word !important;
+  white-space: normal !important;
+}
+
+.dash-cards-hcchart {
+  border-radius: 6px !important;
+}
+
+.hcchart .highcharts-data-labels text tspan{
+  color: #FFFFE0 !important;
+}
+
+.hcchart .highcharts-data-labels .highcharts-text-outline {
+  visibility: hidden;
+}
+
+.hcchart .highcharts-xaxis-grid .highcharts-grid-line {
+  visibility: hidden;
+}
+
+.hcchart .highcharts-yaxis-grid .highcharts-grid-line {
+  stroke: rgba(192, 192, 192, 0.04);
+}
+
+
+.theme.dark .hcchart .highcharts-tooltip-box {
+  fill: rgba(192, 192, 192, 0.4);;
+  fill-opacity: 0.6;
+  stroke-width: 0;
+}
+
+.theme.dark .hcchart .highcharts-tooltip text {
+  fill: white;
+  text-shadow: 0 0 3px #555;
+}

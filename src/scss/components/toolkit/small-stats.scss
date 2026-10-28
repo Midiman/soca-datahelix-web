@@ -1,0 +1,86 @@
+/**
+ smallstats CSS
+*/
+
+@mixin fadeIn($time) {
+    -webkit-animation: fadein $time; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein $time; /* Firefox < 16 */
+    -ms-animation: fadein $time; /* Internet Explorer */
+    -o-animation: fadein $time; /* Opera < 12.1 */
+    animation: fadein $time;
+  }
+  
+  .dash-cards-smallstats svg {
+    width: 100% !important;
+  }
+
+  .dash-cards .dash-cards-smallstats {
+    height: 120px;
+    // border: 1px solid purple;
+    padding: 0;
+    margin-top: 0;
+  }
+  
+  .dash-cards.dash-cards-smallstats  {
+    border: 1px solid var(--bg);
+    border-radius: 6px;
+    padding: 0 3px;
+    background-color: var(--bg);
+  }
+  
+  .dash-cards.dash-cards-smallstats .card-header {
+    font-size: clamp(0.7em, 1.5cqw, 1.2em) !important;
+    background-color: transparent !important;
+/*    font-size: 1.15cqw !important;
+*/
+    white-space: nowrap;
+    text-align: center;
+  }
+  
+  .dash-cards-smallstats .card-body {
+    padding-top: 3px !important;
+    align-items: middle;
+  }
+  
+  .dash-cards-smallstats .card-body .value.no-previous {
+    line-height: 4rem;
+    font-size: 4rem;
+  }
+
+  .theme.light {
+    .dash-cards-smallstats .card-body .value {
+      // filter: invert(100%)
+    }
+  }
+
+  .dash-cards-smallstats .card-body .value {
+    cursor: default;
+    padding-top: 0.1cqh !important;
+    margin: auto;
+    line-height: 2.5rem;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 3rem;
+/*  font-size: clamp(2rem, calc((0.4593rem + 2.8005vw)), 2rem) !important;
+*/
+    font-weight: bold;
+    text-align: center;
+    @include fadeIn(1.5s);
+  }
+  
+  .dash-cards-smallstats .card-body .value.no-previous {
+    font-size: 5rem;
+  }
+  
+  .dash-cards-smallstats .card-body .previous {
+    /* width: 100%;
+    */
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+  /*  padding-top: 3px;
+    margin: auto 0;
+  */
+    @include fadeIn(1.5s);
+  }
+  

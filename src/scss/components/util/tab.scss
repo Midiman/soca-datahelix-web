@@ -1,0 +1,311 @@
+.tabs-row {
+    background-color: #343a40;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    svg {
+        overflow: hidden;
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+    //PDS pill style - think it's nicer as a cross girder
+    // margin: 0 5px 0 5px !important;
+    // border-radius: 4px;
+}
+
+.tabs-row {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.tabs-row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap!important;
+    align-items: stretch;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.tabs-row > .tab-btn {
+    flex: 0 0 auto;
+    width: auto;
+    white-space: nowrap;
+    padding-top: 2px!important;
+}
+
+.tabs-row .tab-btn {
+    background-color: inherit;
+    border: none;
+    color: rgba(238, 255, 255, 0.7);
+//    color: #ebebeb;
+    opacity: 0.7;
+    padding: 0;
+    font-size: 0.9rem;
+    // box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.28);
+}
+
+.tabs-row .tab-btn-icon {
+    margin-right: 5px;
+    font-size: 1.1rem;
+}
+
+.dh-dcard .card-body {
+    padding-left: 15px;
+    padding-right:15px;
+    padding: inherit;
+}
+
+.dh-dcard.d-flex .card-body {
+    display: flex;
+}
+
+.tabs-row .tab-btn:hover {
+    animation: fadeInOpacity 0.5s;
+    opacity: 1.0;
+}
+
+.tabs-row .tab-btn:focus {
+    outline: none;
+}
+
+.tabs-row .tab-btn.selected {
+    opacity: 1;
+}
+
+.tabs-row .tab-btn.selected:hover {
+    animation: none;
+}
+
+.tabs-row .tab-btn .label {
+    padding: 6px 20px;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.tabs-row .tab-btn.selected .label {
+    color: rgba(238, 255, 255, 0.9);
+//    color: rgba(168, 185, 185, 1);
+//    color: #598f99;
+}
+
+.tabs-row .tab-btn hr {
+    margin: 0;
+    background-color: rgba(238, 255, 255, 0.6);
+//    background-color: #ebebeb;
+    height: 2px;
+    border: none;
+}
+
+.tabs-row .tab-btn hr:hover {
+    animation: fadeInOpacity 0.5s;
+}
+
+.tabs-row .tab-btn .tab-btn-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 15px;
+    cursor: pointer;
+    opacity: 0.7;
+    background-color: transparent;
+    margin-left: 10px;
+    flex-shrink: 0;
+    transition: transform 0.1s ease, opacity 0.15s ease, background-color 0.15s ease;
+    svg {
+      margin-right: 0px !important;
+    }
+}
+
+.tabs-row .tab-btn .tab-btn-close svg {
+    display: block;
+}
+
+.tabs-row .tab-btn .tab-btn-close:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.tabs-row .tab-btn .tab-btn-close:active {
+    transform: scale(0.8);
+}
+
+.tabs-row .tab-btn hr.selected {
+    background-color: rgba(238, 255, 255, 0.9);
+//    background-color: #598f99;
+    animation: none;
+}
+
+.tabs.footer-hr {
+    flex: 1;
+    background-color: rgba(238, 255, 255, 0.6);
+    // background-color: #ebebeb;
+    opacity: 0.7;
+    margin-top: auto;
+    margin-bottom: 0;
+    height: 2px;
+    border: none
+}
+
+.fade-in {
+    animation: fadeIn 2s;
+}
+
+.fade-in-opacity {
+    animation: fadeInOpacity 0.5s;
+}
+
+.fade-in-opacity-2 {
+    animation: fadeInOpacity 2s;
+}
+
+@keyframes fadeInOpacity {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.dh-text-input {
+    height: 36px;
+    color: #FFFFFF;
+    border: transparent;
+    border-radius: 4px;
+    background-color: #5d6166;
+    width: 100%;
+    padding-left: 8px;
+}
+
+.dh-text-input.disabled {
+    opacity: 0.5;
+}
+
+.error-banner {
+    animation: fadeIn 0.5s;
+    display: flex;
+    padding: 8px 16px 8px 12px;
+    background-color: #912929;
+    border-radius: 6px;
+}
+
+.error-banner .icon-container {
+    margin-right: 10px;
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1.2rem;
+}
+
+.error-banner .message-container {
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+// Wrapper sits inline in the .tabs-row alongside regular .tab-btn elements
+.tabs-row .tab-btn-dropdown {
+    position: relative;
+    display: inline-flex;
+}
+
+// The caret icon appended to the trigger label
+.tabs-row .tab-btn-dropdown .tab-btn-caret {
+    margin-left: 5px;
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+.tabs-row .tab-btn-dropdown:hover .tab-btn-dropdown-content-container {
+    display: block;
+}
+
+.tab-btn-dropdown-content-container {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+}
+
+.tab-btn-dropdown-content {
+    margin-top: 2px;
+    min-width: 200px;
+    background-color: #343a40;
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.35);
+    padding: 4px 0;
+}
+
+.tab-btn-dropdown-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: rgba(238, 255, 255, 0.7);
+    opacity: 0.7;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    text-align: left;
+    cursor: pointer;
+    white-space: nowrap;
+
+    svg {
+        margin-right: 5px;
+        font-size: 1.1rem;
+        overflow: hidden;
+        vertical-align: middle;
+        flex-shrink: 0;
+    }
+}
+
+.tab-btn-dropdown-item:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+.tab-btn-dropdown-item:focus {
+    outline: none;
+}
+
+.tab-btn-dropdown-item.selected {
+    opacity: 1;
+    color: rgba(238, 255, 255, 0.9);
+}
+
+.tab-btn-dropdown-item.selected:hover {
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+.tab-component {
+    width: 100%;
+}
+
+.tab-component .invisible {
+    height:0!important;
+    width:0!important;
+    max-height:0;
+    max-width:0;
+    visibility:hidden;
+}
+
+.tab-component .animate {
+   animation: tab-animate 250ms linear;
+}
+
+@keyframes tab-animate {
+  0% {
+    transform:scaleY(0) translateY(-60%);
+  }
+  100% {
+    transform:scaleY(1) translateY(0);
+  }
+}

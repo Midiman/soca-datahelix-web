@@ -1,0 +1,30 @@
+.iframe-container {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: auto;
+}
+
+.iframer {
+  height: 100%;
+
+}
+
+.iframer .card-body {
+  padding: 0 !important;
+}
+
+.iframer .embed {
+  position: absolute;
+  height: 40vh;
+  border-radius: 0px !important;
+  overflow: hidden;
+}
+
+.iframer.card {
+  border: 0px solid rgba(0, 0, 0, 0) !important;
+  background-color: transparent !important;
+}
+
+.iframer-wrapper {
+  padding-right: 0 !important;
+}

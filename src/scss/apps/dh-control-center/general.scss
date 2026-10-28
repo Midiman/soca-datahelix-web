@@ -1,0 +1,237 @@
+#body-base .dhcc-root .card-body {
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+    padding-top: 10px!important;
+    padding-bottom: 10px!important;
+}
+
+.subtabs-row {
+    background-color: #343a40;
+    display: flex;
+    margin-top: 3px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+.subtabs-row .tab-btn {
+    background-color: inherit;
+    border: none;
+    color: rgba(238, 255, 255, 0.7);
+    opacity: 0.7;
+    padding: 0;
+    font-size: 0.9rem;
+    // box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.28);
+}
+
+.subtabs-row .tab-btn-icon {
+    margin-right: 5px;
+    font-size: 1.1rem;
+}
+
+.dh-dcard .card-body {
+    padding-left: 15px;
+    padding-right:15px;
+    padding: inherit;
+}
+
+.dh-dcard.d-flex .card-body {
+    display: flex;
+}
+
+.subtabs-row .tab-btn:hover {
+    animation: fadeInOpacity 0.5s;
+    opacity: 1.0;
+}
+
+.subtabs-row .tab-btn:focus {
+    outline: none;
+}
+
+.subtabs-row .tab-btn.selected {
+    opacity: 1;
+}
+
+.subtabs-row .tab-btn.selected:hover {
+    animation: none;
+}
+
+.subtabs-row .tab-btn .label {
+    padding: 6px 20px ;
+}
+
+.theme.light .subtabs-row .tab-btn .label {
+    color: rgba(0, 0, 0, 1.0);
+}
+
+.theme.light .subtabs-row .tab-btn.selected .label {
+    color: rgb(35 138 138);
+    font-weight: bold;
+}
+
+.theme.dark .subtabs-row .tab-btn.selected .label {
+    color: rgba(238, 255, 255, 0.9);
+}
+
+.subtabs-row .tab-btn hr {
+    margin: 0;
+    height: 2px;
+    border: none;
+}
+
+.theme.dark .subtabs-row .tab-btn hr {
+    background-color: rgba(238, 255, 255, 0.6);
+}
+
+.theme.light .subtabs-row .tab-btn.selected hr {
+    background-color: rgb(35 138 138) !important;
+}
+
+.subtabs-row .tab-btn hr:hover {
+    animation: fadeInOpacity 0.5s;
+}
+
+.subtabs-row .tab-btn hr.selected {
+    animation: none;
+}
+
+.subtabs.footer-hr {
+    flex: 1;
+    opacity: 0.7;
+    margin-top: auto;
+    margin-bottom: 0;
+    height: 2px;
+    border: none
+}
+
+.theme.dark .subtabs.footer-hr {
+    background-color: #ebebeb;
+}
+
+.theme.light .subtabs.footer-hr {
+    background-color: #333;
+}
+
+.fade-in {
+    animation: fadeIn 2s;
+}
+
+.fade-in-opacity {
+    animation: fadeInOpacity 0.5s;
+}
+
+.fade-in-opacity-2 {
+    animation: fadeInOpacity 2s;
+}
+
+@keyframes fadeInOpacity {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.dh-text-input {
+    height: 36px;
+    color: #FFFFFF;
+    border: transparent;
+    border-radius: 4px;
+    background-color: #5d6166;
+    width: 100%;
+    padding-left: 8px;
+}
+
+.dh-text-input.disabled {
+    opacity: 0.5;
+}
+
+.error-banner {
+    animation: fadeIn 0.5s;
+    display: flex;
+    padding: 8px 16px 8px 12px;
+    background-color: #912929;
+    border-radius: 6px;
+}
+
+.error-banner .icon-container {
+    margin-right: 10px;
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1.2rem;
+}
+
+.error-banner .message-container {
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.refresh-btn {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 5px;
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+    font-size: 1.1rem;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.theme.dark .refresh-btn {
+    color: #eee;
+
+}
+
+.theme.light .refresh-btn {
+    color: #3a3a3a;
+
+}
+
+.refresh-btn:hover {
+    opacity: 1.0;
+}
+
+.refresh-btn:focus {
+    outline: inherit;
+}
+
+.badge.active {
+    color: white;
+}
+
+// ========================================================================
+// Progress Bar
+// ========================================================================
+.fill-bar {
+    animation: fill 1.5s cubic-bezier(.16,1.15,.96,.93);
+}
+
+.fill-bar-container {
+    opacity: 0.8;
+}
+
+.fill-bar-container:hover {
+    opacity: 1.0;
+}
+
+
+@keyframes fill {
+    0% {width: 0;}
+}
+
+// ========================================================================
+// Theme: Light
+// ========================================================================
+.theme.light {
+    .dh-text-input {
+        background-color: transparent;
+        border: 1px solid rgb(118, 118, 118);
+        color: #333;
+    }
+}

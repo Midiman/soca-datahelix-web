@@ -1,0 +1,1200 @@
+import { Debug } from '@/util/Utilities';
+import { fetchWrapper } from '@/_helpers';
+import { getSessionProps } from '@/util/Utilities';
+
+
+/**
+ * Wrapper for fetching elastic search query results
+ */
+export const searchService = {
+    getBaseUrl,
+
+    doSearch,
+    doFilteredSearch,
+    getAssets,
+    getAssetByName,
+    getAssetScoreTrend,
+    getVulnerabilities,
+    getMachineVulnerabilities,
+
+    getTotalAssets,
+    getMissingAssets,
+    getActiveWorkflows,
+    getCompletedWorkflows,
+    getTopVulnerableAssets,
+    getWorkflowStats,
+    getVulnerabilityStats,
+    getRiskMapTags,
+    getStakeholders,
+    getPlatforms,
+    getSeverities,
+    getTimeline,
+	tenancyOperation,
+    passwordChangeRequest,
+    getSessions,
+    sendLoginEvent,
+    sendLogoutEvent,
+
+    runPDRDemo,
+    getGapAnalysisReport,
+    isTestModeRunning,
+    testModeOperation,
+
+    requestThreatLabSignupCode,
+    verifyThreatLabSignupCode,
+    createThreatLabAccount,
+    getThreatLabSession,
+    logoutThreatLabUser,
+    requestThreatLabAccountDeletion,
+    createThreatLabSupportRequest,
+    loginUser,
+    createUser
+};
+
+export function getBaseUrl()
+{
+    let sessionProps = JSON.stringify(getSessionProps());
+
+    if (Debug)
+        console.log("SWC : getBaseUrl() ENTRY : " + sessionProps);
+    if (sessionProps != undefined)
+    {
+        sessionProps = JSON.parse(sessionProps);
+        if (Debug)
+            console.log("SWC : getBaseUrl() appliance : " + sessionProps.appliance);
+    }
+    else
+    {
+        if (Debug)
+            console.log("SWC : getBaseUrl() appliance : none - it's undefined.");
+        let srv = sessionStorage.getItem('loginServer')
+        if (Debug)
+            console.log("SWC : getBaseUrl() loginserver srv: " + srv);
+        if (srv == undefined)
+        {
+            if (Debug)
+                console.log("SWC : getBaseUrl() appliance : no loginserver defined")
+            srv = "login.socautomation.com"
+        }
+        sessionProps = { appliance: srv};
+        if (Debug)
+        {
+            console.log("SWC : getBaseUrl() appliance : is now? ");
+            console.log("SWC : getBaseUrl() appliance : is now: ",sessionProps);
+        }
+    }
+    var port = '';
+    if (window.API_SRV_PORT)
+        port = ':' + window.API_SRV_PORT;
+    if (Debug)
+        console.log("SWC : getBaseUrl() [parsed] : " + JSON.stringify(sessionProps));
+    let baseUrl = `https://` + sessionProps.appliance + port;
+    if (Debug)
+        console.log("SWC : getBaseUrl() EXIT : " + baseUrl);
+    return baseUrl;
+}
+
+async function doSearch(index = `cmdb_asset*`, search = `{"size":10,"track_total_hits": true,"query":{"match_all":{}}}`) 
+{
+    let url = getBaseUrl() + `/api/app/search/?index=${index}`;
+    let dsearch = `${search}`;
+    if (Debug)
+        console.log("doSearch() ENTRY  url: " + url + " srch: " + dsearch);
+    var response = await fetchWrapper.post(url, dsearch)            
+        .then(result => 
+        {
+            if (Debug)
+                console.log("doSearch() [then] result: " + response + " : " + result)
+            return result;
+        });
+    if (Debug)
+        console.log("doSearch() EXIT : " + JSON.stringify(response));
+    return response;
+}
+
+async function doFilteredSearch(index, fields, terms) 
+{
+    let search = {}
+    if (fields != undefined)
+        search._source = fields;
+
+    let query = {};
+    if (terms != undefined)
+        query.query = { terms: terms };
+    else
+        query.query = { match_all: {} };
+    search.query = query;
+    const searchString = JSON.stringify(search);
+    if (Debug)
+        console.log("doFilteredSearch() search: " + searchString)
+
+    let url = getBaseUrl() + `/api/app/search/?index=${index}`;
+    if (Debug)
+        console.log("doFilteredSearch() ENTRY  url: " + url + " srch: " + searchString);
+    var response = await fetchWrapper.post(url, searchString)            
+        .then(result => 
+        {
+            if (Debug)
+                console.log("doFilteredSearch() [then] result: " + response + " : " + result)
+            return result;
+        });
+    if (Debug)
+        console.log("doFilteredSearch() EXIT : " + JSON.stringify(response));
+    return response;
+}
+
+
+async function getRiskMapTags()
+{
+    const loginUrl = sessionStorage.getItem('loginServer');
+    try
+    {
+        if (Debug)
+            console.log("getRiskMapTags() ENTRY DualSelector " + loginUrl)
+        var resp = await fetchWrapper.get(`https://${loginUrl}/api/rbvm/riskmap?action=gettags`)
+            .then(result => {
+                console.log("getRiskMapTags() [then] DualSelector resp: " + resp + " : " + result)
+                return result;
+            });
+        if (Debug)
+            console.log("getRiskMapTags() EXIT DualSelector resp: " + JSON.stringify(resp))
+        return resp;
+    }
+    catch (exc)
+    {
+        if (Debug)
+            console.log("getRiskMapTags() DualSelector EXCEPTION! " + exc.message)
+        let msg = exc.message.includes('Failed to fetch') ? "Unable to contact server" : exc.message;
+        return { "ok": false, "status": 502, "error": msg, "statusText": msg };
+    }
+}
+
+async function getStakeholders(fields)
+{
+    const loginUrl = sessionStorage.getItem('loginServer');
+    try
+    {
+        const url = `https://${loginUrl}/api/rbvm/stakeholder?type=all` + (fields != undefined ? `&fields=${fields}` : '');
+        if (Debug)
+            console.log("getStakeholders() renderAddStakeholderContent ENTRY url: " + url)
+        var resp = await fetchWrapper.get(url)
+            .then(result => {
+                console.log("getStakeholders() [then] resp: ",resp,result)
+                return result;
+            });
+        if (Debug)
+            console.log("getStakeholders() EXIT resp: " + JSON.stringify(resp))
+        return resp;
+    }
+    catch (exc)
+    {
+        if (Debug)
+            console.log("getStakeholders() EXCEPTION! " + exc.message)
+        let msg = exc.message.includes('Failed to fetch') ? "Unable to contact server" : exc.message;
+        return { "ok": false, "status": 502, "error": msg, "statusText": msg };
+    }
+}
+
+async function getAssets(rows = 50, user = 'admin') 
+{
+    var response = await fetchWrapper.post(getBaseUrl() + `/api/app/search/?index=cmdb_assets*`, `{"size":${rows},"track_total_hits": true,"query":{"match_all":{}}}`);
+    console.log("getAssets() EXIT : " + response);
+    return response;
+}
+
+async function getAssetByName(assetName, user = 'admin') 
+{
+    let request = `{"size":1,"query":{"match":{"dns":"${assetName}"}}}`;
+    console.log("getAssetByName() ENTRY : " + assetName + " request: " + request);
+    var response = await fetchWrapper.post(getBaseUrl() + `/api/app/search/?index=cmdb_assets*`, request);
+    console.log("getAssetByName() EXIT : " + response);
+    return response;
+}
+
+function getVulnerabilities(timeRange = 0, rows = 0, user = 'admin', gap = '1DAYS') 
+{
+    return fetchWrapper.get(getBaseUrl() + `/api/app/search/?index=cmdb_vulnerabil*`);
+}
+
+function getMachineVulnerabilities(timeRange = 0, rows = 0, user = 'admin', gap = '1DAYS') 
+{
+    return fetchWrapper.get(getBaseUrl() + `/api/app/search/?index=cmdb_machinevuln*`);
+}
+
+/*******************
+  Statistics lookups
+********************/
+async function getAssetScoreTrend(assetId) 
+{
+    const query = `{"_source":["score","scoreTrend"],"query":{"match":{"assetId.keyword":"${assetId}"}}}`;
+    if (Debug)
+        console.log("getAssetScoreTrend() vstrend ENTRY : " + query);
+    const response = await fetchWrapper.post(getBaseUrl() + `/api/app/search/?index=cmdb_stats_assets*`, query)
+    if (Debug)
+        console.log("getAssetScoreTrend() vstrend [then] response] : " + JSON.stringify(response));
+    if (response != undefined && response.hasOwnProperty("hits"))
+    {
+        const results = response.hits.hits;
+        if (Debug)
+            console.log("getAssetScoreTrend() vstrend EXIT results : " + JSON.stringify(results));
+        return results;
+    }
+    if (Debug)
+        console.log("getAssetScoreTrend() vstrend EXIT [error] : " + JSON.stringify(response));
+    return response;
+}
+
+/**
+    Helper function for building a tags-based counter elastic query
+ */
+function buildTagsQuery(tagArray, qprefix, qsuffix)
+{
+    if (Debug)
+        console.log("buildTagsQuery() ENTRY < " + tagArray + " >");
+    if (tagArray == undefined)
+    {
+        if (Debug)
+            console.log("buildTagsQuery() EXIT [no tags!] ");
+            return '';
+    }
+    const tags = tagArray.map((elem) =>
+    {
+        return elem.id;
+    })
+    if (Debug)
+        console.log("buildTagsQuery() tags! " + tags);
+
+    if (qprefix == undefined)
+        qprefix = '{"size":0,"track_total_hits":true,"query":{"bool":{"must":[';
+    let query = qprefix;
+    let idx = 0;
+    for (const tag of tags)
+    {
+        if (Debug)
+            console.log("buildTagsQuery() " + tag);
+        const keyword = tag.includes(' ') ? '.keyword' : ''
+        query += `{"nested":{"path":"tags","query":{"match":{"tags.label${keyword}":"${tag}"}}}}`
+        if (idx < (tags.length - 1))
+            query += ','
+        idx++;
+    }
+    query += qsuffix != undefined ? qsuffix : ']}}}';
+    if (Debug)
+        console.log("buildTagsQuery() EXIT ---> " + query);
+    return query;
+}
+
+async function getTotalAssets(tags)
+{
+    let query = '{"size":0,"track_total_hits": true,"query":{"match_all":{}}}';
+    if (Debug)
+        console.log("getTotalAssets() ENTRY tags? " + (tags != undefined && tags.length > 0 ? tags.length + " => " + Object.keys(tags[0]) : "false"));
+    if (tags != undefined && tags.length > 0)
+    {
+        if (Debug)
+            console.log("getTotalAssets() QUERYING... : " + tags);
+        query = buildTagsQuery(tags);
+        if (Debug)
+            console.log("getTotalAssets() QUERY ---> " + query);
+    }
+    var response = await fetchWrapper.post(getBaseUrl() + `/api/app/search/?index=cmdb_assets*`, query);
+    if (Debug)
+        console.log("getTotalAssets() EXIT : " + JSON.stringify(response));
+    try
+    {
+        const result = response.hits.total.value.value
+        if (Debug)
+            console.log("getTotalAssets() [tags] EXIT : " + result);
+        return result;
+    }
+    catch (ex)
+    {
+        if (Debug)
+            console.log("getTotalAssets() EXIT [EXCEPTION]: " + ex);
+        return ex;
+    }
+}
+
+async function getMissingAssets(tags)
+{
+/*
+//TODO
+    if (Debug)
+        console.log("getMissingAssets() ENTRY tags? " + (tags != undefined ? tags.length : "false"));
+    var response = await fetchWrapper.post(getBaseUrl() + `/api/app/search/?index=cmdb_assets*`, `{"size":0,"track_total_hits": true,"query":{"match_all":{}}}`);
+    console.log("getMissingAssets() EXIT : " + JSON.stringify(response));
+    try
+    {
+        // if (response && response.hits && response.hits.total && response.hits.total && response.hits.total.value && response.hits.total.value.value)
+        //     return response.hits.total.value.value;
+        
+//TODO    
+return 0;
+    }
+    catch (ex)
+    {
+        return ex;
+    }
+*/
+return 0;
+}
+
+async function getActiveWorkflows()
+{
+//TODO
+    var response = await fetchWrapper.post(getBaseUrl() + `/api/app/search/?index=rbvm_workflow*`, `{"size":0,"track_total_hits": true,"query":{"match_all":{}}}`);
+    console.log("getActiveWorkflows() EXIT : " + response);
+    try
+    {
+//TODO    
+return 1;
+    }
+    catch (ex)
+    {
+        return ex;
+    }
+}
+
+async function getCompletedWorkflows()
+{
+//TODO
+    var response = await fetchWrapper.post(getBaseUrl() + `/api/app/search/?index=rbvm_workflow*`, `{"size":0,"track_total_hits": true,"query":{"match_all":{}}}`);
+    console.log("getCompletedWorkflows() EXIT : " + response);
+    try
+    {
+//TODO    
+return 3;
+    }
+    catch (ex)
+    {
+        return ex;
+    }
+}
+
+async function getWorkflowStats(prevago = 30, tags)
+{
+    try
+    {
+
+//TODO ADD TAGS
+
+        if (Debug)
+            console.log("getWorkflowStats() ENTRY tags? " + (tags != undefined ? tags.length : "false"));
+        var response = await fetchWrapper.get(getBaseUrl() + '/api/app/search/?action=workflow_stats&prevago=' + prevago);
+        if (Debug)
+            console.log("getWorkflowStats() EXIT : " + JSON.stringify(response));
+        return response;
+    }
+    catch (ex)
+    {
+        return ex;
+    }
+}
+
+async function getVulnerabilityStats(prevago = 30, tags)
+{
+    try
+    {
+
+//TODO ADD TAGS
+
+        if (Debug)
+            console.log("getVulnerabilityStats() tags? " + (tags != undefined ? tags.length : "false"))
+        var response = await fetchWrapper.get(getBaseUrl() + '/api/app/search/?action=vulnerability_stats&prevago=' + prevago);
+        if (Debug)
+            console.log("getVulnerabilityStats() [api] response : " + JSON.stringify(response));
+        if (response != undefined)
+        {
+            if (Debug)
+                console.log("getVulnerabilityStats() [api] EXIT [ok] : " + response);
+            return response;
+        }
+        if (Debug)
+            console.log("getVulnerabilityStats() [api] EXIT [no ok - no data]");
+        return [ {"status": "No data"} ];
+    }
+    catch (ex)
+    {
+        return ex;
+    }
+}
+
+/**
+  Retrieves and extracts the top most vunerable machines and their associated count
+  Return an object ready for chart ingestion
+*/
+async function getTopVulnerableAssets(top = 5, tags)
+{
+    try
+    {   
+        if (Debug)
+            console.log("getTopVulnerableAssets() ENTRY top: " + top + " tags? " + (tags != undefined ? tags.length : "false"));
+        //aggs query - this one searches only for criticals
+        let query = `{"size":0,"_source":["machineId", "severity", "score"],  "query": { "bool": { "must": [ { "term": { "severity": "critical" } } ] } }, "aggs": { "group_by_device": { "terms": { "field": "machineId.keyword" }, "aggs": { "theMax": { "top_hits": { "size": "1", "_source": ["machineId", "machineName", "severity", "score"],  "sort": { "machineId.keyword": { "order": "desc" }}}}}}}}`;
+
+
+//TODO ADD TAGS
+//This query builder doesn't work for cmdb_machine_vulnerabilities because this index doesn't hold a tags[]
+        // if (tags != undefined && tags.length > 0)
+        // {
+        //     if (Debug)
+        //         console.log("getTopVulnerableAssets() QUERYING... : " + tags);
+        //     query = buildTagsQuery(tags, 
+        //                            '{"size":0,"_source":["machineId", "severity", "score"],  "query": { "bool": { "must": [ { "term": { "severity": "critical" } },', 
+        //                            '] } }, "aggs": { "group_by_device": { "terms": { "field": "machineId.keyword" }, "aggs": { "theMax": { "top_hits": { "size": "1", "_source": ["machineId", "machineName", "severity", "score"],  "sort": { "machineId.keyword": { "order": "desc" }}}}}}}}'
+        //                           );
+        //     if (Debug)
+        //         console.log("getTopVulnerableAssets() QUERY ---> " + query);
+        // }
+
+//        var response = await fetchWrapper.post(getBaseUrl() + `/api/app/search/?index=cmdb_machine_vulnerabilities*`, query);
+        var response = await fetchWrapper.post(getBaseUrl() + `/api/app/search/?index=cmdb_machine_vulnerabilities*`, `{"size":0,"_source":["machineId", "severity", "score"],  "query": { "bool": { "must": [ { "term": { "severity": "critical" } } ] } }, "aggs": { "group_by_device": { "terms": { "field": "machineId.keyword" }, "aggs": { "theMax": { "top_hits": { "size": "1", "_source": ["machineId", "machineName", "severity", "score"],  "sort": { "machineId.keyword": { "order": "desc" }}}}}}}}`);
+        if (Debug)
+            console.log("getTopVulnerableAssets() [1] response : " + JSON.stringify(response));
+        if (response != undefined && response.aggregations != undefined && response.aggregations.group_by_device != undefined && response.aggregations.group_by_device.buckets != undefined )
+        {
+            if (Debug)
+                console.log("getTopVulnerableAssets() response Got a buckets array");
+            let result = {};
+            let idx = 0;
+            for (let bucket of response.aggregations.group_by_device.buckets)
+            {
+                if (idx >= top)
+                    break;
+                let aquery = `{"size": 1,"_source": ["name"],"query":{"match":{"_id": "` + bucket.key + `"}}}`;
+                if (Debug)
+                    console.log("getTopVulnerableAssets() asset query: " + aquery);
+                var assetResp = await fetchWrapper.post(getBaseUrl() + `/api/app/search/?index=cmdb_asset*`, aquery);
+                if (Debug)
+                    console.log("getTopVulnerableAssets() asset resp: " + JSON.stringify(assetResp));
+                if (assetResp != undefined && assetResp.hits != undefined && assetResp.hits.hits != undefined)
+                result[assetResp.hits.hits[0].name] = bucket.theMax.hits.total.value;
+                idx++;
+            }
+            if (Debug)
+                console.log("getTopVulnerableAssets() final pushed result: " + JSON.stringify(result));
+            return result;
+        }
+        else
+        if (Debug)
+            console.log("getTopVulnerableAssets() response Didn't get any aggs buckets");
+    }
+    catch (ex)
+    {
+        if (Debug)
+            console.log("getTopVulnerableAssets() [1] EXCEPTION : " + ex);
+        return {'data error':0};
+    }
+    return {'No data':0};
+}
+
+/**
+  Retrieves and extracts counts of platform types
+  Return an array ready for chart ingestion
+*/
+async function getPlatforms(top = 10, tags)
+{
+    try
+    {   
+        if (Debug)
+            console.log("getPlatforms() ENTRY top: " + top + " tags? " + (tags != undefined ? tags.length : "false"));
+        let query = `{"size": 0,"query":{"match_all": {}},"aggs":{"platforms":{"terms":{"size": "` + top + `","field": "type.keyword" }}}}`;
+        //TAG QUERY BUILDER
+        if (tags != undefined && tags.length > 0)
+        {
+            if (Debug)
+                console.log("getPlatforms() QUERYING... : " + tags);
+            query = buildTagsQuery(tags, null, `]}},"aggs": {"platforms":{"terms":{"size": "${top}","field": "type.keyword"}}}}`);
+            if (Debug)
+                console.log("getPlatforms() QUERY ---> " + query);
+        }
+        var response = await fetchWrapper.post(getBaseUrl() + `/api/app/search/?index=cmdb_asset*`, query);
+        if (Debug)
+            console.log("getPlatforms() [1] response : " + JSON.stringify(response));
+        if (response != undefined && response.aggregations != undefined && response.aggregations.platforms != undefined && response.aggregations.platforms.buckets != undefined )
+        {
+            let others = 0;
+            if (Debug)
+                console.log("getPlatforms() response Got a buckets array");
+            let result = [];
+            let idx = 0;
+            for (let bucket of response.aggregations.platforms.buckets)
+            {
+                if (idx >= top || bucket.key.trim() == 0 || bucket.key.trim() === 'notset')
+                {
+                    others += bucket.doc_count;
+                    continue;
+                }
+                result.push([bucket.key, bucket.doc_count]);
+                idx++;
+            }
+            if (others > 0)
+                result.push(['Others', others]);
+            if (Debug)
+                console.log("getPlatforms() final pushed result: " + JSON.stringify(result));
+            return result;
+        }
+        else
+        if (Debug)
+            console.log("getPlatforms() response Didn't get any aggs buckets");
+    }
+    catch (ex)
+    {
+        if (Debug)
+            console.log("getPlatforms() [1] EXCEPTION : " + ex);
+        return {'data error':0};
+    }
+    return {'No data':0};
+}
+
+/**
+  Retrieves and extracts the severity counts
+  Return an object ready for chart ingestion, sorted by severity
+*/
+async function getSeverities(tags)
+{
+    try
+    {   
+        if (Debug)
+            console.log("getSeverities() ENTRY top: " + top + " tags? " + (tags != undefined ? tags.length : "false"));
+
+//TODO ADD TAGS
+//TAG builder won't work here because cmdb_machine_vulnerabiities doesn't hold tag[]
+
+        var response = await fetchWrapper.post(getBaseUrl() + `/api/app/search/?index=cmdb_machine_vulnerabilities*`, `{"size":0,"aggs":{"severities":{"terms":{"field":"severity.keyword"}}}}`);
+        if (Debug)
+            console.log("getSeverities() [1] response : " + JSON.stringify(response));
+        if (response != undefined && response.aggregations != undefined && response.aggregations.severities != undefined && response.aggregations.severities.buckets != undefined )
+        {
+            let unsortedResult = {};
+            for (let bucket of response.aggregations.severities.buckets)
+                unsortedResult[bucket.key] = bucket.doc_count;
+            let result = {};
+            result = {...result, 'Critical':unsortedResult.hasOwnProperty('critical') ? unsortedResult.critical : 0};
+            result = {...result, 'High':unsortedResult.hasOwnProperty('high') ? unsortedResult.high : 0};
+            result = {...result, 'Medium':unsortedResult.hasOwnProperty('medium') ? unsortedResult.medium : 0};
+            result = {...result, 'Low':unsortedResult.hasOwnProperty('low') ? unsortedResult.low : 0};
+            result = {...result, 'Info':unsortedResult.hasOwnProperty('info') ? unsortedResult.info : 0};
+            if (Debug)
+                console.log("getSeverities() final pushed severities: " + JSON.stringify(result));
+            return result;
+        }
+        else
+        if (Debug)
+            console.log("getSeverities() response Didn't get any aggs buckets");
+    }
+    catch (ex)
+    {
+        if (Debug)
+            console.log("getSeverities() [1] EXCEPTION : " + ex);
+        return {'data error':0};
+    }
+    return {'No data':0};
+}
+
+/**
+  Retrieves a date_histogram
+  @param index: the possibly wildcard) index name
+  @param field: the name of the field to aggregate
+  @param range: elastic-friendly Object with the range: example: {"gte":4.0, "lt":6.0}
+  @param dateRange: elastic-friendly date or date match object for date range: example: {"gte":"now-9M/M", "lt":"now"} or {"gte":"now-9M/M"}
+  @param timeField: the time field to aggregate. Default is @timestamp
+  @param interval: Optional field to specify the time range. Default is 'day'
+*/
+async function getTimeline(index, field, range, dateRange, timeField = '@timestamp', interval = 'day', tags)
+{
+    try
+    {   
+        if (Debug)
+            console.log("getTimeline() ENTRY index: " + index + " field: " + field + " range: " + range + " dateRange: " + dateRange + " timefield: " + timeField + " tags? " + (tags != undefined ? tags.length : "false"));
+
+//TODO ADD TAGS
+//The tag builder won't work with cmdb_machine_vulnerabilities as it doesn't hold any tags[]
+
+        let request = `{"size":0,"query":{"bool":{"must":[{"range":{"` + timeField + `":` + dateRange + `}},{"range":{"` + field + `":` + range + `}}]}},"aggs":{"timeline":{"date_histogram":{"field":"` + timeField + `","calendar_interval":"` + interval + `"}}}}`;
+        if (Debug)
+            console.log("getTimeline() request: " + request);
+        var response = await fetchWrapper.post(getBaseUrl() + `/api/app/search/?index=` + index, request);
+        if (Debug)
+            console.log("getTimeline() [1] response : " + JSON.stringify(response));
+        if (response != undefined && response.aggregations != undefined && response.aggregations.timeline != undefined && response.aggregations.timeline.buckets != undefined )
+        {
+            if (Debug)
+                console.log("getTimeline() response Got a buckets array");
+            let result = [];
+            for (let bucket of response.aggregations.timeline.buckets)
+            {
+                if (Debug)
+                    console.log("getTimeline() bucket: " + JSON.stringify(bucket));
+                result = [...result, [bucket.key, bucket.doc_count]];
+            }
+            if (Debug)
+                console.log("getTimeline() final pushed result: " + JSON.stringify(result));
+            return result;
+        }
+        else
+        if (Debug)
+            console.log("getTimeline() response Didn't get any aggs buckets");
+    }
+    catch (ex)
+    {
+        if (Debug)
+            console.log("getTimeline() [1] EXCEPTION : " + ex);
+        return {'data error':0};
+    }
+    return {'No data':0};
+}
+
+export async function tenancyOperation(tenancy, action) {
+    if (Debug) 
+        console.log('tenancyOperation() ENTRY : ', tenancy, action)
+    const url = getBaseUrl() + `/api/app/tenancy?action=${action}`
+    if (Debug) 
+        console.log('tenancyOperation() : url = ', url)
+
+    var response = await fetchWrapper.post(url, tenancy)
+        .then(result => {
+            if (Debug) 
+                console.log('tenancyOperation() : [then] : response result :', result)
+            return result
+        })
+    if (Debug) 
+        console.log('tenancyOperation() : EXIT :', response)
+    return response
+}
+
+export async function passwordChangeRequest(pwd, tpar)
+{
+    if (Debug) 
+        console.log('passwordChangeRequest() ENTRY :', pwd + " : " + tpar)
+    const url = getBaseUrl() + `/api/auth/fpwdtpar`
+    if (Debug) 
+        console.log('passwordChangeRequest() : url = ', url)
+
+    try
+    {
+        const body =
+        {
+            pwd: pwd,
+            tpar: tpar
+        }
+        var response = await fetchWrapper.post(url, body)
+            .then(result => {
+                if (Debug) 
+                    console.log('passwordChangeRequest() : [then] : response result :', result)
+                return result
+            })
+        if (Debug) 
+            console.log('passwordChangeRequest() : EXIT :', response)
+        return response
+    }
+    catch (exc)
+    {
+        if (Debug) 
+            console.log('passwordChangeRequest() : EXCEPTION!', exc)
+        return exc
+    }
+ }
+
+ async function getSessions(activeOnly = false, timeRange = '1y')
+ {
+     try
+     {
+        if (Debug)
+            console.log("getSessions() ENTRY : activeOnly =", activeOnly, timeRange)
+        if (getSessionProps() == undefined || getSessionProps().tenantId == undefined)
+        {
+            if (Debug)
+                console.log("getSessions() EXIT No valid session/tenantId", getSessionProps())
+            return {status:500,message:'No valid session. Please login to continue.'};
+        }
+        const url = getBaseUrl() + '/api/app/sessions/?tenantId=' + getSessionProps().tenantId  + '&rows=2000' + '&activeOnly=' + activeOnly + '&timeRange=' + timeRange;
+        if (Debug)
+            console.log("getSessions() :url:" + url)
+        var response = await fetchWrapper.get(url);
+        if (Debug)
+            console.log("getSessions() [api] response : " + JSON.stringify(response));
+        if (response != undefined)
+        {
+            if (Debug)
+                console.log("getSessions() [api] EXIT [ok] : " + response);
+            return response;
+        }
+        if (Debug)
+            console.log("getSessions() [api] EXIT [no ok - no data]");
+        return [ {"status": "No data"} ];
+
+
+         // var response = await fetchWrapper.get(getBaseUrl() + '/api/app/search/?action=vulnerability_stats&prevago=' + prevago);
+         // if (Debug)
+         //     console.log("getVulnerabilityStats() [api] response : " + JSON.stringify(response));
+         // if (response != undefined)
+         // {
+         //     if (Debug)
+         //         console.log("getVulnerabilityStats() [api] EXIT [ok] : " + response);
+         //     return response;
+         // }
+         // if (Debug)
+         //     console.log("getVulnerabilityStats() [api] EXIT [no ok - no data]");
+         // return [ {"status": "No data"} ];
+ 
+         // TODO: Luke Dev - Use the real API when Peter creates it - return an object when data fetch has an error - return array on a good status
+ 
+         return [
+             {
+                 "_id": "b9f21144-de36-45c7-aaab-93f4eda0fc58",
+                 "@timestamp": "2024-07-29T11:41:24Z",
+                 "name": "Peter Sturge",
+                 "userId": "pds@socautomation.com",
+                 "tenantId": "2e240306-f950-490d-a6d9-5746b3c1e824",
+                 "status": "inactive"
+             },
+             {
+                 "_id": "a9f21144-de36-45c7-aaab-93f4eda0fcaa",
+                 "@timestamp": "2024-08-13T12:41:24Z",
+                 "name": "Luke Sizmur",
+                 "userId": "lsizmur@socautomation.com",
+                 "tenantId": "2e240306-f950-490d-a6d9-5746b3c1e824",
+                 "status": "active"
+             },
+             {
+                 "_id": "c9f21144-de36-45c7-aaab-93f4eda0fccc",
+                 "@timestamp": "2024-08-13T02:41:24Z",
+                 "name": "Matt",
+                 "userId": "matt@socautomation.com",
+                 "tenantId": "2e240306-f950-490d-a6d9-5746b3c1e824",
+                 "status": "timed-out"
+             }
+         ]
+     }
+     catch (ex)
+     {
+         return ex;
+     }
+ }
+ 
+ async function sendLoginEvent(type = 'notset', data = '{}')
+ {
+    try
+    {
+        if (Debug)
+            console.log("sendLoginEvent() ENTRY : type: " + type + ' data: ', data)
+
+        var body = {}
+        if (data != undefined)
+        {
+           body = {... data}
+           body['@timestamp'] = new Date().toISOString();
+           if (getSessionProps() != undefined)
+           {
+               body.name = getSessionProps().name,
+               body.email = getSessionProps().email,
+               body.tenantId = getSessionProps().tenantId
+               if (Debug)
+                   console.log("sendLoginEvent() : session props body update to:", body)
+           }
+           else
+           if (Debug)
+               console.log("sendLoginEvent() : no session props : body:", body)
+        }            
+        else
+        {
+           if (Debug)
+               console.log("sendLoginEvent() EXIT : No data!")
+           return;
+        }
+        if (Debug)
+           console.log("sendLoginEvent() : body: ",body)
+
+        const url = getBaseUrl() + '/api/app/sessions/audit?event=login&type=' + type;
+        if (Debug)
+            console.log("sendLoginEvent() :url:" + url + " body: ", body)
+        
+        //Send the audit event . . . . . 
+        var response = await fetchWrapper.post(url, body)
+            .then(result => 
+            {
+                if (Debug)
+                    console.log("sendLoginEvent() [then] result: ", result)
+                return result;
+            });
+        if (Debug)
+            console.log("sendLoginEvent() EXIT resp: ", response);
+        return response;
+    }
+    catch (exc)
+    {
+        if (Debug)
+            console.log("sendLoginEvent() : EXCEPTION! : ", exc)
+    }
+}
+
+ async function sendLogoutEvent(type = 'notset')
+ {
+    try
+    {
+        if (Debug)
+             console.log("sendLogoutEvent() ENTRY : type: " + type)
+
+        var body = {}
+        body['@timestamp'] = new Date().toISOString()
+        if (getSessionProps() != undefined)
+        {
+            body.user = getSessionProps().email,
+            body.name = getSessionProps().name,
+            body.email = getSessionProps().email,
+            body.tenantId = getSessionProps().tenantId
+            if (Debug)
+                console.log("sendLogoutEvent() : session props body update to:", body)
+        }
+        else
+        {
+            if (Debug)
+                console.log("sendLogoutEvent() EXIT : No data!")
+            return;
+        }
+        if (Debug)
+            console.log("sendLogoutEvent() : body: ", body)
+
+        const url = getBaseUrl() + '/api/app/sessions/audit?event=logout&type=' + type;
+        if (Debug)
+            console.log("sendLogoutEvent() :url:" + url + " body: ", body)
+
+        //Send the audit event . . . . . 
+        var response = await fetchWrapper.post(url, body)
+            .then(result => 
+            {
+                if (Debug)
+                    console.log("sendLogoutEvent() [then] result: ", result)
+                return result;
+            });
+        if (Debug)
+            console.log("sendLogoutEvent() EXIT resp: ", response);
+        return response;
+     }
+     catch (exc)
+     {
+        if (Debug)
+            console.log("sendLogoutEvent() : EXCEPTION! : ", exc)
+    }
+}
+
+async function runPDRDemo()
+{
+    console.log("runPDRDemo() svc ENTRY")
+
+
+    const url = getBaseUrl() + '/api/app/demo?operation=pdr';
+    const resp = await fetchWrapper.post(url)
+                            .then(result =>
+                                {
+                                    console.log("runPDRDemo() [then] result",result)
+                                    return result
+                                });
+    console.log("runPDRDemo() svc EXECUTE Request Sent! resp:",resp)
+    return resp;
+}
+
+async function getGapAnalysisReport(id)
+{
+    if (Debug)
+        console.log("getGapAnalysisReport ENTRY", id);
+    try
+    {
+        let sessionProps = JSON.stringify(getSessionProps());
+        let url = getBaseUrl() + `/api/app/gap-analysis/?operation=run-report&tenantId=${sessionProps.tenantId}`;
+
+        if (Debug)
+            console.log("getGapAnalysisReport() url: " + url);
+        const response = await fetchWrapper.get(url);
+        if (Debug)
+            console.log("getGapAnalysisReport EXIT response: ", response);
+
+
+        var result = response;
+        if (Debug)
+            console.log("getGapAnalysisReport EXIT results: ", result);
+        return result;
+    }
+    catch (exc)
+    {
+        if (Debug)
+            console.log("getGapAnalysisReport EXCEPTION",exc);
+        return {
+            status: 400,
+            message: 'Error getting Gap Analysis Report ' + exc.message
+        }
+    }
+}
+
+async function isTestModeRunning()
+{
+    if (Debug)
+        console.log("isTestModeRunning PT1d ENTRY ");
+    try
+    {
+        const tid = getSessionProps().tenantId;
+        if (tid == undefined)
+        {
+            if (Debug)
+                console.log("isTestModeRunning PTNOTID");
+            return null;
+        }
+        let url = getBaseUrl() + `/api/app/testmode/?operation=status&tenantId=${tid}`;
+
+        if (Debug)
+            console.log("isTestModeRunning() PT1d url: " + url);
+        const response = await fetchWrapper.get(url)
+                    .then((resp) => 
+                    {
+                        if (Debug)
+                            console.log('isTestModeRunning() PT1d [then]: ',resp);
+                        return resp;
+                    });
+        if (Debug)
+            console.log("isTestModeRunning PT1d EXIT response: ", response);
+        return response;
+        // var result = response;
+        // if (Debug)
+        //     console.log("isTestModeRunning PT1d EXIT results: ", result);
+        // return result?.message === 'true' ? true : false;
+    }
+    catch (exc)
+    {
+        if (Debug)
+            console.log("isTestModeRunning PT1d EXCEPTION",exc);
+        return {enabled:false,verbosity:5}
+    }
+}
+
+async function testModeOperation(enable, verbosityLevel, generateSafeEvents = false)
+{
+    if (Debug)
+        console.log("testModeOperation PT1c ENTRY ",enable, verbosityLevel);
+    try
+    {
+        const tid = getSessionProps().tenantId;
+        if (tid == undefined)
+        {
+            if (Debug)
+                console.log("isTestModeRunning PTNOTID");
+            return null;
+        }
+        let url = getBaseUrl() + `/api/app/testmode/?operation=${enable ? 'start' : 'stop'}&verbosity=${verbosityLevel}&generateSafeEvents=${generateSafeEvents}&tenantId=${tid}`;
+
+        if (Debug)
+            console.log("testModeOperation() url: " + url);
+        const response = await fetchWrapper.get(url);
+        if (Debug)
+            console.log("testModeOperation EXIT response: ", response);
+
+
+        var result = response;
+        if (Debug)
+            console.log("testModeOperation EXIT results: ", result);
+        return result;
+    }
+    catch (exc)
+    {
+        if (Debug)
+            console.log("testModeOperation EXCEPTION",exc);
+        return {
+            status: 400,
+            message: 'Error setting Test Mode' + exc.message
+        }
+    }
+}
+
+/**
+ * Generates a verification code email request to send to the specified email.
+ */
+async function requestThreatLabSignupCode({
+    email,
+    plan = null,
+    billingPeriod = null,
+    currency = null,
+    termsVersion = null
+})
+{
+    if (Debug)
+        console.log('requestThreatLabSignupCode ENTRY', email, plan);
+
+    const sessionProps = getSessionProps();
+
+    const body = {
+        email,
+        plan,
+        billingPeriod,
+        currency,
+        termsVersion
+    };
+
+    return await fetchWrapper.post(
+        getBaseUrl() + `/api/app/threatlab/signup/verification/?action=generate&tenantId=${sessionProps.tenantId}`,
+        body
+    );
+}
+
+/**
+ * Generates a verify request for the code generated by the email request inrequestThreatLabSignupCode.
+ */
+async function verifyThreatLabSignupCode({ email, code })
+{
+    if (Debug)
+        console.log('verifyThreatLabSignupCode ENTRY', email);
+
+    const sessionProps = getSessionProps();
+
+    // Expected success: { ok: true, verificationToken: '...' }
+    return await fetchWrapper.post(
+        getBaseUrl() + `/api/app/threatlab/signup/verification/?action=verify&tenantId=${sessionProps.tenantId}`,
+        { email, code }
+    );
+}
+
+/**
+ * Makes a create user request.
+ */
+async function createThreatLabAccount({
+    plan,
+    billingPeriod = null,
+    currency = null,
+    name,
+    email,
+    password,
+    mfaEnabled = false,
+    mfaMethod = null,
+    verificationToken,
+    termsAccepted,
+    termsVersion
+})
+{
+    if (Debug)
+        console.log('createThreatLabAccount ENTRY', email, plan);
+
+    const sessionProps = getSessionProps();
+
+    const body = {
+        plan,
+        billingPeriod,
+        currency,
+        name,
+        email,
+        password,
+        mfaEnabled,
+        mfaMethod,
+        verificationToken,
+        termsAccepted,
+        termsVersion
+    };
+
+    // Free plan reaches this directly. Paid checkout will sit before this call.
+    return await fetchWrapper.post(
+        getBaseUrl() + `/api/app/threatlab/signup/?action=create&tenantId=${sessionProps.tenantId}`,
+        body
+    );
+}
+
+
+async function getThreatLabSession()
+{
+    if (Debug)
+        console.log('getThreatLabSession ENTRY');
+
+    const sessionProps = getSessionProps();
+
+    // session-restore endpoint
+    return await fetchWrapper.get(
+        getBaseUrl() + `/api/app/threatlab/?action=session&tenantId=${sessionProps.tenantId}`
+    );
+}
+
+
+async function logoutThreatLabUser()
+{
+    if (Debug)
+        console.log('logoutThreatLabUser ENTRY');
+
+    const sessionProps = getSessionProps();
+
+    // logout endpoint.
+    return await fetchWrapper.post(
+        getBaseUrl() + `/api/app/threatlab/auth/?action=logout&tenantId=${sessionProps.tenantId}`,
+        {}
+    );
+}
+
+async function requestThreatLabAccountDeletion()
+{
+    if (Debug)
+        console.log('requestThreatLabAccountDeletion ENTRY');
+
+    const sessionProps = getSessionProps();
+    if (Debug)
+        console.log('requestThreatLabAccountDeletion session props: ' + typeof sessionProps, sessionProps);
+
+    /*
+     * Gatekeeper owns the deletion policy. For paid plans it should disable
+     * access immediately, retain the account through the paid term, then delete.
+     */
+    const response = await fetchWrapper.post(
+        getBaseUrl() + `/api/app/threatlab/account/?action=delete&tenantId=${sessionProps.tenantId}`,
+        sessionProps
+    );
+    if (Debug)
+        console.log('requestThreatLabAccountDeletion EXIT response: ', response);
+    return response;
+}
+
+
+async function createThreatLabSupportRequest({ subject, message })
+{
+    if (Debug)
+        console.log('createThreatLabSupportRequest ENTRY', subject);
+
+    const sessionProps = getSessionProps();
+
+    return await fetchWrapper.post(
+        getBaseUrl() + `/api/app/threatlab/support/?action=createTicket&tenantId=${sessionProps.tenantId}`,
+        { subject, message }
+    );
+}
+
+async function loginUser({ username = null, email = null, password })
+{
+    const userId = (email || username || '').trim().toLowerCase();
+
+    if (Debug)
+        console.log('loginUser ENTRY', userId);
+
+    const sessionProps = getSessionProps();
+
+    // Placeholder Gatekeeper login endpoint.
+    return await fetchWrapper.post(
+        getBaseUrl() + `/api/app/threatlab/auth/?action=login&tenantId=${sessionProps.tenantId}`,
+        {
+            email: userId,
+            password
+        }
+    );
+}
+
+
+async function createUser({ name, email, password })
+{
+    if (Debug)
+        console.log('createUser ENTRY', name, email);
+
+    /*
+     * Legacy AuthPage signup hook. ThreatLab should normally use the verified
+     * Signup flow instead, so this remains a separate placeholder.
+     */
+    return await fetchWrapper.post(
+        getBaseUrl() + '/api/threatlab/user',
+        {
+            name,
+            email,
+            password
+        }
+    );
+}

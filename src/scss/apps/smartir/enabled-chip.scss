@@ -1,0 +1,36 @@
+.modal-header.has-header-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.enabled-chip {
+  display: inline-flex;
+  align-items: center;
+  float:right;
+  gap: 0.5rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+
+  .enabled-chip-label {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    opacity: 0.9;
+    width: 5em;
+    text-align: center;
+  }
+
+  .soca-switch-container {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+  }
+}
+
+// Light-theme chip background
+.modal-dialog.light .enabled-chip {
+  background-color: rgba(0, 0, 0, 0.06);
+}

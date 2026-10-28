@@ -1,0 +1,79 @@
+// ── SOCAThreatScoreGauge (toolkit component) ────────────────────────────────
+// ArcGauge.jsx defines a <filter id="gaugeGlow"> that stacks two feGaussianBlur
+// passes (stdDeviation 2 and 6) via feMerge. The pixel-level compositing of
+// two distinct Gaussian distributions produces visible concentric intensity
+// rings (banding). A CSS `filter` property overrides the SVG `filter` attribute,
+// replacing the banded merge with a single smooth Gaussian falloff.
+
+.threat-gauge-card {
+    .arc-gauge {
+        overflow: visible;
+        display: block;
+        margin: 0 auto;
+
+        // CSS filter takes precedence over the SVG filter="url(#gaugeGlow)"
+        // attribute — one smooth drop-shadow instead of two merged blurs.
+        g {
+            filter:
+                drop-shadow(0 0 3px var(--gauge-glow))
+                drop-shadow(0 0 10px var(--gauge-glow));
+        }
+    }
+
+    .arc-gauge__fill {
+        transition: stroke-dashoffset 1.2s cubic-bezier(0, 0, 0.2, 1), stroke 0.6s cubic-bezier(0.32, 0.72, 0, 1);
+        will-change: stroke-dashoffset;
+    }
+
+    .arc-gauge__tip {
+        transition: fill 0.6s;
+    }
+
+    .arc-gauge__score {
+        transition: fill 0.6s;
+        letter-spacing: -2px;
+    }
+}
+
+// ── Legacy dashboard crystal variant ────────────────────────────────────────
+
+.threat-score-container {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    flex-wrap: nowrap;
+
+    .arc-layer {
+        position: absolute;
+        width: 82%;
+        height: 82%;
+        filter: drop-shadow(0 0 8px rgba(255, 62, 62, 0.1));
+        z-index: 0;
+    }
+
+    .score-text {
+        position: relative;
+        z-index: 3;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+
+        .number {
+            display: block;
+            font-size: 6rem;
+            font-weight: 700;
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .label {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #8b949e;
+            font-weight: 500;
+        }
+    }
+}

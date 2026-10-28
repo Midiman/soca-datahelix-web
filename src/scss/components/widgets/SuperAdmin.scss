@@ -1,0 +1,59 @@
+
+.theme.light {
+  .soca-superAdmin-multiStep-wrapper {
+        ol {
+            li {
+                color: #333;
+            }
+            li::before {
+                color: #EEE;
+                background-color: #3f4b4b;
+            }
+        }
+    }  
+}
+
+.theme.dark {
+    .soca-superAdmin-multiStep-wrapper {
+        ol {
+            li::before {
+                color: #EEE;
+                background-color: #577179;
+            }
+        }
+    }  
+}
+
+.soca-superAdmin-multiStep-wrapper {
+    ol {
+        justify-content: center;
+    }
+    .toolbar-btn:hover {
+        color: #D33 !important;
+        box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+    }
+}
+
+// Luke Dev - Fixes an alignment 
+.soca-form {
+    .soca-form-container {
+        .select-companySubscriptions {
+            margin-top: -4px;
+        }
+
+        .input-key {
+            // width: 100%;
+            flex: 1;
+            margin-right: auto;
+        }
+    }
+}
+
+.confirmDetailsWrapper {
+    background-color: rgba(37, 68, 78, 0.6);
+    padding: 5px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.10);
+}
+

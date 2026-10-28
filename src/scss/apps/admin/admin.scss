@@ -1,0 +1,185 @@
+/*
+    CSS for Administration (cog) tab
+*/
+/*
+ MFA form stuff
+*/
+:root {
+    --border-dark-color: #EEE;
+    --border-light-color: #333;
+    --tableBg: #343a40
+}
+
+.soca-form-container .switch-off {
+    background-color: #888;
+    border-color: #888;
+}
+
+.soca-form-container .switch span {
+    background-color: #DDD !important;
+    border-color: #DDD !important;
+}
+
+.soca-form-container .switch span {
+    margin-top: -1px !important;
+    height: 20px !important;
+    width: 20px !important;
+}
+
+.soca-form-container .switch-on span {
+    left: 11px !important;
+}
+
+.soca-form-container .switch-off span {
+    margin-left: -1px !important;
+}
+
+/*
+ MFA reset stuff
+*/
+.user-edit-footer {
+    display: inline;
+}
+
+.btn-reset-mfa, .btn-reset-mfa:focus, .btn-reset-mfa.btn:active {
+    height: 27.6px;
+    background-color: rgba(173, 133, 23, 0.8) !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    // margin-left: 8px;
+    float: left;
+}
+
+.btn-reset-mfa:hover {
+    background-color: rgba(173, 133, 23, 0.6) !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.btn-close-mfa {
+    margin-right: 5px;
+}
+
+
+
+.select-companySubscription {
+    height: 68px !important;
+    label {
+        margin-bottom: 4px !important;
+    }
+}
+
+.soca-superAdmin-multiStep-wrapper {
+    .summary-details-btn:hover {
+        border: 1px solid white !important;
+    }
+
+    .summary-details-btn:focus {
+        border: 1px solid white !important;
+        box-shadow: none !important ;
+    }
+}
+
+.summaryOfDetailsTableWrapper {
+    h1 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .summaryOfDetailsTableInnerWrapper {
+        width: 100%;
+        .tableWrapper {
+            width: 100%;
+            background-color: var(--tableBg);
+            border-radius: 4px;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            table {
+                flex: 1;
+            }
+        }
+        .companyDetailsTableWrapper {
+            gap: 0.5rem;
+            display: flex;
+            justify-items: start; /* Aligns items along the row axis */
+            border-radius: 4px;
+
+            .tableWrapper {
+                width: 100%;
+                background-color: var(--tableBg);
+                border-radius: 4px;
+                padding: 0.5rem;
+                table {
+                    flex: 1;
+                }
+
+            }
+            td {
+                padding-left: 0 !important;
+            }
+            .tableHeading {
+                width: 60%;
+                padding-right: 0.5rem;
+            }
+        }
+        table {
+            width: 100%;
+            td {
+                text-align: 'left';
+            }
+        }
+    }
+}
+
+
+
+.subscriptionWrapper {
+    h1 {
+        padding-bottom: 24px
+    }
+
+    table {
+        background-color: var(--tableBg);
+    }
+
+    h1:nth-of-type(2) {
+        padding-top: 24px;
+    }
+
+    table:nth-of-type(2) {
+        margin-bottom: 24px;
+    }
+
+    th {
+        padding-bottom: 24px;
+        // padding-left: 0px !important;
+        min-width: 200px;
+        text-align: left;
+    }
+}
+
+.summary-details-btn {
+    font-size: 0.7rem;
+    padding: 0.3rem;
+}
+
+.summary-details-icon {
+    font-size: 1.3rem;
+    margin-left: 10px;
+    color: #577179;
+}
+
+.soca-superAdmin-multiStep-wrapper {
+    .step-progress {
+        .footer-buttons {
+            float: right;
+            padding-bottom: 1rem;
+        }
+    }
+
+    .subscriptionDetailsTableExpandRow {
+        box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+    }
+}

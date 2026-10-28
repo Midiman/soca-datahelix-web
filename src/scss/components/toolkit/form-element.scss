@@ -1,0 +1,190 @@
+.form-element {
+    .card-header {
+        padding: 0px;
+        padding-top: 5px;
+        padding-bottom: 0px;
+        background-color: transparent !important;
+        border: none !important;
+        font-size: 1rem !important;
+    }
+    .card-body {
+        padding: 0px;
+        padding-top: 5px;
+        padding-bottom: 2px;
+        fieldset {
+            margin-left: 0.5rem;
+        }
+    }
+    .card-footer {
+        background-color: transparent;
+        border: none;
+        padding: 12px;
+        padding-top: 0px;
+        color: rgb(255, 0, 0);
+        padding: 0;
+    }
+}
+
+.form-element.flex.card {
+    display: flex;
+    flex-direction: row;
+    .card-header {
+        display: flex;
+        padding-top: 0.6rem;
+        // align-items: center;
+        margin-right: 0.5rem;
+    }
+
+    .card-body {
+        align-items: center;
+    }
+    .card-footer {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 0;
+        padding-left: 0.5rem;
+    }
+}
+
+.ReactModalPortal {
+    .ReactModal__Content {
+        .form-element {
+            .card-header {
+                padding: 0px !important;
+                padding-top: 5px !important;
+                padding-bottom: 0px !important;
+            }
+        }
+    }
+}
+
+.form-element-input {
+    width: 100%;
+    height: 36px;
+    border-radius: 4px;
+    background-color: #cfcfd0;
+    border: transparent;
+    color: #5a5a5a;
+    padding-left: 8px;
+    // box-sizing is added to stop it from increasing the width.
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box; 
+}
+
+.form-element-input:focus {
+    border: 1px solid black;
+}
+
+.form-element-input:disabled {
+    background-color: #9292928e !important;
+}
+
+.form-element-input-wrapper {
+    position: relative;
+}
+
+.form-element-input-wrapper.has-password-toggle .form-element-input {
+    padding-right: 2em;
+}
+
+.form-element-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0.5em;
+    transform: translateY(-50%);
+    display: inline-flex;
+    width: 1em;
+    height: 1em;
+    cursor: pointer;
+}
+
+.form-element-radio-button:checked {
+    accent-color: #6a949c;
+}
+
+.form-element-radio-button {
+    margin-top: -7px;
+    vertical-align: middle;
+}
+
+.form-element-radio-label {
+    margin-left: .35rem;
+}
+
+.form-element-radio[type='radio'] {
+    border: 1px solid red;
+}
+
+
+// Fixes a Modal input issue
+.soca-superAdmin-multiStep-wrapper {
+    .form-element {
+        .form-element-input {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+        }
+    }
+}
+
+// luke dev - Testing to see how this looks across all forms in the expand rows
+.expand-row {
+    .form-element, .card {
+        background-color: transparent !important;
+    }
+}
+
+
+.theme.dark, .dark {
+    .form-element {
+        color: #EEE;
+        .card-header {
+            color: #EEE;
+        }
+        .form-element-input {
+            border: transparent;
+            background-color: rgba(255, 255, 255, 0.2) !important;
+            color: #EEE;
+        }
+
+        .form-element-input:disabled {
+            opacity: 55%;
+        }
+
+        .form-element-input::placeholder {
+            color: #EEE;
+            opacity: 80%;
+        }
+    
+        .form-element-input:focus {
+        border: 2px solid #eeeeee6b;
+        }
+
+        .card-footer {
+            color: #ff7627;
+        }
+    }
+}
+
+.theme.light, .light {
+    .form-element {
+        color: #333;
+        .card-header {
+            color: #333;
+        }
+      .form-element-input {
+        border: transparent;
+        background-color: #d8d8d8;
+        color: #333;
+      }
+
+      .form-element-input:focus {
+        border: 1px solid #333;
+      }  
+
+      .card-footer {
+        color: #D33
+      }
+    }
+}

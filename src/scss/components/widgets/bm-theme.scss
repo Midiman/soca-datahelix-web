@@ -1,0 +1,33 @@
+/*
+    Theme overrides for buger-menu elements
+*/
+/* T H E M E */
+.theme .bm-menu {
+    background: var(--bg);
+}
+
+.theme .bm-menu .bm-item {
+    color: var(--color);
+}
+
+/* D A R K */
+.theme.dark .bm-menu {
+    --bg: rgba(255, 255, 255, 0.8);
+}
+
+.theme.dark .bm-menu .bm-item {
+    --color: #262626;
+}
+
+.theme.dark .bm-burger-bars {
+    background: var(--bg);
+}
+
+/* L I G H T */
+.theme.light .bm-menu {
+    --bg: rgba(40, 53, 58, 0.8);
+}
+
+.theme.light .bm-menu .bm-item {
+    --color: #EEE;
+}

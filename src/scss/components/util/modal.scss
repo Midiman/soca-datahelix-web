@@ -1,0 +1,706 @@
+
+/**
+  modal dialog CSS
+*/
+
+/** MODAL ANIMATIONS **/
+/**
+  To use this: use react-modal package only
+  For close animation, *only* use the isOpen property - don't conditionally set the render
+    e.g. isOpen={showMyModal}
+  Set the closeTimeoutMS property so it matches the animation to keep the object in the DOM for the duration of the animation
+    closeTimeoutMS={170} <-match value of --mdlto
+*/
+body {
+    --mdlto: 170ms;
+}
+
+:root {
+  --ease-in-out-circ: cubic-bezier(.785, .135, .15, .86);
+}
+
+.ReactModal__Overlay {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+    margin: auto;
+    pointer-events:all!important;
+    // This fixes the tabbing issue within Modals - in short it needs a height > 0
+    height: 100dvh;
+    z-index: 9998;
+}
+
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+    .modal-content {
+      animation: curtainDown var(--mdlto) linear;
+    }
+}
+
+.ReactModal__Overlay--before-close .modal-content{
+    animation: curtainUp var(--mdlto) linear;
+}
+
+.ReactModal__Overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes curtainUp {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes curtainDown {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes unfoldIn {
+  0% {
+    transform:scaleY(.005) scaleX(0);
+  }
+  50% {
+    transform:scaleY(.005) scaleX(1);
+  }
+  100% {
+    transform:scaleY(1) scaleX(1);
+  }
+}
+
+@keyframes unfoldOut {
+  0% {
+    transform:scaleY(1) scaleX(1);
+  }
+  50% {
+    transform:scaleY(.005) scaleX(1);
+  }
+  100% {
+    transform:scaleY(.005) scaleX(0);
+  }
+}
+
+.modal-dialog {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  width: 100% !important;
+  height: 100%;
+  max-width: unset;
+  // margin: auto;
+  // Luke Dev - removed to fix the SOCASelect issue
+  // z-index: 99999;
+}
+
+.modal-dialog.dark {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-dialog.light {
+  background-color: rgba(38, 80, 88, 0.4);
+}
+
+/**
+  Full is completely covering parent
+*/
+.modal-dialog.full .modal-content, .full .modal-dialog .modal-content {
+  position: absolute;
+  top: 32px;
+  right: 0;
+  bottom: 0;
+  width: calc(100vw - 32px)!important;
+  height: calc(100vh - 32px);
+}
+
+.modal-dialog.full.panel.dark .modal-header {
+  // height: 38px !important;
+  height: 50px;
+  // background-color: var(--bg) !important;
+  // Luke Dev - I removed this so that the Modals follow a consistent theme
+  // background-color: var(--bg) !important;
+}
+
+.modal-dialog.full.panel.dark .modal-header h1, .modal-header .card-header h1 {
+  font-size: 1.5rem !important;
+}
+
+/**
+  full-screen is the full size modal
+*/
+.modal-dialog.full-screen {
+    position: relative;
+    width: 100%!important;
+    height: 100%!important;
+
+    .modal-content {
+        width: 100%!important;
+        height: 100%!important;
+    }
+
+    .modal-header {
+        padding-bottom: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        height: 2.7em;
+        font-size: 1.4rem!important;
+    }
+}
+
+/**
+  wide is an 'almost' full width modal
+*/
+.modal-dialog.wide .modal-content, .wide .modal-dialog .modal-content {
+  position: absolute;
+  width: 90%;
+}
+
+/**
+  wide is an 'almost' full width modal
+*/
+.modal-dialog.wide-70 .modal-content, .wide-70 .modal-dialog .modal-content {
+  position: absolute;
+  width: 70%;
+}
+
+/**
+  wide is an 'almost' full width modal
+*/
+.modal-dialog.wide-50 .modal-content, .wide-50 .modal-dialog .modal-content {
+  position: absolute;
+  width: 50%;
+}
+
+/**
+  high is an 'almost' full height modal
+*/
+.modal-dialog.high .modal-content, .high .modal-dialog .modal-content {
+  position: absolute;
+  top: 5%;
+  height: 90%;
+}
+
+/**
+    popup overlay modal
+*/
+.modal-dialog.busy .modal-content.card {
+    background-color: transparent !important;
+}
+
+.modal-dialog.busy .modal-body {
+  margin: auto;
+  color: #CCC;
+  line-height: 2em;
+}
+
+.modal-dialog.busy .modal-header, .modal-dialog.busy .modal-footer {
+  display: none !important;
+}
+
+/**
+  normal (non-wide) is a fixed-width 604px modal
+*/
+.modal-dialog .modal-content {
+  position: relative;
+  width: calc(602px - 2rem);
+  border-radius: 12px;
+  overflow: hidden;
+  // z-index: 9999 !important;
+  cursor: default !important;
+  background-color: rgba(38, 50, 50, 1);
+}
+
+.modal-dialog.dark .modal-content {
+  background-color: rgba(40, 50, 50, 1) !important;
+  color: #EEE;
+}
+
+// Luke Dev - Fixes hard to read table content for just this tenancy modal
+.modal-dialog.dark .modal-content.tenancyModal, .modal-dialog.tenancyModal.dark .modal-content {
+  background-color: rgba(40, 50, 50) !important;
+}
+
+.modal-dialog.light .modal-content {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: #5A5A5A;
+}
+
+// Luke Dev - removes the opacity on full width modals, makes no sense for it to be there on full width ones
+.modal-dialog.light.full .modal-content {
+  background-color: rgba(255, 255, 255, 1) !important;
+  color: #5A5A5A;
+}
+
+// Luke Dev - Fixes hard to read table content for just this tenancy modal
+.modal-dialog.light .modal-content.tenancyModal {
+  background-color: rgba(255, 255, 255, 1) !important;
+}
+
+.modal-dialog.dark .modal-footer {
+  padding: 5px 10px 5px 10px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.modal-dialog.dark .card-footer .btn, .modal-dialog .modal-footer .btn,
+.modal-dialog.dark .btn {
+  background-color: rgba(175, 180, 185, 0.3);
+  border: 1px solid rgba(175, 180, 185, 0.3);
+  // Luke Dev - testing a little depth for the buttons
+  box-shadow: inset black 0px 0px 20px -12px; 
+  // float:right;
+}
+
+.modal-dialog.dark .card-footer .btn-secondary,
+.modal-dialog .modal-footer .btn-secondary {
+  background-color: transparent !important;
+  border: 1px solid rgba(175, 180, 185, 0.3);
+}
+
+.modal-dialog.dark .card-footer .btn-primary-danger, 
+.modal-dialog .modal-footer .btn .btn-primary-danger {
+  background-color: #D33 !important;
+}
+
+.modal-dialog.dark .modal-footer .btn-primary-danger:hover, 
+.modal-dialog .modal-footer .btn .btn-primary-danger:hover {
+  background-color: rgb(255, 96, 96) !important;
+}
+
+.modal-dialog.light .modal-footer .btn,
+.modal-dialog.light .btn {
+  background-color: #6a949c;
+  border: 1px solid #6a949c;
+  // float:right;
+}
+
+.modal-dialog .card-footer .btn, .modal-dialog .modal-footer .btn {
+  float: right;
+}
+
+.modal-dialog.dark .modal-footer .btn-primary:hover,
+.modal-dialog.dark .btn-primary:hover {
+  background-color: rgba(75, 80, 85, 0.9);
+  border: 1px solid rgba(175, 180, 185, 0.6);
+}
+
+.modal-dialog.dark .modal-footer .btn-secondary,
+.modal-dialog.dark .btn-secondary {
+  background-color: transparent !important;
+  border: 1px solid rgba(175, 180, 185, 0.3);
+  // float:right;
+}
+
+.modal-dialog.dark .modal-footer .btn-primary-alternate:hover,
+.modal-dialog.dark .btn-primary-alternate:hover {
+  background-color: #d4b100 !important;
+  border: 1px solid #EEE !important;
+  // float:right;
+}
+
+
+.modal-dialog.dark .modal-footer .btn-secondary:hover,
+.modal-dialog.dark .btn-secondary:hover {
+  background-color: rgba(75, 80, 85, 0.9) !important;
+  border: 1px solid rgba(175, 180, 185, 0.6) !important;
+  // float:right;
+}
+
+.modal-dialog.light .modal-footer .btn-secondary,
+.modal-dialog.light .btn-secondary {
+  background-color: transparent !important;
+  border: 1px solid #6a949c;
+  // float:right;
+}
+
+.modal-dialog.light .modal-footer .btn-secondary:hover,
+.modal-dialog.light .btn-secondary:hover {
+  background-color: #6a949c !important;
+  border: 1px solid #6a949c;
+  // float:right;
+}
+
+.modal-dialog.light .modal-footer {
+  border-top: 1px solid rgba(38, 80, 88, 0.9);
+}
+
+.modal-dialog .modal-header {
+  letter-spacing: 0.07em;
+  padding: 10px 10px 10px 10px;
+  background-color: rgba(106, 148, 156, 0.7);
+  border-bottom: 1px solid rgba(250, 250, 250, 0.2) !important;
+  cursor: default !important;
+}
+
+.modal-dialog.light .modal-header {
+  border-bottom: 1px solid rgba(38, 80, 88, 0.9) !important;
+  background-color: rgba(0, 0, 0, .03) !important;
+}
+
+.modal-dialog .modal-header, .modal-dialog.dark .modal-header {
+  font-size: 1rem;
+  letter-spacing: 0.07em;
+  padding: 10px 10px 10px 10px;
+  background-color: rgba(40, 50, 50, 0.8) !important;
+  border-bottom: 1px solid rgba(250, 250, 250, 0.2) !important;
+  cursor: default !important;
+}
+
+.modal-body.card-body {
+    overflow: auto;
+    margin: 0.5rem
+}
+
+.XXXXmodal-dialog .modal-body {
+  padding: 10px 10px 10px 10px;
+  border-radius: 4px;
+  cursor: default !important;
+  overflow: auto;
+}
+
+.XXXXmodal-dialog .modal-body span {
+  background-color: transparent;
+  cursor: default !important;
+}
+
+// .modal-dialog .modal-body button span {
+//   background-color: initial!important;
+// }
+
+.modal-dialog .modal-body special input {
+  font-size: 1.5em;
+  height: auto;
+  width: calc(100% - 25px);
+  caret-color: rgba(240, 240, 240, 0.4);
+  text-align: left;
+  line-height: normal !important;
+  margin-top: 10px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  opacity: 1;
+  color: #5A5A5A;
+  background-color: #FFFFFF !important;
+  border: none;
+  border-radius: 4px;
+  caret-color: #5A5A5A;
+}
+
+.modal-dialog .modal-body .input-pct {
+  text-align: right;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.modal-dialog .modal-body .label-pct {
+  display: inline-block;
+  font-size: inherit;
+  height: auto;
+  line-height: inherit;
+  padding: 1px 2px;
+  margin-left: -2px;
+  width: 25px;
+  border-radius: 4px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: #FFFFFF !important;
+  color: #5A5A5A;
+  box-sizing: border-box;
+  border-width: 2px;
+  border-style: inset;
+  border-left-width: 0;
+  border-top-color: rgb(0, 0, 0);
+  border-right-color: rgb(118, 118, 118);
+  border-bottom-color: rgb(118, 118, 118);
+}
+
+.modal-dialog .modal-body input::selection {
+  color: #EEE;
+  background-color: rgba(38, 80, 88, 0.9);
+  outline: none !important;
+}
+
+.modal-dialog .modal-body input::-moz-selection {
+  color: #EEE;
+  background-color: rgba(38, 80, 88, 0.9);
+  outline: none !important;
+}
+
+.modal-dialog .modal-footer {
+  display: block !important;
+  padding: 10px;
+  cursor: default !important;
+}
+
+.modal-dialog .modal-footer > * {
+  margin-right: 0 !important;
+}
+
+.modal-dialog .modal-footer .login-btn, 
+.modal-dialog .modal-footer .login-btn:hover,
+.modal-dialog .modal-footer .login-btn:active,
+.XXXXmodal-dialog .modal-footer .login-btn:focus {
+  font-family: Arial, san-serif;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.XXXXmodal-dialog .modal-footer .login-btn.resend {
+  font-size: 1em;
+  float: left;
+  padding: 0;
+  opacity: 1;
+}
+
+.XXXXmodal-dialog .modal-footer .login-btn.close {
+  font-size: 1em;
+  font-weight: normal;
+  text-shadow: none !important;
+  line-height: 24px;
+  color: #FFFFFF !important;
+  opacity: 1;
+  float: right;
+  padding: 0;
+  appearance: button !important;
+}
+
+.XXXXmodal-dialog .card-header {
+  background-color: #547D84 !important;
+  padding: 10px 15px;
+  color: #EEE;
+  font-size: 1.1em;
+  border-bottom: 2px solid rgba(92, 92, 92, 0.5);
+}
+
+.XXXXmodal-dialog .card-body {
+  padding: 15px;
+}
+
+.XXXXmodal-dialog .card-footer {
+  padding: 10px;
+}
+
+.XXXXmodal-dialog .card-footer button {
+  margin-left: 8px;
+  float: right;
+}
+
+// ========================================================================
+// Modal - Prototype Start
+// ========================================================================
+.modal-dialog.proto {
+  background-color: rgba(0, 0, 0, 0.9);
+
+  .card .card-header {
+    padding: 20px 16px 12px 16px;
+  }
+
+  .card .card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0px 0px 0px;
+  }
+
+  .modal-content {
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: transparent!important;
+  }
+
+  .card-body .body-contents {
+    padding: 0px 20px 8px 20px;
+    overflow: auto;
+  }
+
+  .modal-content .card {
+    border-radius: inherit;
+    overflow: hidden;
+  }
+
+  .card-body .footer-contents {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .card-body .footer-contents button {
+    margin: 0px 5px;
+  }
+
+  .card-header hr {
+    margin-top: 12px;
+    margin-bottom: 0px;
+  }
+
+  .card-header svg {
+    font-size: 1.4em;
+    opacity: 0.7;
+  }
+
+  .card-header svg:hover {
+    opacity: 1;
+  }
+
+  .btn-primary {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .btn-primary:active {
+    border: 1px solid #6a949c!important;
+    background-color: rgb(75 105 111 / 70%) !important;
+  }
+
+}
+
+
+/// ========================================================================
+// Theme: Dark
+// ========================================================================
+.modal-dialog.proto.dark {
+
+  .card-header {
+    background-color: inherit!important;
+  }
+
+  .modal-content hr {
+    border-top: 1px solid rgb(91 91 91);
+  }
+
+  .modal-content .card {
+    --bg: #2d3237;
+  }
+
+  .card-body .footer-contents {
+    background-color: #343a40;
+  }
+
+  .btn-primary {
+    background-color: transparent;
+  }
+
+  .btn-primary:hover {
+    background-color: rgba(106, 148, 156, 0.7);
+  }
+
+  .btn-primary:active {
+    border: 1px solid #6a949c!important;
+    background-color: rgb(75 105 111 / 70%) !important;
+  }
+
+}
+
+/// ========================================================================
+// Theme: Light
+// =========================================================================
+.modal-dialog.proto.light {
+
+  .btn-primary {
+    border: 1px solid #8c8d8d!important;
+    background-color: transparent;
+    color: black
+  }
+
+  .btn-primary:hover {
+    background-color: rgba(106, 148, 156, 0.7);
+  }
+
+  .btn-primary:active {
+    background-color: rgb(141 161 165 / 70%)!important;
+  }
+
+  .card-body .footer-contents {
+    background-color: #e4e4e4;
+  }
+
+}
+
+
+
+
+
+
+.ReactModal__Overlay--after-open .modal-dialog.proto .modal-content{
+    animation: modalIn cubic-bezier(.16,.49,.41,1.03) 0.5s;
+}
+
+.ReactModal__Overlay--before-close {
+    opacity: 0;
+    transition: opacity 1s cubic-bezier(.16,.49,.41,1.03) 0.5s forwards;
+}
+
+.ReactModal__Overlay--before-close .modal-dialog.proto .modal-content{
+    animation: modalOut cubic-bezier(.16,.49,.41,1.03) 0.5s forwards;
+}
+
+@keyframes modalIn {
+    0% { 
+      opacity: 0; 
+      transform: translate(0em, 3em);
+    }
+    100% { 
+      opacity: 1; 
+      transform: translate(0em, 0em);
+    }
+}
+
+@keyframes modalOut {
+    0% { 
+      opacity: 1; 
+      transform: translate(0em, 0em);
+    }
+    100% { 
+      opacity: 0; 
+      transform: translate(0em, 3em);
+    }
+}
+
+// ========================================================================
+// Modal - Prototype End
+// ========================================================================
+
+.confirm-modal-override {
+  min-width: auto;
+}
+
+/*
+  login container stuff - What's this doing here?
+*/
+.login-container .badge {
+  padding: 0.35rem 1rem;
+}
+
+.login-container .badge-warning {
+  background-color: rgba(255, 193, 7, 0.7);
+}
+
+.login-container .badge-danger {
+  background-color: rgba(220, 53, 69, 0.7);
+}
+
+.event-table-data .table-search-wrapper {
+    display: none!important;
+}

@@ -1,0 +1,913 @@
+@use "sass:color";
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+//TODO  PDS TEST - I put this in because otherwise the promper is cut off at the bottom by the height of the top header+tab bar height
+//83px is an emprical value - should really be sorted out properly
+.tab-component .chatbot-container {
+    height: calc(100vh - 7rem)!important;
+}
+
+//PDS TEST - for when chatbot is sitting in masonryLayout in DH Analysis reports view
+.tab-component.reports.row .chatbot-container {
+    height: calc(100vh - 8rem)!important;
+}
+
+
+.chatbot-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: unset;
+
+    flex-wrap: nowrap;
+    width: 100%;
+    margin: 5px;
+
+    margin-inline: 0!important;
+    padding-inline: 0!important;
+
+    // Luke Dev - This makes the prompter box stay at the bottom for chtabot (this broke it within the web client)
+    // .MuiBox-root {
+    //     position: fixed;
+    //     bottom: 0;
+    // }
+
+    .chatbot-global-toolbar {
+        display:flex;
+        width:60%;
+        max-width:60vw;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        margin-inline: auto !important;
+        padding-inline:0;
+        padding-bottom:0.3rem;
+        overflow: hidden;
+        z-index: 1;
+
+        span {
+            padding: 5px 0 10px 0;
+        }
+
+        .chatbot-toolbar-button {
+            background-color: transparent;
+            border: none;
+            color: var(--fg-color);
+            padding: 0px 10px 5px 0;
+        }
+
+        .chatbot-toolbar-button:focus {
+            border: none;
+            outline: none !important;
+        }
+
+        .new-chat-button {
+            background-color: rgba(166, 177, 177, 0.3);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 0.4rem;
+            color: var(--fg-color);
+            border-radius: 10px;
+        }
+    }
+
+    #react-select-2-placeholder {
+        color: #EEE !important;
+    }
+
+    /* set the dynamic placeholder id to use a smaller font'size */
+    [id^="react-select-"][id$="-placeholder"] {
+        font-size: 0.80rem !important;
+        color: rgba(238, 238, 238, 0.55) !important;
+    }
+}
+
+/* Add to your main CSS */
+.chatbot-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatbot-overlay.active {
+    display: flex;
+}
+
+
+.chatbot-dropzone {
+    z-index: 1000;
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%); 
+    width: 60vw; 
+    height: 40vh;
+    background-color: #495353;
+    border-radius: 10px;
+    border: 3px dashed rgba(0, 0, 0, 0.3) !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .chatbot-dropzone-header-wrapper {
+        width: 100%;
+        text-align: center;
+        margin-left: auto;
+        // background-color: #a8a8a820 !important;
+        margin-right: auto;
+        .chatbot-dropzone-header {
+            font-size: 2rem;
+            margin-top: 0.5em;
+        }
+    }
+
+    .chatbot-dropzone-upload-section {
+        position: relative;
+        
+        border-radius: 20px;
+        padding: 3rem;
+        margin-top: 2rem;
+        background-color: #5a696d;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        p {
+            margin-top: 0.5rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+    }
+}
+
+/* PDS TEST UPDATED RESPONDER STUFF */
+.chatbot-layout-manager-container {
+    display: flex;
+    flex-direction: column;
+    // align-items: flex-start;
+    // Luke test - Hiding the scroll until it is needed
+    height: 100%;
+    max-height: 100dvh;
+    .col {
+        min-height: 0;
+    }
+}
+
+.chatbot-layout-manager {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width:100%;
+    // max-width:60vw;
+    height: 100vh;
+    margin-top:10px;
+    margin-bottom: 0px;
+    margin-inline: auto !important;
+    padding-inline:0.6rem;
+}
+
+.chatbot-layout-inner-container {
+    display: flex;
+    // flex-direction: column;
+    flex-grow: 1;
+    flex-wrap: nowrap;
+    width:100%;
+    min-height:0;
+ }
+  /************************************************************
+   Dynamic heights for chatbot responder when it's in
+   different places/containers etc.
+ ************************************************************/
+//  luke dev - Updated this as it adds more 'margin' with the new drawer
+ :root {
+    --chatbot-responder-height: calc(100vh - 195px); 
+}
+
+/* soca-datahelix-analysis tab */
+.dhanalyzer {
+    --chatbot-responder-height: calc(100vh - 342px); 
+}
+
+ /*
+   PDS TEST - I've set the responder view to fll width so i can see the masnry container wide!
+ */
+.chatbot-responder-container.row {
+    display:flex;
+    height: 100%;
+    overflow-y:auto;
+    overflow-x:hidden;
+    position: relative;
+}
+
+.report-view-slider .chatbot-responder-container {
+    height: 95vh !important;
+}
+
+// Luke Dev - This fixes the double scrollbar issue within slide out in casemgt report
+.report-view-slider .MuiPaper-root {
+    overflow-y: hidden !important;
+}
+
+// Luke dev - Working on the drawer prompter
+.responder-drawer-container {
+    height: auto;
+    overflow: hidden;
+}
+
+.toggle-collapse-btn-wrapper {
+    padding: 4px 16px;
+    border-radius: 4px;
+    width: fit-content;
+    margin-inline: auto;
+    &.collapsed {
+        margin-bottom: 1.3rem;
+        transition: opacity 0.4s ease-in-out;
+    }
+}
+
+.toggle-collapse-btn-wrapper:hover {
+    cursor: pointer;
+    background-color: rgba(125, 124, 124, 0.27);
+}
+
+.chatbot-delete-prompt-history-btn {
+    padding: 0.3rem;
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+.chatbot-delete-prompt-history-btn:hover {
+    cursor: pointer;
+    background-color: #a09c9c63;
+}
+
+// .prompt-drawer-collapser {
+//     min-height: auto !important;
+//     height: auto !important;
+// }
+
+// .expanded-chatbot-responder {
+//     // height: calc(100vh - 170px) !important;
+// }
+
+.chatbot-responder-container.row:has(.maximized-item-card) {
+    height:100vh;
+}
+
+.chatbot-input-container {
+    // height:190px;
+    // position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px;
+}
+
+.chatbot-responder-container {
+    .chat-box {
+        margin: 0 !important;
+        padding-top: 0!important;
+        padding-bottom:0!important;
+        display: block;
+        height: auto;
+        // padding: 2rem 1rem;
+        padding-bottom: 15rem;
+        // overflow:auto;
+    }
+
+    
+    .scroll-to-bottom-btn {
+        position: fixed;
+        bottom: 35%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #cacaca;
+        color: #333;
+        padding: 5px;
+        cursor: pointer;
+        z-index: 10;
+        border-radius: 9999px;
+        background-clip: padding-box;
+        color: #333;
+        background-color: #EEE;
+        width: 10%;
+        height: 1.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .scroll-to-bottom-btn:hover {
+        background-color: #8a8a8a;
+    }
+    
+    .prompt,
+    .llm-message {
+        display: block;
+        margin: 10px 0;
+        // padding: 10px;
+        // border-radius: 30px;
+        max-width: 100%;
+    }
+    
+    /* for user chat prompt */
+    .user-prompt {
+        color: var(--fg-dark-color);
+        margin-left: auto;
+        // Luke Dev - removed while I work on the files UI
+        // width: 100%;
+        text-align: right;
+        .message-box {
+            margin-left: auto;
+            text-align: center;
+        }
+        .message-box {
+            background-color: #fff;
+            color: #1f2f2f;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            line-height: 1;
+            overflow: hidden;
+        }
+    }
+
+    /* for pdr auto-gen Agentic prompt */
+    .pdr-prompt {
+        display: flex;
+        color: var(--fg-dark-color);
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+        .message-box {
+            min-width:200px;
+            .header {
+                color: var(--fg-dark-color);
+                font-family: Roboto-Light,Roboto,Arial,Sans-serif !important;;
+                font-size: 0.85em;
+                font-weight: 700;
+                padding-bottom: 2px;
+            }
+            color: var(--fg-dark-color)!important;
+            background-color: var(--automation-stat-color);
+            margin: 1rem;
+            margin-left:auto;
+            padding: 1rem;
+            border-radius: 15px;
+            display: inline-block;
+            text-align: left;
+        }
+    }
+    
+    .llm-message {
+        color: #f1f1f1;
+        overflow: hidden;
+        width: 100%;
+        animation: 
+            typing 3.5s steps(40, end);
+        p {
+            margin: 1rem;
+            margin-left: 0;
+            width: 100%;
+            padding: 1rem;
+            padding-left: 0;
+            padding-bottom: 0;
+            display: inline-block;
+        }
+    }
+
+    /* Hide the buttons by default */
+    .chatbot-copy-button,
+    .chatbot-feedback-button {
+        opacity: 1; 
+        visibility: visible; 
+        transition: opacity 0.2s ease-in, visibility 0.2s ease-in; 
+    }
+
+    .chatbot-copy-button {
+        background: none;
+        color: white;
+        border: none;
+        padding: 5px;
+    }
+
+    .chatbot-copy-button:hover {
+        background: rgba(204, 195, 195, 0.247);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .chatbot-feedback-button {
+        background: none;
+        color: white;
+        border: none;
+        padding: 5px;
+    }
+
+    .chatbot-feedback-button:hover {
+        background: rgba(204, 195, 195, 0.247);
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .chatbot-dropzone-upload-section {
+        width: 80%;
+        text-align: center;
+        background-color: #6a949c5b;
+        border-radius: 5px;
+        padding: 1rem;
+    }
+
+    .selected-file-wrapper {
+        position: relative;
+        width: 170px;
+        margin-top: 100px; // prevent overflow above
+        margin-left: auto;
+        .selected-file-card {
+            background-color: grey;
+            border: 1px solid #252525;
+            position: absolute;
+            margin-bottom: 0;
+            text-align: left;
+            margin-left: auto;
+            max-width: 135px;
+
+            @for $i from 1 through 5 {
+                $reverseIndex: 5 - $i;
+              
+                &:nth-child(#{$i}) {
+                  transform: translate(#{$reverseIndex * 10}px, #{$reverseIndex * -20}px)
+                             rotate(#{$reverseIndex * 1}deg);
+                  z-index: #{$i};
+                }
+              }
+              
+        }
+
+        .selected-file-spacer {
+            pointer-events: none;  // so it doesn’t interfere with clicks
+            visibility: hidden;    // so it’s invisible
+          }
+          
+    }
+
+}
+
+.chatbot-actions-container.row {
+    margin-inline: auto !important;
+    width: 60%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #EEE;
+
+    .chatbot-action-button {
+        background-color: rgba(166, 177, 177, 0.0);
+        border: 1px solid rgba(0, 0, 0, .1);;
+        padding: 0.4rem;
+        margin: 0px 7px 0px 0;
+        color: var(--fg-color);
+        border-radius: 8px;
+    }
+
+    .chatbot-action-button:hover {
+        background-color: rgba(166, 177, 177, 0.171);
+    }
+
+    .chatbot-action-button:focus, .chatbot-action-button:active {
+        border: none!important;
+        outline: none!important;
+        box-shadow: none!important;
+    }
+    
+    .actions-title {
+        margin-top: 5px;
+    }
+
+    .actions-title:hover {
+        cursor: pointer;
+    }
+
+    // .actions {
+    //     border-top: 1px solid #888;
+    //     padding-top: 5px;
+    // }
+}
+
+.chatbot-actions-container.row {
+    margin-inline: auto !important;
+    width: 60%;
+}
+
+.chatbot-prompter-container.row {
+    position: relative;
+    background-color: #1c1f1f65;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px #0000001a;
+    padding: .3rem;
+    width: 60%;
+    margin-inline: auto !important;
+    .chatbot-input-background-wrapper {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        background-color: #3a4b4b;
+        padding-bottom: 20px;
+        z-index: 10;
+      }
+      
+      
+      .chatbot-input-outer-wrapper {
+        background-color: #1c1f1f65;
+        padding: 0.3rem;
+        width: 60%;
+        max-width: 60vw;
+        border-radius: 20px;
+        position: relative;
+        margin: 0 auto;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        gap: 8px;
+    }
+
+    .chatbot-input-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-radius: 12px;
+        background-color: #EEE;
+        overflow: hidden;
+    }
+
+    .chatbot-input-disabled {
+        background-color: rgba(202 202 202 / 0.5)!important;
+    }
+
+    .chatbot-input {
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 80px;
+        max-height: 200px;
+        line-height: 1.5;
+        vertical-align: middle;
+        resize: none;
+        overflow-y: auto;
+        padding: 10px 12px;
+        border-radius: 12px 12px 0 0;
+        border: none;
+        background-color: #eee;
+        outline: none;
+        font-size: 16px;
+        font-weight: 400;
+        font-family: inherit;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    #react-select-3-placeholder {
+        color: rgba(230, 230, 230, 0.5);
+    }
+
+    .chatbot-input::placeholder {
+        vertical-align: middle;
+        opacity: 0.6;
+    }
+
+    .chatbot-input:focus {
+        outline: none;
+        border: none;
+        box-shadow: none;
+        min-height: 80px;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .chatbot-input-util-row {
+        display: flex;
+        align-items: center;
+        background-color: #343a402c;
+        padding: 2px 4px;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .chatbot-add-files-button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 40px;
+        width: 40px;
+        border-radius: 15px;
+        border: none;
+        color: #EEE;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .chatbot-add-files-button:hover {
+        cursor: pointer;
+    }
+
+    .chatbot-file-bubble {
+        position: absolute;
+        top: -15px;
+        left: 15px;
+        background: rgba(160, 110, 255, 0.2);
+        color: var(--fg-dark-color);
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    .chatbot-submit-button {
+        height: 28px;
+        width: 80px;
+        font-size: 1rem;
+        margin: 0.25rem;
+        border-radius: 10px;
+        border: none;
+        background-color: rgb(52,58,64);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+    }
+
+    .chatbot-submit-button:hover {
+        cursor: pointer;
+        opacity: 80%;
+    }
+
+    .chatbot-agent-chip.datahelix-agent-btn {
+        color: #EEE;
+        background-color: #3a4b4bbc;
+        box-shadow: none!important;
+        outline: none!important;
+        border: none!important;
+    }
+
+    .chatbot-agent-chip {
+        all: unset;
+
+        font-size: 0.85em;
+        font-family: Roboto,Arial,Sans-Serif;
+        color: var(--fg-dark-color);
+
+        background-color: #ffffff5b;
+        border: 1px solid rgba(0, 0, 0, .1);;
+        padding: 0.15rem 0.5rem;
+        margin: 0.3rem 0.25rem;
+        color: #333;
+        border-radius: 10px;
+    }
+
+    .chatbot-agent-chip:focus {
+//        background-color: #EEE!important;
+        box-shadow: none!important;
+        outline: none!important;
+        border: none!important;
+    }
+
+    .chatbot-agent-chip:hover {
+        cursor: pointer;
+        opacity: 80%;
+        box-shadow: none!important;
+        outline: none!important;
+        background-color: rgba(58, 75, 75, 0.737254902);
+        color: #EEE;
+        /* Luke Dev - this causes the entire input wrapper to change height */
+        /* border: none!important; */
+    }
+
+    .chatbot-agent-chip:not(.active):focus {
+        background-color: #EEE!important;
+        box-shadow: none!important;
+        outline: none!important;
+        border: none!important;
+    }
+
+    .btn.chatbot-agent-chip.active, .btn.chatbot-agent-chip.active:focus {
+        color: #EEE;
+        background-color: #3a4b4bbc;
+        box-shadow: none!important;
+        outline: none!important;
+        border: 1px solid rgba(0, 0, 0, .1) !important;
+    }
+
+    .chatbot-files-wrapper {
+        display: flex;
+        max-width: 60vw;
+        overflow: visible;
+    }
+
+    .selected-file-card:nth-child(2) {
+        margin-left: 0.5rem !important;
+    }
+
+    .chatbot-prompter-history-search {
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin-left: auto;
+        right: 0;
+        flex-shrink: 1;
+        padding: 2px 4px 2px 2px;
+        margin-bottom: 0.4rem;
+        background-color: rgba(184, 184, 184, 0.42);
+        border-radius: 12px;
+        color: #EEE;
+    }
+}
+
+.selected-file-card {
+    transform: scale(100%);
+    transition: transform 0.5s ease;
+    max-width: 10rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 5px 10px 12px;
+    margin-bottom: 0.5rem;
+    font-size: 13px;
+    margin-left: 2rem;
+    border-radius: 8px;
+    background-color: #a5a5a52a;
+    overflow: visible;
+
+    .selected-file-title {
+        white-space: nowrap;
+        overflow: hidden;
+        font-weight: 500;
+        color: #EEE;
+    }
+
+    .selected-file-size {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        font-weight: normal;
+        line-height: 1;
+        color: #b3b3b9; 
+    }
+
+    .selected-file-type {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        font-weight: normal;
+        line-height: 1;
+        margin-right: 5px;
+        color: #b3b3b9;
+    }
+
+    .selected-file-more-text {
+        height: 50px;
+        line-height: 50px;
+        margin-left: 1rem;
+    }
+
+    .selected-file-delete-btn {
+        position: absolute;
+        top: -16px;
+        right: -10px;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color: #252525;
+        border-radius: 50%;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.2s ease;
+
+        svg {
+            width: 16px;
+            height: 16px;
+            color: #fff;
+        }
+    }
+
+    &:hover {
+        .selected-file-delete-btn {
+            opacity: 100%;
+            pointer-events: auto;
+            z-index: 99999 !important;
+            background-color: #252525;
+            transition: opacity 0.3s ease;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #444;
+                transform: scale(1.05);
+            }
+        }
+    }
+}
+
+.maximized-item-card {
+    &.card {
+        padding: 15px!important;
+        border: 2px solid #888;
+        border-radius: 6px;
+    }
+}
+
+.maximized-item-card .card-header .popout-header-row {
+    margin-bottom: 5px;
+    background-color: var(--bg-mid2);
+    border: 1px solid var(--bg-mid2);
+    border-radius: 6px;
+    h4 {
+        margin: 0;
+        padding: 5px;
+    }
+    .popout-header-col-min-button {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        padding-right: 0;
+    }
+}
+//Wave animation for chat-bot
+.sound-wave {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 20px;
+    margin-left: .4rem;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+
+  .chatbot-responder-container .row .thinking {
+    font-size: 19px;
+    color: rgba(230, 240, 240, 0.6)!important;
+  }
+
+  .bar {
+    width: 4px;
+    height: 15px;
+    background-color: color.scale(#3A4B4B, $lightness: 40%);
+    transform-origin: bottom;
+    animation: wave 0.5s infinite ease-in-out alternate;
+  }
+
+  .bar:nth-child(1) { animation-delay: 0s; }
+  .bar:nth-child(2) { animation-delay: 0.2s; }
+  .bar:nth-child(3) { animation-delay: 0.4s; }
+  .bar:nth-child(4) { animation-delay: 0.6s; }
+  .bar:nth-child(5) { animation-delay: 0.8s; }
+
+  @keyframes wave {
+    0%   { transform: scaleY(0.3); opacity: 0.5; }
+    100% { transform: scaleY(1);   opacity: 1; }
+  }
+  .agent-tooltip {
+    float: right;
+  }
+
+/* Scroll to top button */
+.chatbot-container .scroll-to-top-btn {
+    font-size: 0.85rem!important;
+    position: fixed;
+    bottom: 5px;
+    right: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 9; 
+}

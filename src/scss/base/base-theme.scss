@@ -1,0 +1,97 @@
+/**************************************************************************
+  T H E M I N G
+
+  Defines element overrides for theming.
+  The associated var values are defined in the relevant theme file
+  (e.g. 'theme-dark.css')
+**************************************************************************/
+.theme {
+    overflow-y: clip;
+    background-color: var(--bg);
+    color: var(--color);
+}
+
+.theme .card {
+    background-color: var(--bg);
+    color: var(--color);
+}
+
+.theme .card .card-header {
+    font-size: clamp(8px, calc(1.385cqw), 1rem);
+    // background-color: var(--bg);
+    color: var(--color);
+    padding: 0;
+}
+
+.theme .card {
+    background-color: var(--bg);
+    color: var(--color);
+}
+
+.theme {
+    font-family: Montserrat, Arial, Sans-Serif!important;
+    .card text {
+        color: var(--textcolor);
+        fill: var(--textcolor);
+    }
+
+    .theme-container-light .card .highcharts-data-label text {
+        font-family: Geist, Arial, Sans-Serif!important;
+        font-weight: 100;
+        color: #333!important;
+        fill: #333!important;
+        tspan {
+          stroke-width: 1px !important;
+        }
+    }
+
+    .theme-container-light .speedometer .label text {
+        font-family: Geist, Arial, Sans-Serif!important;
+        font-weight: 900;
+        color: #555!important;
+        fill: #555!important;
+    }
+
+    .theme-container-light .speedometer .current-value {
+        font-family: Geist, Arial, Sans-Serif!important;
+        font-weight: 700;
+    }
+}
+
+/** TOAST */
+.theme .Toastify__toast-container {
+    --toastify-toast-width: 50%;
+    max-width: 500px;
+}
+
+.theme .Toastify__toast span.success::before {
+    content: '\f00c';
+    color: #8D8;
+    font: var(--fa-font-solid);
+    font-size: 2rem;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
+.theme .Toastify__toast span.warning::before {
+    content: '\f071';
+    color: #FFFFE0;
+    font: var(--fa-font-solid);
+    font-size: 2rem;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
+.theme .Toastify__toast span.error::before {
+    content: '\f06a';
+    color: #FFFFE0;
+    font: var(--fa-font-solid);
+    font-size: 2rem;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
+.theme .Toastify__toast-icon {
+    width: 2.5em;
+    height: 2.5em;
+}

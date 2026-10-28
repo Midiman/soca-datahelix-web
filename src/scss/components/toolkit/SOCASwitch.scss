@@ -1,0 +1,56 @@
+.soca-switch.soca-switch-container {
+    cursor: default;
+    .soca-switch {
+        cursor: pointer;
+        min-height: auto !important;
+        span {
+            cursor: pointer !important;
+            span {
+                cursor: pointer;
+                background-color: #eee !important;
+                border-color: #eee !important;
+            }
+        }
+    }
+}
+
+.soca-switch.soca-switch-container {
+    .soca-switch {
+        vertical-align: middle;
+        height: 20px !important;
+        width: 32px !important;
+        span {
+            height: 20px !important;
+            width: 20px !important;
+            margin-top: -1px !important;
+        }
+    }
+
+    .soca-switch.switch-on {
+        span {
+            left: 11px !important;
+        }
+    }
+
+    .soca-switch.switch-off {
+        span {
+            left: -1px !important;
+        }
+    }   
+}
+
+/* 
+  A littler version of the switch
+  Note 'small' needs to be set in the switch's parent
+*/
+.small .soca-switch.soca-switch-container {
+    .soca-switch {
+        height: 15px !important;
+        width: 27px !important;
+        span {
+            height: 15px !important;
+            width: 15px !important;
+            margin-top: -1px !important;
+        }
+    }
+}

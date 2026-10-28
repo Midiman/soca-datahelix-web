@@ -1,0 +1,142 @@
+/*
+	DASH-CARDS
+*/
+.scroller {
+	height: 100%;
+	width: 100%;
+	overflow-y: scroll;
+  }
+  
+  .scroller::-webkit-scrollbar {
+	overflow-y: scroll;
+	width: 8px;
+	height: 8px;
+	border: 0;
+  }
+  
+  .scroller::-webkit-scrollbar-track {
+	overflow-y: scroll;
+	border-radius: 10px;
+  }
+  
+  .scroller::-webkit-scrollbar-thumb {
+	background: rgba(192, 192, 192, 0.5);
+	overflow-y: scroll;
+	border-radius: 10px;
+	z-index: 101;
+  }
+  
+  .scroller::-webkit-scrollbar-corner {
+	overflow-y: scroll;
+	background: transparent;
+  }
+  
+//   TODO: Fix the important swapping heights with the smallstats vs pie charts
+  .dash-cards {
+/* PDS TEST
+	height: 100%;
+	max-height: 100%;
+*/	
+	top: 0px;
+	left: 0vh;
+	margin-top: 0px;
+	margin-bottom: 0px;
+/*	background: #343a40;
+*/
+  }
+  
+.modal-dialog .dash-cards .card-header {
+    padding:0!important;
+    background-color: transparent!important;
+    line-height: normal;
+    height: auto;
+    border: none;
+}
+
+//   Luke dev - fixes for the react tooltip styling
+  .dash-cards.chart-card .card-header svg {
+	// controls svg size
+	height: 100%;
+	// background-color: green;
+  }
+
+  .dash-cards.chart-card .card-header div {
+	height: auto;
+	z-index: 9999;
+  }
+  
+  .highcharts-container,
+  .dash-cards.chart-card .highcharts-container {
+	height: 100%;
+	width: 100%;
+  }
+  
+  .highcharts-container,
+  .dash-cards.chart-card .highcharts-container svg {
+	// TODO: change the inline styling for this
+	height: 100% !important;
+	width: 100% !important;
+  }
+  
+  .XXXhcchart {
+	height: 4rem !important;
+	width: 14rem !important;
+  }
+  
+  .dash-cards .card-header {
+	cursor: default;
+	height: 1rem;
+	font-family: "Roboto Light", Arial, Sans-Serif;
+	font-weight: normal;
+	font-size: clamp(8px, calc(1.385cqw), 1rem);
+	letter-spacing: 0.07em;
+	text-align: center;
+	line-height: clamp(1.6, 1.2, 1.2);
+	color: #ffffe0;
+	background: transparent;
+	border: none;
+	padding: 2px 3px 20px 3px;
+  }
+  
+  .expand-row-div .chart-card .card-header {
+	padding: 0;
+	margin: 0;
+	/* HACK! */
+	margin-top: -3px;
+	margin-bottom: 10px;
+	font-size: clamp(8px, calc(1.285cqw), 22px);
+	text-align: center;
+  }
+  
+  .dash-cards .card-body {
+	// height: 100%;
+	padding: 1rem 5px 3px 5px;
+	margin-top: 0;
+	// background: rgb(96, 65, 8);
+	overflow: hidden;
+  }
+  
+  .dash-cards .card-body .highcharts-data-label,
+  .dash-cards .card-body .highcharts-data-labels path {
+	visibility: visible;
+  }
+  
+  .dash-cards .highcharts-background {
+	fill: none;
+  }
+  
+  .dash-cards .alert {
+	font-size: 12px;
+	padding: 0.5em 1em;
+	margin-bottom: 0.5rem;
+  }
+  
+  .col-sm-12.chart-col.timeline.col {
+	width: 100%;
+  }
+  
+  .dash-cards.chart-card.timeline.card {
+	height: 170px;
+	width: 100%;
+  }
+  

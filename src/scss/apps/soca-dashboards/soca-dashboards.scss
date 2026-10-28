@@ -1,0 +1,1239 @@
+@mixin gauge-glow($opacity: 0.06, $spread: 65%) {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    var(--gauge-glow, #c8e63c) 0%,
+    transparent $spread
+  );
+  opacity: $opacity;
+  pointer-events: none;
+}
+
+@mixin value-glow($opacity: 0.15) {
+  content: '';
+  position: absolute;
+  left: -120px;
+  right: -100px;
+  bottom: -30px;
+  height: 60px;
+  background: radial-gradient(
+    ellipse at 10% 100%,
+    currentColor 0%,
+    transparent 80%
+  );
+  opacity: $opacity;
+  pointer-events: none;
+}
+
+@mixin crystal-bg-mask() {
+  $mask: radial-gradient(
+    circle at center,
+    rgb(20, 20, 20) 20%,
+    rgba(20, 20, 20, 0.5) 40%,
+    transparent 80%
+  );
+  mask-image: $mask;
+  -webkit-mask-image: $mask;
+}
+
+// ============================================
+// INTERACTIVE ELEMENT MIXINS
+// ============================================
+
+@mixin magnetic-hover($scale: 0.98) {
+  transition: all 500ms cubic-bezier(0.32, 0.72, 0, 1);
+  will-change: transform, opacity;
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+  
+  &:hover {
+    transform: scale($scale);
+    opacity: 1;
+    filter: brightness(1.1);
+    cursor: pointer;
+  }
+  
+  &:active {
+    transform: scale($scale * 0.97);
+  }
+}
+
+@mixin clickable-card {
+  cursor: pointer;
+  transition: all 600ms cubic-bezier(0.32, 0.72, 0, 1);
+  will-change: transform, box-shadow;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-3px) scale(1.001);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 1px rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    
+    * {
+      cursor: pointer !important;
+    }
+  }
+  
+  &:active {
+    transform: translateY(-4px) scale(1.01);
+  }
+}
+
+.soca-dashboard-container {
+    --dashbkg: transparent;
+    .threat-gauge-card {
+      position: relative;
+      overflow: hidden;
+
+      .card-body {
+        position: relative;
+        padding: 3px;
+        
+        span {
+          transition: all 500ms cubic-bezier(0.32, 0.72, 0, 1);
+          will-change: transform, opacity;
+          transform: scale(1);
+          opacity: 0.9;
+          cursor: pointer;
+          display: inline-block;
+          pointer-events: auto;
+          user-select: none;
+          
+          &:hover {
+            transform: scale(0.98);
+            opacity: 1;
+            filter: brightness(1.1);
+            background: var(--gauge-glow);
+            color: #000 !important;
+            cursor: pointer;
+          }
+          
+          &:active {
+            transform: scale(0.95);
+          }
+          
+          &:not(:hover) {
+            will-change: auto;
+          }
+        }
+      }
+    }
+    
+    &.dark {
+      --card-bg: #2a3838;
+      --dashcolor: #eee;
+      color: #eee;
+      fill: #eee;
+      --border: 0.5px solid rgba(240, 248, 255, 0.07);
+      --ring: 0 0 0 1px rgba(240, 248, 255, 0.03);
+      --box-shadow:
+        var(--ring),
+        0 4px 24px rgba(0, 0, 0, 0.4),
+        0 0 12px rgba(240, 248, 255, 0.06),
+        0 0 2px rgba(240, 248, 255, 0.12),
+        inset 0 0 6px rgba(240, 248, 255, 0.03);
+
+      .user-dashboard {
+        .arc-gauge__track {
+          stroke: rgba(255, 255, 255, 0.08);
+        }
+        .arc-gauge__score {
+          filter: drop-shadow(0 0 14px var(--gauge-glow));
+        }
+
+        // Ambient light spill behind the ThreatScore gauge
+        .threat-gauge-card {
+          &::after {
+            @include gauge-glow();
+          }
+        }
+
+        // Section labels recede so data values pop by contrast
+        .dashboard-container {
+          .card-header {
+            letter-spacing: 0.13em !important;
+            font-size: clamp(1.1rem, 1.1vw, 1.6rem) !important;
+            color: rgba(238, 238, 238, 0.80) !important;
+          }
+        }
+        
+        .highcharts-axis-labels.highcharts-xaxis-labels span {
+          fill: var(--dashcolor) !important;
+          color: var(--dashcolor) !important;
+          stroke: none !important;
+        }
+
+        .highcharts-axis-title text {
+          fill: var(--dashcolor) !important;
+          color: var(--dashcolor) !important;
+        }
+
+        .highcharts-axis-labels text {
+          fill: var(--dashcolor) !important;
+          color: var(--dashcolor) !important;
+        }
+      }
+    }
+
+    &.theme-container-light.light {
+      --dashcolor: #333;
+      color: #333;
+      fill: #333;
+      --card-bg: ##F4F1EC;
+      --border: 1px solid rgba(0, 0, 0, 0.07);
+      --ring: 0 0 0 1px rgba(0, 0, 0, 0.04);
+      --box-shadow:
+        var(--ring),
+        0 1px 2px rgba(0, 0, 0, 0.04),
+          0 4px 12px rgba(0, 0, 0, 0.06),
+          0 12px 32px rgba(0, 0, 0, 0.05);
+
+      .user-dashboard {
+        .arc-gauge__track {
+          stroke: rgba(0, 0, 0, 0.12);
+        }
+        .arc-gauge__score {
+          filter: none;
+        }
+
+        .dash-cards.dash-cards-smallstats .value::after {
+          opacity: 0.82;
+        }
+
+        .soca-dashboard-container .user-dashboard .card-header .infotip svg {
+            color: #333 !important;
+        }
+        
+        .threat-gauge-card {
+          &::after {
+            @include gauge-glow($spread: 45%);
+          }
+        }
+
+        // Override hardcoded dark-theme Highcharts colors
+        .highcharts-axis-labels.highcharts-xaxis-labels span {
+          fill: #444 !important;
+          color: #444 !important;
+          stroke: none !important;
+        }
+
+        .highcharts-axis-title text {
+          fill: #555 !important;
+          color: #555 !important;
+        }
+
+        .highcharts-axis-labels text {
+          fill: #555 !important;
+          color: #555 !important;
+        }
+
+        .incident-response-timeline {
+          .heading label {
+            color: var(--dashcolor);
+          }
+        }
+
+        // Empty-state "No data" chip — restore visible chip on light card
+        .no-data-pill {
+          background: rgba(0, 0, 0, 0.06) !important;
+          border: 1px solid rgba(0, 0, 0, 0.18) !important;
+          color: #333;
+          opacity: 0.75 !important;
+        }
+      }
+    }
+
+    &.theme-container-light {
+      .hover-shade.hovered {
+        background-color: transparent;
+        box-shadow: none;
+      }
+    }
+
+    .card {
+      .card-header,
+      .card-body {
+        color: var(--dashcolor) !important;
+
+        .current-value {
+          transform: translateY(8px);
+          color: var(--dashcolor) !important;
+          fill: var(--dashcolor) !important;
+        }
+      }
+    }
+
+    .table-widget {
+      background: var(--card-bg) !important;
+      box-shadow: var(--box-shadow) !important;
+      border: var(--border) !important;
+      margin-top: none;
+    }
+
+    // Header panel — mirrors the .dash-cards design language
+    .dashboard-header {
+      background: var(--card-bg);
+      box-shadow: var(--box-shadow);
+      border: var(--border);
+      border-radius: 8px;
+      padding: 4px 12px 0;
+      margin-bottom: 12px;
+      overflow: visible; // keep time-range dropdown menu unclipped
+
+      // Neutralise the legacy flat #343A40 fills so the wrapper panel shows through
+      .title-toolbar,
+      .title-toolbar .title-row {
+        background: transparent !important;
+        border-radius: 0;
+      }
+
+      // Faint divider between title and tabs — echoes the card-body separator
+      .title-toolbar .title-row {
+        border-bottom: var(--border);
+        padding-bottom: 6px;
+      }
+
+      .tabs-row {
+        background-color: transparent;
+        margin-top: 0 !important;
+      }
+    }
+
+    .user-dashboard {
+      /* transition: background-color 0.9s ease, color 0.9s ease; */
+      background: var(--dashbkg) !important;
+      padding: 0;
+      margin-inline: 0px;
+      overflow: visible;
+
+      .dash-cards {
+        background: var(--card-bg) !important;
+        box-shadow: var(--box-shadow) !important;
+        border: var(--border);
+        border-radius: 8px;
+        margin-top: none;
+        margin-bottom: none;
+      }
+      
+      .dash-cards.dash-cards-smallstats {
+          padding: 0;
+      }
+      
+      // Fix cursor pointer on SmallStats value span
+      .clickable .dash-cards.dash-cards-smallstats .card-body span {
+        cursor: pointer;
+        display: inline-block;
+        pointer-events: auto;
+        transition: all 500ms cubic-bezier(0.32, 0.72, 0, 1);
+        
+        &:hover {
+          transform: scale(0.98);
+          opacity: 1;
+          filter: brightness(1.1);
+          cursor: pointer;
+        }
+        
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+      
+      .arc-gauge {
+        overflow: visible;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .arc-gauge__fill {
+        transition: stroke-dashoffset 1.2s cubic-bezier(0, 0, 0.2, 1), stroke 0.6s cubic-bezier(0.32, 0.72, 0, 1);
+        will-change: stroke-dashoffset;
+      }
+
+      .arc-gauge__tip {
+        transition: fill 0.6s;
+      }
+
+      .arc-gauge__score {
+        transition: fill 0.6s;
+        letter-spacing: -2px;
+      }
+
+      .dashboard-container {
+        .dash-cards.dash-cards-smallstats .card-header,
+        .card-header {
+          background: transparent;
+          font-family: Geist, Montserrat, Roboto-Light, Sans-Serif !important;
+          font-weight: 300;
+          font-size: clamp(1rem, 1.1vw, 1.6rem) !important;
+          text-align: left;
+          line-height: 1;
+          padding: 15px !important;
+          margin-bottom: 0px !important;
+          height: auto !important;
+        }
+
+        .dash-cards.dash-cards-smallstats {
+            overflow: hidden;
+
+            .card-body {
+                padding-inline: 15px !important;
+                padding-top: 0px !important;
+                padding-bottom: 10px;
+
+              .value {
+                text-align: left !important;
+                position: relative;
+                font-family: Geist;
+                width: 100%;
+
+                &::after {
+                  @include value-glow();
+                }
+              }
+            }
+        }
+        
+        .dash-cards.alert-sources.alert-triage {
+            border: var(--border);
+        }
+      }
+      
+      .soc-operations-dashboard {
+        .dash-cards.dash-cards-smallstats .card-header,
+        .card-header {
+          font-family: Geist, Montserrat, Roboto-Light, Sans-Serif !important;
+          font-weight: 300;
+          font-size: clamp(1rem, 1.1vw, 1.6rem) !important;
+          text-align: left;
+          line-height: 1;
+          padding: 15px;
+          margin-bottom: 0px !important;
+          height: auto !important;
+        }
+
+        .dash-cards.dash-cards-smallstats {
+            overflow: hidden;
+
+            .card-body {
+                padding-inline: 15px;
+                padding-top: 0px !important;
+                padding-bottom: 5px;
+
+              .value {
+                text-align: left !important;
+                position: relative;
+
+                &::after {
+                  @include value-glow();
+                }
+              }
+            }
+        }
+      }
+
+      .highcharts-axis-labels text {
+        font-family: Geist, Montserrat, Roboto-Light, Sans-Serif !important;
+        font-size: 0.75em;
+        color: var(--dashcolor) !important;
+        fill: var(--dashcolor) !important;
+      }
+
+      .card-header .infotip {
+        font-size: 1.3rem;
+      }
+
+      .highcharts-alert-severity,
+      .highcharts-alert-sources {
+        .card-body {
+          overflow: visible;
+        }
+      }
+
+      .highcharts-alert-sources text {
+        font-size: clamp(1rem, 0.2rem + 0.65cqw, 1rem)!important;
+        // font-size: clamp(1.2rem, 0.2rem + 0.65cqw, 0.55rem + 0.65cqw)!important;
+      }
+
+      .table-widget.highcharts-alert-severity,
+      .table-widget.highcharts-alert-sources {
+        height: auto;
+      }
+
+      .highcharts-alert-severity,
+      .alert-sources {
+        .highcharts-axis-labels text {
+          font-size: 1.2em !important;
+        }
+      }
+
+      .alert-sources {
+        .card-body {
+          padding-top: 0 !important;
+        }
+
+        .highcharts-axis-labels text {
+          white-space: pre-wrap !important;
+        }
+
+        .highcharts-data-label text {
+          font-size: 0.9rem !important;
+        }
+      }
+    }
+}
+
+.user-dashboard {
+  .table-widget {
+    display: flex;
+    /* background: transparent ; */
+    height: 215px;
+    border-radius: 8px;
+
+    .card-header {
+      padding-top: 10px;
+    }
+  }
+
+  .speedometer .current-value {
+    font-size: 1.9em !important;
+  }
+
+  &.widget-drawer {
+    background-color: #3a4b4b !important;
+    font-family: Montserrat, Roboto-Light, Sans-Serif !important;
+    font-weight: 300;
+    // font-size: 2.4rem !important;
+    text-align: left;
+    color: #eee;
+    padding-left: 15px !important;
+    padding: 10px;
+    height: 100%;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 16px;
+      height: 100%;
+      background: linear-gradient(
+        to right,
+        rgba(58, 75, 75, 0.05) 0%,
+        rgba(58, 75, 75, 0.3) 40%,
+        rgba(58, 75, 75, 0.6) 100%
+      );
+      pointer-events: none;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+
+    .card-header {
+      padding: 0 0 10px 0;
+      margin: 0 0 15px 0;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      color: #eee !important;
+      text-align: left;
+      cursor: default;
+      font-size: 2.4rem;
+    }
+
+    .card-body {
+      color: #eee !important;
+    }
+
+    .card-footer {
+      padding-right: 0;
+    }
+  }
+}
+
+.user-dashboard-slider {
+  .MuiPaper-root {
+    background-color: rgba(58, 75, 75, 0.9);
+    width: 90vw !important;
+  }
+}
+
+.user-dashboard {
+    .clickable {
+        .stats-card-wrapper {
+          position: relative;
+          height: 100%;
+          @include magnetic-hover(0.98);
+        }
+
+        .dash-cards.dash-cards-smallstats {
+          /* @include clickable-card; */
+          background-color: transparent;
+
+          box-shadow: none;
+          border-radius: 8px;
+
+          *, *::before, *::after {
+            cursor: pointer;
+          }
+
+          .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 400ms cubic-bezier(0.32, 0.72, 0, 1);
+          }
+
+          &.hovered-no-pointer {
+            cursor: default !important;
+            background-color: rgba(58, 75, 75, 0.5);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          }
+        }
+    }
+}
+
+.live-chip {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+  pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+  opacity: 0.9;
+
+  // Semi-transparent fill matching currentColor without affecting child opacity
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: currentColor;
+    opacity: 0.18;
+    z-index: -1;
+  }
+
+  .live-chip-label {
+    align-self: center;
+    line-height: 1;
+  }
+
+  .live-chip-dot {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    align-self: center;
+    border-radius: 50%;
+    background: currentColor;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: currentColor;
+      animation: live-pulse 1.6s ease-out infinite;
+    }
+  }
+}
+
+@keyframes live-pulse {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(2.6); opacity: 0;   }
+}
+
+.popout-header-col-title {
+  padding: 5px 5px 5px 15px !important;
+}
+
+.incident-precis-row {
+  color: #eee !important;
+  margin: 15px !important;
+  border-radius: 6px;
+  font-size: 1.4rem;
+  cursor: default;
+
+  &.critical {
+    // background-color: rgba(200, 60, 60, 0.5);
+
+    background-color: rgba(200, 60, 60, 0.08);
+    border: 1px solid rgba(200, 60, 60, 0.5);
+    border-left: 10px solid rgba(200, 60, 60, 0.5);
+  }
+
+  &.high {
+    background-color: rgba(195, 178, 10, 0.2);
+    border: 1px solid rgba(195, 178, 10, 1);
+    border-left: 10px solid #c3b20a;
+  }
+
+  &.warn {
+    background-color: rgba(227, 128, 2, 0.1);
+    border: 1px solid rgba(227, 128, 2, 1);
+    border-left: 10px solid rgba(227, 128, 2, 0.6);
+  }
+
+  &.low {
+    background-color: rgba(128, 128, 148, 0.1);
+    border: 1px solid rgba(128, 128, 148, 1);
+    border-left: 10px solid rgba(128, 128, 148, 0.6);
+  }
+
+  &.ignore {
+    background-color: rgba(128, 128, 128, 0.1);
+    border: 1px solid rgba(128, 128, 128, 1);
+    border-left: 10px solid rgba(128, 128, 128, 0.6);
+  }
+
+  p {
+    margin: 0;
+  }
+
+  code {
+    color: #eee !important;
+  }
+}
+
+
+//PDS TEST CYBER CRYSTAL
+.dashboard-container-crystal {
+    .table-widget {
+      background: transparent !important;
+      box-shadow: none !important;
+      border: none !important;
+      margin-top: none;
+    }
+    .threat-score-container {
+        position: relative;
+        width: 350px;
+        height: 350px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        flex-wrap: nowrap;
+
+        .crystal-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('@/assets/cyber-crystal.png') no-repeat center;
+            background-size: contain;
+            mix-blend-mode: screen; // Removes the black background
+            opacity: 0.9;
+            
+            animation: 
+                slow-rotate 100s linear infinite, 
+                crystal-pulse 3s ease-in-out infinite;
+
+            /* LOW: Shift the starting color to Teal/Green */
+            &.crystal-shade-high {
+                opacity: 0.1;
+                filter: hue-rotate(150deg) brightness(1.0); 
+            }
+
+            /* MEDIUM: Shift the starting color to Blue */
+            &.crystal-shade-medium {
+                filter: hue-rotate(40deg) saturate(1.5);
+            }
+
+            /* WARNING: Shift the starting color to Amber/Orange */
+            &.crystal-shade-warning {
+                filter: hue-rotate(220deg) saturate(1.5);
+            }
+
+            /* HIGH: Shift the starting color to Red */
+            &.crystal-shade-low {
+                filter: hue-rotate(-20deg) contrast(1.1);
+            }
+        }
+
+        .arc-layer {
+            position: absolute;
+            width: 82%; // Slightly smaller than the crystal
+            height: 82%;
+            filter: drop-shadow(0 0 8px rgba(255, 62, 62, 0.1));
+            z-index: 0;
+        }
+
+        .score-text {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+
+            .number {
+                display: block;
+                font-size: 6rem;
+                font-weight: 700;
+                line-height: 1;
+                text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            }
+
+            .label {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #8b949e;
+            font-weight: 500;
+            }
+        }    
+    }
+
+    @keyframes crystal-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.03); opacity: 1; }
+    }
+
+    @keyframes slow-rotate {
+        from { rotate: 0deg; }
+        to { rotate: 360deg; }
+    }
+}
+
+.dashboard-container-crystal .status-high .score-text .number {
+    cursor: default;
+    color: rgba(255, 92, 92, 0.9 ) !important;
+}
+
+.dashboard-container-crystal .status-warning .score-text .number {
+    cursor: default;
+    color: rgba(255, 255, 92, 0.8 ) !important;
+}
+
+.dashboard-container-crystal .status-medium .score-text .number {
+    cursor: default;
+    color: rgba(92, 92, 255, 0.9 ) !important;
+}
+
+.dashboard-container-crystal .status-low .score-text .number {
+    cursor: default;
+    color: rgba(92, 192, 128, 0.9 ) !important;
+}
+
+.user-dashboard .dashboard-container-crystal {
+  position: relative;
+  overflow: hidden;
+  background-color: rgb(10, 26, 26); // Ensure a deep base color
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -10%; // Extra bleed to account for the 'warp' scale
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    
+    // 1. THE IMAGE
+    background: url('@/assets/cyber-background.png') repeat;
+    
+    // 2. MAKE IT LESS PRONOUNCED
+    opacity: 0.45; // Adjust this (0.1 to 0.3) for subtlety
+    
+    // 3. THE "WARP" EFFECT
+    // We use a slight scale and a blur that increases toward the edges
+    filter: blur(1.2px); 
+    
+    // 4. THE EYEGLASS MASK
+    // This makes it look like a circular lens is over the dashboard
+    @include crystal-bg-mask();
+
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+.user-dashboard .dashboard-container-crystal {
+
+  .dash-cards.dash-cards-smallstats {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .dash-cards:not(.dash-cards-smallstats) {
+    background: transparent !important;
+    backdrop-filter: none;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* .user-dashboard .dashboard-container-crystal .dash-cards.dash-cards-smallstats .card-header {
+  padding-bottom: 45px!important;
+} */
+
+.soca-dashboard-container .user-dashboard .dashboard-container-crystal .dash-cards.dash-cards-smallstats .card-header,
+.soca-dashboard-container .user-dashboard .dashboard-container-crystal .card-header {
+  position: relative;
+  font-family: 'Geist', 'Montserrat', sans-serif;
+   font-size: 28px!important;
+//  font-size: clamp(1.0rem, 2.0vw, 2.0rem) !important;
+  height: auto !important;
+  font-weight: 700!important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(240, 255, 255, 0.9)!important;
+  border: none; // Remove the old orange line
+  text-align: center !important;
+  justify-content: center !important;
+  padding: 5px !important;
+
+  background: linear-gradient(
+    90deg, 
+    rgba(0, 212, 255, 0.15) 0%, 
+    rgba(0, 212, 255, 0.08) 65%, 
+    transparent 100%
+  );
+
+  // 2. THE TOP ACCENT LINE
+//  border-top: 1px solid rgba(0, 212, 255, 0.4);
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      rgba(0, 212, 255, 1) 0%, 
+      rgba(0, 212, 255, 0.3) 70%, 
+      transparent 100%
+    );
+  }
+
+  // Adding technical "Brackets" or "Dots" at the start
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 8px;
+    height: 5px;
+    border-left: 4px solid #00d4d4;
+    border-bottom: 2px solid #00d4d4;
+  }
+}
+
+//Highcharts stuff
+// Target the Highcharts bar series
+.dashboard-container-crystal {
+    .highcharts-series rect, .highcharts-bar-series path {
+        // 1. THE GLASS EFFECT
+        // We use a slight transparency so the hex grid peeks through
+        fill-opacity: 0.6;
+        stroke-width: 1px;
+        
+        // 2. NEON EDGES
+        // This gives the bar a crisp, glowing 'wireframe' boundary
+        stroke: rgba(255, 255, 255, 0.5); 
+        
+        // 3. THE GLOW (The 'Bloom' effect)
+        filter: drop-shadow(0 0 6px var(--bar-glow-color));
+        
+        transition: all 0.3s ease;
+    
+        &:hover {
+        fill-opacity: 0.9;
+        stroke-width: 2px;
+        cursor: pointer;
+    }
+      
+    // 4. COLOR OVERRIDES (Apply based on your data classes)
+    // Highcharts usually assigns classes like .highcharts-color-0
+    .highcharts-color-critical, .highcharts-bar-series { 
+        fill: #ff3e3e; 
+        --bar-glow-color: rgba(255, 62, 62, 0.6); 
+    }
+    .highcharts-color-high { 
+        fill: #d4ff00; 
+        --bar-glow-color: rgba(212, 255, 0, 0.6); 
+    }
+    .highcharts-color-medium { 
+        fill: #707eff; 
+        --bar-glow-color: rgba(112, 126, 255, 0.6); 
+    }
+    .highcharts-color-low { 
+        fill: #8b949e; 
+        --bar-glow-color: rgba(139, 148, 158, 0.4); 
+    }
+    }
+    
+    .highcharts-alert-severity .highcharts-color-0  {
+      animation: intermittent-glitch var(--glitch-duration, 8s) step-end infinite;
+      filter: drop-shadow(0 0 5px rgba(255, 62, 62, 0.8));
+      transform-origin: center left;
+    }
+}
+
+@keyframes intermittent-glitch {
+  /* --- THE GLITCH PHASE (0% to 5%) --- */
+  /* We removed scaleY to prevent vertical jumping */
+  0% { transform: skewX(10deg) translateX(2px); filter: brightness(2); opacity: 0.8; }
+
+  /* The "Blackout" Flicker */
+  0.5% { opacity: 0; }
+
+  1% { transform: skewX(-10deg) translateX(-3px); filter: brightness(1); opacity: 1; }
+  2% { transform: translateX(4px); filter: contrast(2); }
+  3% { transform: skewX(5deg) translateX(-2px); filter: invert(0.1); opacity: 0.7; }
+
+/* Another quick dip in signal */
+  2.5% { opacity: 0.1; transform: scaleX(1.1); }
+
+  4% { transform: translateX(3px); filter: brightness(3); }
+  5% { transform: translateX(0) skewX(0); filter: brightness(1); opacity: 1; }
+
+  /* --- THE STABLE PHASE (5.1% to 100%) --- */
+  5.1%, 100% {
+    transform: translateX(0) skewX(0);
+    filter: brightness(1) contrast(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tv-static-glitch {
+  0% {
+    transform: skewX(0deg) scaleY(1);
+    filter: brightness(1) contrast(1);
+  }
+  10% {
+    transform: skewX(20deg) scaleY(1.05);
+    filter: brightness(2) contrast(1.5);
+  }
+  20% {
+    transform: skewX(-15deg) scaleY(0.9);
+    opacity: 0.7;
+  }
+  30% {
+    transform: skewX(0deg) scaleY(1);
+    filter: brightness(1);
+    opacity: 1;
+  }
+  45% {
+    transform: translateX(4px);
+    filter: saturate(5);
+  }
+  50% {
+    transform: translateX(-4px) skewX(5deg);
+  }
+  55% {
+    transform: translateX(0);
+  }
+  70% {
+    transform: scaleY(1.2);
+    filter: invert(0.1);
+  }
+  100% {
+    transform: skewX(0deg);
+  }
+}
+
+@keyframes bar-glitch {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    20% {
+        transform: translateX(-2px);
+        opacity: 0.8;
+    }
+    40% {
+        transform: translateX(2px);
+        opacity: 1;
+    }
+    60% {
+        transform: translateX(-1px);
+        filter: hue-rotate(10deg) brightness(1.5);
+    }
+    80% {
+        transform: translateX(1px);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* SOC Operations Tab */
+
+.user-dashboard {
+    .incident-response-timeline.row {
+        /* margin: 40px 10px !important; */
+        /* padding: 10px!important; */
+        // border: 1px solid rgb(255 255 240 / 0.5);
+        border-radius: 8px;
+        /* background-color: rgb(255 255 240 / 0.01); */
+    
+        .heading label {
+            width: 100%;
+            text-align: center;
+            font-size: clamp(1.1rem, 2.1vw, 2.1rem) !important;
+            font-weight: 300!important;
+            border-bottom: 1px solid orange;
+        }
+    
+        .dash-cards.chart-card {
+            .card-header {
+                font-size: 1.6rem !important;
+                border-bottom: none;
+                height: 100%;
+            }
+            
+            .card-body {
+                height: 100%;
+                padding-bottom: 70px;
+            }
+        }
+    
+        .dash-cards.chart-card .highcharts-axis-labels text {
+            font-size: 0.6rem!important;
+            padding: 0!important;
+            margin: 0!important;
+        }
+    
+        .highcharts-column-series path {
+            stroke: rgba(0 0 0 / 0.01) !important;
+        }
+        
+        .card-header {
+            font-size: 2rem;
+        }
+    }
+}
+
+.hide-header .card-header {
+  display: none;
+}
+
+// === SOC Operations — typography hierarchy ===
+// Wrapped in .user-dashboard to match specificity of the .user-dashboard .incident-response-timeline.row rules
+// that would otherwise win for !important declarations at the same priority.
+.user-dashboard .soc-operations-dashboard {
+  font-family: Geist, sans-serif !important;
+
+  // Stat card label — small-caps metadata treatment
+  .dash-cards.dash-cards-smallstats .card-header {
+    font-size: clamp(1rem, 1.1vw, 1.6rem) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.12em !important;
+    line-height: 1.2;
+    opacity: 0.85;
+  }
+
+  // Stat card value — unified display scale
+  .dash-cards.dash-cards-smallstats .card-body .value {
+    font-size: clamp(1.4rem, 2vw, 2rem) !important;
+    font-weight: 400 !important;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  // Section headings — "Incident Response" + "Analyst Activity"
+  .incident-response-timeline .heading label,
+  .analyst-activity > .card-header {
+    font-size: clamp(1rem, 1.1vw, 1.6rem) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.10em !important;
+    text-transform: uppercase !important;
+    text-align: left !important;
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0.25rem;
+    width: 100%;
+  }
+
+  // Chart card titles — larger than section headings, sentence case
+  // Selector includes .incident-response-timeline to match the specificity of the competing
+  // .user-dashboard .incident-response-timeline.row .dash-cards.chart-card rule.
+  .incident-response-timeline .dash-cards.chart-card .card-header {
+    font-size: clamp(1rem, 1.1vw, 1.6rem) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    text-align: left !important;
+  }
+
+
+}
+
+// Dark-theme specificity fix: override the global .theme-dark .card .card-header rule
+// that would otherwise beat the SOC-scoped stat label above.
+.theme-dark .user-dashboard .soc-operations-dashboard {
+  .dash-cards.dash-cards-smallstats .card-header {
+    font-size: clamp(1rem, 1.1vw, 1.6rem) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.12em !important;
+  }
+}
+
+// Alert Sources — pinned-mode cue on the widget
+.highcharts-alert-sources.is-pinned {
+  outline: 1px solid rgba(120, 200, 220, 0.25);
+  outline-offset: -1px;
+  border-radius: 6px;
+
+  .highcharts-point {
+    opacity: 0.55;
+    transition: opacity 120ms ease;
+  }
+  .highcharts-point-select,
+  .highcharts-point:hover {
+    opacity: 1;
+  }
+}
+
+// Timeline — pinned vs hovered series differentiation
+.hover-chart {
+  .highcharts-series.pinned-source-series .highcharts-graph {
+    stroke-width: 2.5px;
+    filter: drop-shadow(0 0 4px rgba(120, 200, 220, 0.35));
+  }
+  .highcharts-series.hovered-source-series .highcharts-graph {
+    stroke-width: 1.5px;
+    stroke-dasharray: 4 3;
+  }
+}
+
+
+.security-posture-drawer .loading-overlay {
+    height: 3px !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+}
+
+.security-posture-drawer .loading-overlay > div {
+    position: static !important;
+    top: auto !important;
+    height: 100% !important;
+    width: 40%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--loadingcolor, rgba(175, 191, 191, 0.8)) 20%,
+        var(--loadingcolor, rgba(175, 191, 191, 0.8)) 80%,
+        transparent 100%
+    );
+    animation: dashboard-loading-slide 1.8s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+.security-posture-drawer .loading-overlay > div > * {
+    display: none !important;
+}

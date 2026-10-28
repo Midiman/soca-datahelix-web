@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html class="mail-html" lang="en">
+<head>
+    <title>ThreatLab threat detected</title>
+    <meta name="title" content="ThreatLab threat detected"/>
+    <meta charset="utf-8"/>
+    <style>
+        html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #4B5B5B;
+        }
+
+        body {
+            margin: 0;
+            padding: 1em;
+            font-family: Arial, Roboto, Sans-Serif;
+            font-size: 16px;
+            font-weight: normal;
+            color: #333;
+            background-color: #FFFFFF;
+        }
+
+        .mail-body,
+        .mail-html {
+            color: #333;
+            background-color: #FFFFFF;
+        }
+
+        .mail-header {
+            width: 100%;
+            color: #333;
+            font-size: 1em;
+        }
+
+        .mail-header span {
+            display: inline-block;
+            width: 100%;
+            text-align: right;
+        }
+
+        .divider {
+            border: 0;
+            border-top: 1px solid #555555;
+        }
+
+        .mail-message {
+            max-width: 760px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .threat-title {
+            margin: 1.25em 0 0.35em;
+            color: #3A4B4B;
+            font-size: 1.55em;
+            font-weight: bold;
+        }
+
+        .threat-summary {
+            margin: 1em 0;
+            padding: 1em;
+            border-left: 4px solid #408080;
+            background-color: #F4F7F7;
+        }
+
+        .threat-table {
+            width: 100%;
+            margin: 1.2em 0;
+            border-collapse: collapse;
+        }
+
+        .threat-table td {
+            padding: 0.55em 0.7em;
+            border-bottom: 1px solid #E0E4E4;
+            vertical-align: top;
+        }
+
+        .threat-table .label {
+            width: 145px;
+            color: #5A6666;
+            font-weight: bold;
+        }
+
+        .severity {
+            display: inline-block;
+            padding: 0.22em 0.7em;
+            border-radius: 1em;
+            color: #FFFFFF;
+            background-color: #AA3333;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .action-link {
+            display: inline-block;
+            margin: 0.8em 0 1.2em;
+            padding: 0.65em 1em;
+            border-radius: 4px;
+            color: #FFFFFF !important;
+            background-color: #408080;
+            text-decoration: none;
+        }
+
+        .copyright {
+            color: #333;
+            font-size: 0.65em;
+            margin-bottom: 1em;
+            text-align: right;
+        }
+
+        .copyright a {
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body class="mail-body">
+
+    ## Expected context values:
+    ## threatTitle, severity, detectedAt, sourceName, eventId, summary
+    ## Optional: companyName, threatUrl
+
+    <div class="mail-header">
+        <span>ThreatLab Threat Detection</span>
+        <hr class="divider"/>
+    </div>
+
+    <div class="mail-message">
+        <p>Hello,</p>
+
+        <p>
+            ThreatLab detected a threat in your live data stream.
+        </p>
+
+        <div class="threat-title">$threatTitle</div>
+
+        <table class="threat-table">
+            <tr>
+                <td class="label">Severity</td>
+                <td><span class="severity">$severity</span></td>
+            </tr>
+            <tr>
+                <td class="label">Detected</td>
+                <td>$detectedAt</td>
+            </tr>
+            <tr>
+                <td class="label">Source</td>
+                <td>$sourceName</td>
+            </tr>
+            <tr>
+                <td class="label">Event ID</td>
+                <td>$eventId</td>
+            </tr>
+#if($companyName)
+            <tr>
+                <td class="label">Company</td>
+                <td>$companyName</td>
+            </tr>
+#end
+        </table>
+
+        <div class="threat-summary">
+            $summary
+        </div>
+
+#if($threatUrl)
+        <a href="$threatUrl" target="_blank" class="action-link">Open in ThreatLab</a>
+#end
+
+        <p>
+            This notification was generated automatically from your ThreatLab streaming PoC.
+        </p>
+
+        <p>
+            You can find answers to most questions and get in touch with us by clicking
+            <a href="https://socautomation.com/contact" target="_blank">here</a>.<br/>
+            We're here to help if you have any questions or concerns.
+        </p>
+
+        <br/>
+
+        <p>
+            Kind regards,<br/>
+            The SOCAutomation Team
+        </p>
+    </div>
+
+    <hr class="divider"/>
+
+    <div class="copyright">
+        Powered by
+        <a href="https://socautomation.com" target="_blank">
+            SOCAutomation<sup style="font-size:0.5em">TM</sup>
+        </a>
+    </div>
+
+</body>
+</html>

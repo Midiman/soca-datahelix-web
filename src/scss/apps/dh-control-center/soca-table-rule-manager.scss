@@ -1,0 +1,138 @@
+.dh-rule-manager {
+    padding: 5px 0;
+}
+
+.dh-rule-manager .spinner{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.dh-rule-manager .filter-tgl-row {
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+    margin-top: .6rem;
+    margin-bottom: .6rem;
+}
+
+.theme.dark .dh-rule-manager .card {
+    --bg: #343a40;
+}
+
+.rm-hr { 
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.status-container {
+    display: inline-block;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.top-container {
+    height: 54px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+}
+
+.top-container-col {
+    padding: 0 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+}
+
+/**
+ * Table Error Widget Styles
+ */
+.table-error-widget {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 33%;
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.28);
+    border-radius: 10px;
+    color: #eee;
+}
+
+.table-error-widget .top {
+    padding: 15px;
+    min-height: 150px;
+    background-color: #8d5555;
+    color: #eee;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.table-error-widget .bottom {
+    padding: 15px;
+    background-color: #8b8b8b;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.table-error-widget .top .error-icon {
+    height: 50%;
+    width: 50%;
+}
+
+.table-error-widget .search-retry-btn {
+    padding: 10px 50px;
+    border-radius: 30px;
+    border: 0;
+    color: #595959;
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.28);
+}
+
+.fade-in {
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(30px) }
+    100% { opacity: 1; transform: translateY(0) }
+}
+
+.theme.dark {
+    .table-rule-expand {
+        .dh-dcard .card {
+            --bg: #22262a
+        }
+
+    }
+
+}
+
+.theme.light {
+
+    .table-error-widget .top {
+        background-color: #af6060;
+    }
+
+     .table-error-widget .bottom {
+        background-color: #a09f9f;
+     }
+
+    .table-error-widget .top .error-icon {
+        color: #eee;
+    }
+
+    .table-rule-expand {
+        .dh-dcard .card {
+            --bg: #dadada;
+        }
+
+        .rule-data-table td {
+            background-color: #ececec;
+        }
+
+        .rule-raw {
+            background-color: #ececec;
+        }
+    }
+}

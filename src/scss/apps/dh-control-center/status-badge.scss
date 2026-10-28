@@ -1,0 +1,25 @@
+/*
+PDS TEST TB Moved
+*/
+
+.status-badge-wrapper {
+     display: inline-flex;
+}
+
+.status-badge-wrapper .badge {
+     font-weight: normal;
+     cursor: default;
+     margin-left: 1px;
+     margin-right: 1px;
+     width: 70px;
+}
+
+.blink {
+     animation: blinky 2.5s ease-in infinite;
+}
+
+@keyframes blinky {
+     50% {
+          opacity: 0.1;
+     }
+}

@@ -1,0 +1,27 @@
+.dropdown-menu-item {
+    padding: 10px;
+}
+
+.dropdown-menu-item.enabled {
+    cursor: pointer;
+}
+
+.dropdown-menu-item:first-child {
+    border-radius: 3px 3px 0 0;
+}
+
+.dropdown-menu-item:last-child {
+    border-radius: 0 0 3px 3px;
+}
+
+.dropdown-menu-item:hover {
+}
+
+
+.dropdown-menu-item.enabled:hover {
+    background-color: grey;
+}
+
+.dropdown-menu-item.disabled {
+    opacity: 0.6;
+}

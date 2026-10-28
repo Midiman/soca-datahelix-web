@@ -1,0 +1,166 @@
+import React, { useEffect, useState } from 'react';
+import { FaArrowLeft, FaCheck, FaFingerprint, FaShieldAlt } from 'react-icons/fa';
+
+import { AuthenticatorSetup } from './AuthenticatorSetup';
+import { PasskeySetup } from './PasskeySetup';
+
+
+const MFASetup = ({
+    email,
+    password = null,
+    setupToken = null,
+    initialMethod = 'authenticator',
+    allowSkip = false,
+    busy = false,
+    alert = null,
+    onComplete = null,
+    onSkip = null,
+    onCancel = null,
+    onRetry = null
+}) =>
+{
+    const [method, setMethod] = useState(
+        initialMethod === 'passkey' ? 'passkey' : 'authenticator'
+    );
+
+
+    useEffect(() =>
+    {
+        function handleKeyDown(event)
+        {
+            if (event.key !== 'Escape')
+                return;
+
+            event.preventDefault();
+            onCancel?.();
+        }
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () =>
+            window.removeEventListener('keydown', handleKeyDown);
+    }, [onCancel]);
+
+
+    function renderBody()
+    {
+        /*
+         * MFA enrolment already succeeded (Authenticator/Passkey are done),
+         * and the account itself is now being created from that proof - or
+         * that final creation call just failed. Either way, Authenticator/
+         * Passkey setup must not be re-rendered here: it already did its
+         * job, there is nothing left for the user to verify, and the
+         * account must be created exactly once from this state, not
+         * re-triggered by remounting the method panel.
+         */
+        if (alert && onRetry)
+        {
+            return (
+                <div className="mfa-status mfa-error">
+                    <div>{alert}</div>
+
+                    <button
+                        type="button"
+                        className="mfa-primary"
+                        onClick={onRetry}
+                        disabled={busy}
+                    >
+                        <FaCheck aria-hidden="true" />
+                        {busy ? 'Creating account...' : 'Try again'}
+                    </button>
+                </div>
+            );
+        }
+
+        if (busy)
+        {
+            return (
+                <div className="mfa-status">
+                    Creating your account...
+                </div>
+            );
+        }
+
+        return method === 'authenticator'
+            ?
+            <AuthenticatorSetup
+                email={email}
+                password={password}
+                setupToken={setupToken}
+                onComplete={onComplete}
+            />
+            :
+            <PasskeySetup
+                email={email}
+                setupToken={setupToken}
+                onComplete={onComplete}
+            />;
+    }
+
+
+    return (
+        <section className="mfa-setup">
+            {onCancel && (
+                <button
+                    type="button"
+                    className="mfa-back-link mfa-setup-back"
+                    onClick={() => onCancel()}
+                    disabled={busy}
+                >
+                    <FaArrowLeft aria-hidden="true" />
+                    Back
+                </button>
+            )}
+
+            <div className="mfa-title">
+{/*                 
+                <h2>Secure your account</h2>
+                <p>Choose how you want to verify sign-ins.</p>
+*/}                
+            </div>
+            
+
+{/*
+            <div className="mfa-method-selector">
+                <button
+                    type="button"
+                    className={method === 'authenticator' ? 'selected' : ''}
+                    onClick={() => setMethod('authenticator')}
+                >
+                    <FaShieldAlt aria-hidden="true" />
+                    <span>
+                        <strong>Authenticator</strong>
+                        <small>Microsoft or Google Authenticator</small>
+                    </span>
+                </button>
+
+                <button
+                    type="button"
+                    className={method === 'passkey' ? 'selected' : ''}
+                    onClick={() => setMethod('passkey')}
+                >
+                    <FaFingerprint aria-hidden="true" />
+                    <span>
+                        <strong>Passkey</strong>
+                        <small>Biometrics or device security</small>
+                    </span>
+                </button>
+            </div> */}
+
+            {renderBody()}
+
+            {allowSkip && (
+                <button
+                    type="button"
+                    className="mfa-skip"
+                    onClick={onSkip}
+                >
+                    Set up later
+                </button>
+            )}
+        </section>
+    );
+};
+
+
+export { MFASetup };

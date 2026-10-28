@@ -1,0 +1,553 @@
+/**
+*   Table Styles
+*/
+
+tbody {
+    .TableRowResizable {
+        background: greenyellow;
+        resize: horizontal;
+        overflow: auto;
+        display: block;
+    }
+}
+
+.resizableHeader {
+    resize: horizontal;
+    overflow: auto;
+    display: block;
+    white-space: nowrap;
+}
+
+.soca-table.fit table {
+    display: block;
+    overflow-x: auto;
+    white-space: normal;
+}
+
+.soca-table.fit .column-resizer-expand-div {
+    width: 100% !important;
+    min-width: unset !important;
+    max-width: unset !important;
+}
+
+.theme.dark {
+  --color: #eee;
+}
+
+.theme.light {
+  --color: #333;
+}
+
+.soca-table td:has(> .center) {
+  text-align: center;
+}
+
+.soca-table table {
+  border-collapse: separate;
+  border-spacing: 0 var(--element-br);
+  margin-top: var(--element-br);
+  margin-bottom: 1rem;
+}
+
+/**
+.soca-table .table-row:hover>td {
+  border-radius: 4px !important;
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+}
+**/
+
+.soca-table td {
+  padding: var(--element-br);
+  background-color: var(--element-bg);
+  box-shadow: none;
+}
+
+.soca-table td:first-child,
+.soca-table td:first-child:hover {
+  border-top-left-radius: var(--element-br);
+  border-bottom-left-radius: var(--element-br);
+  -webkit-border-top-left-radius: var(--element-br);
+  -webkit-border-bottom-left-radius: var(--element-br);
+  -moz-border-radius-topleft: var(--element-br);
+  -moz-border-radius-bottomleft: var(--element-br);
+}
+
+.soca-table td:last-child,
+.soca-table td:last-child:hover {
+  border-bottom-right-radius: var(--element-br);
+  border-top-right-radius: var(--element-br);
+  -webkit-border-top-right-radius: var(--element-br);
+  -webkit-border-bottom-right-radius: var(--element-br);
+  -moz-border-radius-topright: var(--element-br);
+  -moz-border-radius-bottomright: var(--element-br);
+}
+
+.soca-table {
+    container-name: soca-table;
+    container-type: inline-size;
+    margin: 0 10px;
+    font-family: Roboto Light, Arial, monospace, Sans-Serif;
+    font-weight: normal;
+    color: var(--color);
+
+    table:has(span.column-resizer) {
+        table-layout: auto;
+    }
+
+    .table-heading {
+        text-wrap: nowrap;
+    }
+
+    .soca-table-inner-wrapper {
+        overflow-x: auto;
+        flex-grow: 3;
+    }
+
+    table {
+        width: 100%;
+        table-layout: fixed;
+        border-spacing: 0 0.5rem;
+        border-collapse: separate;
+    }
+
+    .table-row td {
+        text-wrap: nowrap;
+    }
+
+    thead {
+        th {
+            padding: 0px 10px 10px 10px;
+            font-weight: normal;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .resizeable-wrapper {
+            display: flex;
+            align-items: center;
+
+            // justify-content: space-between;
+
+            // This is the actual grabbable | element
+            .column-resizer {
+                margin-top:4px;
+                margin-bottom:4px;
+                padding-top:10px;
+                padding-bottom:10px;
+                font-size:1.4rem;
+                direction:rtl;
+                padding-left:5px;
+                border-left:1px solid rgba(240,240,240,.15)
+            }
+            
+            .column-resizer:hover,.soca-table thead .resizeable-wrapper .column-resizer:active
+            {
+                margin-top:4px;
+                margin-bottom:4px;
+                border-left:1px solid rgba(240,240,240,.75)
+            }
+
+            span {
+                text-wrap: nowrap;
+            }
+        }
+        
+    }
+
+    .table-row {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+        margin: 5px;
+        // Luke Dev - Fixes light theme not being rounded
+        border-radius: 4px;
+
+        td:first-child {
+            border-radius: 4px 0px 0px 4px;
+            // Luke Dev - Noticed that padding was off for the first entries in rows
+            padding-left: 10px !important;
+        }
+
+        td:last-child {
+            border-radius: 0px 4px 4px 0px;
+        }
+    }
+
+    .table-row {
+        td {
+            padding: 10px;
+            // Luke dev - this makes the text more readable when the table is getting wrapped
+            // Luke Dev  - Added back now the column resizer ie being used
+//            word-break: break-all;
+            white-space: normal;
+            .no-word-break {
+                word-break: normal
+            }   
+            .word-break-off {
+                word-break: unset;
+                white-space: nowrap;
+            }
+        }        
+    }
+
+    .table-row.even {
+        td {
+            background-color: rgba(0, 0, 0, 0.35);
+        }
+    }
+
+    .table-row.odd {
+        td {
+            background-color: rgba(0, 0, 0, 0.14);
+        }
+    }
+
+    .table-row:hover {
+        background-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .table-row.disabled:hover {
+        background-color: inherit;
+    }
+
+    tbody {
+        .expand-row {
+            box-shadow: none;
+        }
+
+        .expand-row:hover {
+            background-color: inherit;
+        }
+    }
+
+    /**
+    * Control Row Styles
+    */
+
+    .control-row {
+        display: flex;
+        margin-bottom: 0.5rem;
+        // justify-content: space-evenly;
+        flex-direction: row;
+        flex-wrap: wrap;
+        // max-height: 1.5em;
+        /* .svg-inline--fa.fa-magnifying-glass  {
+            vertical-align: middle;
+            margin-top: auto;
+            margin-bottom: auto;
+        } */
+    }
+
+    /**
+    *   Search Bar Styles
+    */
+    .table-search-wrapper {
+      color: #9d9d9d;
+      display: flex;
+      width: 40%;
+      padding: 0px 8px;
+      background-color: rgba(255, 255, 255, 0.2);
+      /* max-height: 1.5rem; */
+      margin-bottom: 0.5rem;
+      align-items: center;
+      border: none;
+      border-radius: 6px;
+      gap: 8px;
+    
+      input {
+        border: none;
+        outline: none;
+        flex: 1;
+        /* padding: 4px 4px; */
+        background: transparent;
+      }
+    }
+
+    .table-search {
+      color: var(--color);
+      flex: auto;
+      font-size: inherit;
+      font-family: inherit;
+    }
+
+    .table-search-search-button {
+      margin-bottom: 0.5rem;
+    }
+
+    .table-search-icon-base {
+      opacity: 0.5;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      &:hover {
+          opacity: 1;
+      }
+    }
+    
+    .table-search-search-icon {
+      @extend .table-search-icon-base;
+      width: 25px;
+      max-width: 40px;
+    }
+    
+    .table-search-clear-icon {
+      @extend .table-search-icon-base;
+      width: 25px;
+      max-width: 40px;
+      /* margin: auto 5px auto 3px; */
+    }
+
+    .table-search-clear-icon:hover {
+      opacity: 1;
+    }
+
+    .table-search-wrapper.disabled {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /**
+    *   Row Selection Styles
+    */
+
+    .table-pg-size-select {
+      padding: 5px;
+      border-radius: 6px;
+      margin-left: 10px;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    select.disabled {
+        background-color: rgba(72, 114, 122, 0.2);
+    }
+
+    /**
+    *   Pagination Control Styles
+    */
+
+    .table-pg-controls {
+        display: flex;
+        height: 100%;
+    }
+
+    .row-selection-counter {
+        margin-bottom: 0.5rem;
+    }
+
+    @media only screen and (min-width: 51rem) {
+        .table-search-wrapper, 
+        .table-search-search-button, 
+        .row-selection-counter {
+            margin-bottom: 0;
+        }
+
+        .table-pg-controls {
+            margin-left: auto;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .control-row {
+            max-height: unset;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+    }
+
+    .table-pg-cb {
+        display: inline-block;
+        padding: 5px 8px;
+        font-size: 1rem;
+        border: none;
+        background-color: transparent;
+        color: var(--color);
+        font-size: 1.1rem;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .table-pg-cb.disabled {
+        cursor: inherit;
+        color: #aaa;
+    }
+
+    .table-pg-cb.table-refresh.disabled {
+        animation: table-refresh-spin 0.8s linear infinite;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    .table-pg-size-selector-col {
+        margin-left: 15px;
+        height: 100%;
+    }
+
+    /**
+    *   Misc Styles
+    */
+
+    .spinner-container {
+        text-align: center;
+        padding: 20px 0;
+        min-width: 54px;
+    }
+
+    .table-hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #494949;
+    }
+
+    // Resizable Styling
+    .column-resizer {
+        float: right;
+    }
+
+    .bi-check2 {
+        color: palegreen;
+    }
+    
+}
+
+/**
+* API-Driven SOCA Table Styles
+*/
+.soca-table.api-driven {
+    .table-search-wrapper {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .table-search-search-button {
+        padding-left: 5px;
+        padding-right: 5px;
+        background-color: #b7b7b7;
+        opacity: 0.5;
+        border-top-right-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+        align-self: stretch;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .svg-inline--fa {
+          vertical-align: 0;
+        }
+    }
+
+    .table-search-search-button:hover {
+        opacity: 0.75;
+    }
+
+    .table-search-search-button.disabled{
+        opacity: 0.25;
+    }
+
+    .table-search-search-button.disabled:hover {
+        opacity: 0.25;
+    }
+
+}
+
+.theme.dark {
+    .soca-table {
+        input[type="checkbox"] {
+            filter: invert(85%) hue-rotate(30deg) brightness(1.7);
+        }
+
+        .table-pg-size-select {
+            background-color: rgba(72, 114, 122, 0.5);
+            border-color: rgb(108, 117, 125);
+            color: var(--color);
+        }
+    }
+}
+
+.theme.light {
+    .soca-table {
+        color: #333;
+
+        .table-search-wrapper {
+            background-color: rgb(218, 218, 218);
+            color: #333;
+        }
+
+        .table-search {
+            color: #333;
+        }
+        .row-selection-counter {
+            .counter-label {
+                background-color: rgba(72, 114, 122);
+                color: #EEE;
+            }
+            .counter-value.zero {
+                color: #333;
+                background-color: #dadada;
+            }
+        }
+
+        .table-row.even {
+            td {
+                background-color: #d1d1d1;
+            }
+        }
+
+        .table-row.odd {
+            td {
+                
+                background-color: #f2f2f2;
+            }
+        }
+
+        thead tr {
+            background-color: rgb(131 131 131 / 30%);
+        }
+
+        .table-pg-size-select {
+            background-color: transparent;
+            border-color: rgb(108, 117, 125);
+            color: #3a3a3a;
+        }
+    }
+}
+
+/**
+* Container Queries
+*/
+@container soca-table (width < 800px) {
+    /* PDS TEST - breaks wrapping    .soca-table .control-row {
+        display: inherit;
+    }
+*/
+
+    // .soca-table .row-selection-counter {
+    //     margin: 10px 0 10px 0;
+    //     justify-content: center;
+    //     text-align: center;
+    // }
+
+    // .row-selection-counter-item {F
+    //     padding-top: 8px;
+    //     padding-bottom: 8px;
+    // }
+
+    .soca-table .table-search-wrapper {
+        /* PDS TEST - breaks wrapping       width: 100%;
+*/
+    }
+
+    .soca-table .table-pg-controls {
+        justify-content: center;
+    }
+
+    .soca-table .spinner-container {
+        justify-content: center;
+        padding: 5px;
+    }
+}
+
+@keyframes table-refresh-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}

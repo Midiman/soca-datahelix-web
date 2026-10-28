@@ -1,0 +1,407 @@
+/*
+ * ThreatLab application launcher rail.
+ *
+ * The rail is a real part of the application layout, not an overlay. It lives
+ * on the left and expands into the available application area while leaving
+ * the profile/account surface on the right independent.
+ */
+
+.threatlab-app-bar {
+    --threatlab-app-bar-collapsed-width: 42px;
+    --threatlab-app-bar-expanded-width: 224px;
+    --threatlab-app-bar-row-height: 52px;
+
+    position: relative;
+    z-index: 1100;
+
+    display: flex;
+    flex-direction: column;
+
+    flex: 0 0 auto;
+    width: var(--threatlab-app-bar-collapsed-width);
+    min-width: 0;
+
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    overflow: hidden;
+
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--bg-mid2);
+
+    will-change: width;
+    transition-property: width;
+    transition-duration: 320ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+
+    &.expanded {
+        width: var(--threatlab-app-bar-expanded-width);
+    }
+}
+
+
+.threatlab-app-bar-header {
+    display: flex;
+    align-items: center;
+
+    flex: 0 0 var(--threatlab-app-bar-row-height);
+    width: 100%;
+    min-height: var(--threatlab-app-bar-row-height);
+
+//    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+.threatlab-app-bar-nav {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 6px;
+
+    min-height: 0;
+    padding: 8px 5px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+.threatlab-app-bar-toggle,
+.threatlab-app-bar-item {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    align-items: center;
+
+    width: calc(var(--threatlab-app-bar-expanded-width) - 10px);
+    min-height: 42px;
+    padding: 0;
+
+    border: 1px solid transparent !important;
+    border-radius: 7px;
+    outline: none !important;
+    box-shadow: none !important;
+
+    color: #eee;
+    background: transparent;
+    text-align: left;
+
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        color 150ms ease,
+        background 150ms ease;
+
+    &:hover {
+        color: #fff;
+        border-color: transparent !important;
+        background: rgba(255, 255, 255, 0.07);
+    }
+
+    &:focus,
+    &:focus-visible,
+    &:active {
+        color: #eee;
+        border-color: transparent !important;
+        outline: none !important;
+        box-shadow: none !important;
+        background: transparent;
+    }
+
+    &:disabled {
+        opacity: 0.42;
+        cursor: default;
+
+        &:hover,
+        &:focus,
+        &:focus-visible,
+        &:active {
+            color: #eee;
+            border-color: transparent !important;
+            outline: none !important;
+            box-shadow: none !important;
+            background: transparent;
+        }
+    }
+}
+
+
+.threatlab-app-bar-toggle {
+    margin: 5px;
+}
+
+
+.threatlab-app-bar-item {
+    flex: 0 0 auto;
+}
+
+
+.threatlab-app-bar-item.active,
+.threatlab-app-bar-item.active:hover,
+.threatlab-app-bar-item.active:focus,
+.threatlab-app-bar-item.active:focus-visible,
+.threatlab-app-bar-item.active:active {
+    color: #fff;
+    border-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: rgba(255, 255, 255, 0.11);
+}
+
+
+.threatlab-app-bar-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    min-width: 30px;
+
+    color: #eee;
+    font-size: 1rem;
+
+    svg {
+        display: block;
+    }
+}
+
+
+.threatlab-app-bar-label {
+    display: block;
+    min-width: 0;
+
+    padding-right: 10px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    opacity: 0;
+    transform: translateX(-14px);
+    pointer-events: none;
+
+    color: #eee;
+    font-size: 0.82rem;
+    font-weight: 600;
+
+    transition:
+        opacity 160ms ease,
+        transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.threatlab-app-bar.expanded {
+    .threatlab-app-bar-label {
+        opacity: 1;
+        transform: translateX(0);
+        transition-delay: 45ms;
+    }
+}
+
+.threatlab-app-bar:not(.expanded) {
+    .threatlab-app-bar-label {
+        transition-delay: 0ms;
+    }
+}
+
+
+/*
+ * Keep the base AI Assistant header and its branding inside main-content.
+ * DefaultBranding.horizontal is globally absolutely positioned; that works in
+ * the legacy header but lets the logo drift underneath the expanded app rail.
+ * Scope the correction to the AI Assistant header only.
+ */
+.datahelix-web-app.main-layout > .main-content > .header {
+    margin-left: 0;
+    margin-right: 0;
+
+    .branding {
+        position: relative;
+        display: flex;
+        align-items: center;
+        min-width: 0;
+
+        .logo {
+            display: flex;
+            flex-direction: row !important;
+            align-items: center !important;
+            margin: 0;
+        }
+
+        .default-branding.horizontal {
+            position: relative;
+            top: auto;
+            left: auto;
+        }
+    }
+}
+
+
+/*
+ * Application content pane. The AppBar is a single persistent sibling in the
+ * WebFramework main flex layout; only this pane changes when switching apps.
+ * Keeping the rail mounted is what allows its width transition to animate.
+ */
+.threatlab-app-shell-content {
+    position: relative;
+
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+
+    width: auto;
+    min-width: 0;
+    height: 100%;
+    min-height: 0;
+
+    overflow: hidden;
+    background: #071315;
+}
+
+
+.threatlab-app-shell-content > .management-points-page,
+.threatlab-app-shell-content > .dashboards-portal-page {
+    position: relative !important;
+    inset: auto !important;
+
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    .threatlab-app-bar-label {
+        transition-duration: 1ms;
+    }
+}
+
+/*
+ * The application rail is the primary app navigation. Existing portal Back
+ * controls remain in the DOM for compatibility, but are not part of the UI.
+ */
+.threatlab-app-shell-content {
+    .management-points-back,
+    .portal-dashboard-back {
+        display: none !important;
+    }
+}
+
+
+/*
+ * Application entry animation.
+ *
+ * No extra layout wrapper is introduced. WebFramework applies this class to
+ * the existing AI Assistant .main-content and the existing application shell.
+ * The application shell is keyed by authMode, so switching between portal apps
+ * remounts the same layout element and reliably retriggers this animation.
+ */
+.threatlab-app-entry {
+    animation: threatlab-app-entry-left-to-right 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    will-change: transform;
+
+    .branding {
+        padding-left: 0px !important;
+    }
+
+    .chatbot-col {
+        padding-inline: 0px !important;
+    }
+}
+
+/*
+ * Portal components historically animate their own root from right to left.
+ * The persistent shell above is now the single entry-animation owner. Keep the
+ * root layout intact and suppress only its entry animation to avoid a double
+ * transform. The .closing animation remains available for compatibility.
+ */
+.threatlab-app-shell-content > .management-points-page:not(.closing),
+.threatlab-app-shell-content > .dashboards-portal-page:not(.closing) {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+}
+
+@keyframes threatlab-app-entry-left-to-right {
+    from {
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+
+/*
+ * Shared application viewport behaviour.
+ *
+ * The application shell owns only page-level overflow. Portal bodies and
+ * embedded applications may still provide their own local scroll regions.
+ * Using auto means no outer scrollbar is shown unless the application really
+ * exceeds the available viewport height.
+ */
+.threatlab-app-shell-content {
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+}
+
+.threatlab-app-shell-content > .management-points-page,
+.threatlab-app-shell-content > .dashboards-portal-page {
+    flex: 0 0 auto;
+//    height: auto;
+    min-height: 100%;
+}
+
+.threatlab-app-shell-content > .management-points-page > .management-points-card,
+.threatlab-app-shell-content > .dashboards-portal-page > .portal-card,
+.threatlab-app-shell-content > .dashboards-portal-page > .portal-dashboard-card {
+//    height: auto;
+    min-height: 100%;
+}
+
+
+/*
+ * Account/profile access for every application view.
+ * The AI Assistant continues to render the same control in its own header;
+ * application portals use this persistent top-right copy.
+ */
+.datahelix-web-app.main-layout {
+    position: relative;
+}
+
+.threatlab-app-account-menu {
+    position: absolute;
+    top: 9px;
+    right: 12px;
+    z-index: 999;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    width: 44px;
+    height: 38px;
+
+    .profile-menu {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* Leave room for the persistent account launcher in portal headers. */
+.threatlab-app-shell-content {
+    .portal-header,
+    .management-points-header,
+    .portal-dashboard-header {
+        padding-right: 62px;
+    }
+}

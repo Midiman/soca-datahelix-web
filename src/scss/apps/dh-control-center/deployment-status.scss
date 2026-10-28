@@ -1,0 +1,18 @@
+.deployment-status {
+    display: flex;
+}
+
+.deployment-status .spinner {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.deployment-status .waiting-count {
+    flex: 1;
+}
+
+.deployment-status .deployment-status-refresh-btn {
+    padding: 0;
+    border: none;
+    background-color: inherit;
+}

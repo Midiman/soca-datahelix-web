@@ -1,0 +1,8 @@
+.infotip {
+    font-size: 1.2em;
+}
+
+// this is to fix the infotip being placed behind smallstats
+.tooltip-info {
+    z-index: 1000;
+}

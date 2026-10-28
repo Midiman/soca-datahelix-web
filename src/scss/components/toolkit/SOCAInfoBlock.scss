@@ -1,0 +1,43 @@
+.soca-info-block {
+    // display: flex;
+    background-color: #c0740a;
+    border: 2px solid #915605;
+    margin: auto;
+    padding: 0.5rem;
+    border-radius: 6px;
+    width: 100%;
+  }
+  
+  .soca-info-block {
+    margin: auto;
+    padding: 0.5rem;
+    border-radius: 6px;
+    width: 100%;
+    color: #EEE;
+    .soca-info-block-content-wrapper {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    p {
+      // This stops Bootstrap from adding margin
+      margin: 0;
+    }
+    .col {
+      padding-left: 0 !important;
+    }
+  }
+  
+  .soca-warning-info-block {
+    background-color: #c0740a;
+    border: 2px solid #915605;
+  }
+  
+  .soca-danger-info-block {
+    background-color: #be3106;
+    border: 2px solid #8a2101;
+  }
+  
+  .soca-success-info-block {
+    background-color: #408140;
+    border: 2px solid #376e37;
+  }

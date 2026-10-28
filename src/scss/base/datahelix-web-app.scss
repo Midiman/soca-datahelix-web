@@ -1,0 +1,537 @@
+.datahelix-web-app {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    overflow: hidden;    
+    margin: 0;
+    padding: 0;
+
+    .header {
+        border-radius: 0;
+        padding: 10px 5px;
+        background-color: var(--bg-mid2);
+
+        .branding {
+            font-family: PirulenRegular;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+
+            button {
+                font-family: PirulenRegular;
+                font-size: 0.6rem;
+                color: #ddd;
+                background: rgba(255, 255, 255, 0.0);
+                border-radius: 4px;
+                border: none!important;
+                box-shadow: none!important;
+                outline: none!important;
+            }
+        }
+
+    }
+
+    .body {
+        min-height: 0;
+        flex-grow: 1;
+    }
+
+    .chatbot-col {
+        display:flex;
+        flex-direction: column;
+        height:100%;
+        overflow: hidden;
+        min-height:0;
+
+        //PDS - chatbot css modes for this framework
+        .chatbot-container {
+            display: flex !important;
+            flex-direction: column !important;
+            height: 100% !important;
+            min-height: 0 !important;
+            overflow: hidden !important;
+        }
+
+        .chatbot-responder-container {
+            flex: 1 1 0 !important;
+            min-height: 0 !important;
+
+            height: auto !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+
+            .scroll-to-top-btn {
+                bottom: 10px;
+            }
+        }
+
+        /* Bottom area - never grows/shrinks */
+        .chatbot-prompter-section-container {
+            flex: 0 0 auto !important;
+        }
+    }
+
+    // .right-sidebar {
+    //     display:none;
+    // }
+
+    // .left-sidebar {
+    //     display:none;
+    // }
+
+    .footer {
+        width: 100%;
+        border-radius: 0;
+        margin: 0;
+        padding: 10px 20px!important;
+
+        background: rgba(255, 255, 255, 0.1);;
+
+    }
+
+    .soca-svc-ad {
+        width: 90%;
+        border: 1px solid #DDD;
+        border-radius: 4px;
+
+        padding: 10px;
+        background-color: rgba(180, 140, 31, 0.6);
+    }
+
+
+
+    .footer {
+        position: relative;
+        flex-shrink: 0;
+        flex-wrap: nowrap;
+
+        width: 100%;
+        height: 67px;
+
+        margin: 0;
+        padding: 0 !important;
+
+        //background-color: var(--bg-mid2);
+        background: #19282b;
+        overflow: hidden;
+
+        .footer-content {
+            position: relative;
+            width:100%;
+
+            border-top: 2px solid orange;
+
+            display: flex;
+            align-items: center;
+
+            height: 87px;
+            padding: 0 24px;
+
+            left:-1px;
+
+            cursor: pointer;
+
+            background-image: url('/images/soca-cta.png');
+            background-repeat: no-repeat;
+            background-position: right;
+            background-size: 40%;
+            background-position-y: -80px;
+
+            &.col {
+                display:flex;
+                flex-direction: column;
+                
+            }
+
+            .soca-cta {
+                display: flex;
+                width:100%;
+                font-family:Montserrat;
+                font-size: 1.2rem!important;
+                font-weight: 500;
+                letter-spacing: 1.2px;
+                text-transform: uppercase;
+                // font-family:PirulenRegular;
+
+                .btn-cta {
+                    margin: 20px 35px 20px 0px;
+                    padding: 5px;
+                    font-family:PirulenRegular;
+                    font-size: 0.65rem!important;
+                    border-radius: 12px;
+                    pointer-events: none!important;
+                    min-width: 120px;
+                    outline: none!important;
+                    box-shadow: none!important;
+                }
+            }
+        }
+
+        .footer-copy {
+            position: relative;
+            z-index: 2;
+            pointer-events:none;
+
+            color: #eee;
+            // font-size: 0.98rem;
+            line-height: 1.55;
+
+
+            // width:100%;
+            text-align:left;
+            display:flex;
+            flex: 1;
+            min-width: 0;
+            align-items: center;
+            height:67px;
+        }
+
+        .footer-top {
+            position: absolute;
+            z-index: 3;
+
+            right: 18px;
+            bottom: 8px;
+
+            font-size: 0.75rem;
+        }
+    }    
+
+    .no-ads-cta {
+        display: flex;
+        width:100%;
+        font-family: Montserrat, Arial;
+        font-size: 0.75rem!important;
+        border: 1px solid #DDD;
+        border-radius: 4px;
+        padding: 8px;
+        margin: 5px 0 5px 0;
+        .btn-cta {
+            width: auto;
+            margin: 0px;
+            margin-left: 10px;
+            padding: 5px 15px;
+            font-size: 0.65rem!important;
+            border-radius: 12px;
+            pointer-events: none!important;
+            // min-width: 120px;
+            outline: none!important;
+            box-shadow: none!important;
+            background-color: transparent!important;
+        }
+    }
+
+    .svc-ad {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid #DDD;
+        border-radius: 4px;
+        margin: 5px 0 5px 0;
+
+        display:flex;
+        flex-direction:column;
+        flex-grow:1;
+        height:100%;
+    }
+
+    .svc-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        margin-bottom: 12px;
+
+        .col {
+            display: flex;
+            min-height: 0;
+            min-width: 0;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+    }
+
+    .chatbot-global-toolbar {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .chatbot-responder-container {
+        border-bottom: 1px solid #888;
+    }
+
+    .toggle-collapse-btn-wrapper {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+}
+
+.main-layout {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+
+    padding: 0;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 100%;
+}
+
+
+// .thought-leadership-shell {
+//     display: flex;
+//     flex-direction: row;
+//     flex-shrink: 0;
+
+//     height: 100%;
+// }
+
+.thought-leadership-shell {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+
+    height: 100%;
+    min-height: 0;
+
+    .MuiCollapse-root {
+        height: 100%;
+        min-height: 0;
+    }
+
+    .MuiCollapse-wrapper {
+        height: 100%;
+        min-height: 0;
+    }
+
+    .MuiCollapse-wrapperInner {
+        height: 100%;
+        min-height: 0;
+    }
+}
+
+.thought-leadership-sidebar {
+    width: 350px;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.thought-leadership-board {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.tl-carousel {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.tl-viewport {
+    flex: 1 1 0;
+    min-height: 0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.tl-header {
+    margin-bottom: 5px;
+}
+
+.tl-heading {
+    padding-left: 10px;
+    padding-right: 7px;
+    font-family: PirulenRegular;
+    font-size: 0.62rem;
+}
+
+.tl-refresh {
+    font-size: 0.2rem;
+}
+
+
+.thought-leadership-toggle {
+    width: 24px;
+    height: 90px;
+
+    align-self: center;
+
+    padding: 0;
+    border: 0;
+    border-radius: 4px 0 0 4px;
+    border: none!important;
+
+    background-color: rgba(255, 255, 255, 0.09)!important;
+    color: #eee;
+
+    font-size: 1.4rem;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.thought-leadership-toggle:hover {
+    background: rgba(255, 255, 255, 0.2)!important;
+}
+
+.thought-leadership-shell .thought-leadership-toggle:active, .thought-leadership-toggle:focus {
+    outline:none!important;
+    box-shadow:none!important;
+    background-color: rgba(255, 255, 255, 0.09)!important;
+}
+
+.tl-card {
+    flex-shrink: 0;
+
+    margin-bottom: 5px;
+    padding: 10px 5px 10px 5px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+
+    border-radius: 8px;
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    cursor: pointer;
+}
+
+.tl-card-image {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+.tl-card-content {
+    padding: 10px 12px;
+}
+
+.tl-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 5px;
+}
+
+.tl-card-title {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+}
+
+.tl-card-summary {
+    font-size: 0.8rem;
+    line-height: 1.35;
+
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tl-card-link {
+    margin-top: 7px;
+    font-size: 0.75rem;
+}
+
+
+
+
+
+
+
+
+.thought-leadership-shell {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+
+    height: 100%;
+    min-height: 0;
+
+    // no big background/container treatment
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+
+    // rail immediately RIGHT of the button
+    &::before {
+        content: '';
+
+        position: absolute;
+        z-index: 3;
+
+        left: 24px;
+        top: 14px;
+        bottom: 14px;
+
+        width: 3px;
+        border-radius: 3px;
+
+        background: linear-gradient(
+            to bottom,
+            rgba(255, 165, 0, 0.15),
+            rgba(255, 255, 255, 0.28) 15%,
+            rgba(255, 255, 255, 0.12) 85%,
+            rgba(255, 165, 0, 0.15)
+        );
+    }
+
+    .MuiCollapse-root,
+    .MuiCollapse-wrapper,
+    .MuiCollapse-wrapperInner {
+        height: 100%;
+        min-height: 0;
+    }
+}
+
+.thought-leadership-sidebar {
+    width: 350px;
+    height: 100%;
+    min-height: 0;
+
+    margin-left: 10px;
+
+    overflow: hidden;
+}

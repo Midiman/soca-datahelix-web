@@ -1,0 +1,166 @@
+/**
+  dashboardtoolbar css
+*/
+.bg-dark-m {
+  border-radius: 4px;
+  padding: 0;
+  margin:  10px 10px 0px 10px;
+}
+
+.dashboardtoolbar {
+  height: 55px;
+  color: #FFFFE0;
+  // background-color: #343A40 !important;
+  border-radius: 6px;
+}
+
+.dashboardtoolbar .card-body {
+  /*background-color: #343A40 !important;
+  */
+  line-height: 35px;
+  padding: 0 10px 0 10px;
+  display: flex;
+}
+
+.dashboardtoolbar .title {
+  line-height: inherit;
+  border: 0;
+  background-color: transparent !important;
+  padding-left: 0;
+  padding-left: 0.25rem;
+  color: #FFFFE0;
+  font-family: 'Roboto Light', Arial, Sans-Serif;
+  font-size: 24px;
+  font-weight: normal;
+  display: inline-block;
+  margin: auto 0;
+  cursor: default;
+  flex: 1;
+  text-align: start;
+}
+
+.dashboardtoolbar .title .title-text {
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.dashboardtoolbar .subtitle {
+  border: 0;
+  background-color: transparent !important;
+  padding-left: 0;
+  padding: 0.60em 0.4em 0.4em 0.25em;
+  color: #FFFFE0;
+  font-family: 'Roboto Light', Arial, Sans-Serif;
+  font-size: 18px;
+  font-weight: normal;
+  display: inline-block;
+  margin: auto 0;
+  cursor: default;
+}
+
+.dashboardtoolbar .timerange-select .select__option select__option--is-focused {
+  visibility: hidden;
+}
+
+.dashboardtoolbar .timerange-select .select__single-value {
+  color: #EEE;
+}
+
+.dashboardtoolbar .timerange-select .select__menu {
+  background: rgba(58, 75, 75, 0.7);
+}
+
+.dashboardtoolbar .timerange-select .select__option {
+  line-height: 1em;
+  background: rgba(58, 75, 75, 0.7);
+}
+
+.dashboardtoolbar .timerange-select .select__option:hover {
+  line-height: 1em;
+  background: rgba(72, 114, 122, 0.7);
+}
+
+.dashboardtoolbar .timerange-select .select__option:focus {
+  line-height: 1em;
+  background: rgba(72, 114, 122, 0.7);
+}
+
+.dashboardtoolbar .timerange-select .select__indicator {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.dashboardtoolbar .timerange-select .select__control {
+  height: auto;
+  border: 0;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.dashboardtoolbar .timerange-select .select__control .select__value-container {
+  height: 3em;
+  line-height: 14px;
+  padding-right: 1px;
+}
+
+.dashboardtoolbar .timerange-select .select__indicator-separator {
+  visibility: hidden;
+}
+
+.dashboardtoolbar .timerange-select {
+  height: 1.6em !important;
+  line-height: 1.6em !important;
+  width: 140px;
+  font-size: 16px;
+  color: #FFFFE0;
+  background-color: rgba(192, 192, 192, 0.0) !important;
+  float: right;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-top: 0px;
+  text-align: right;
+  border: 0px solid rgb(0,0,0);
+  border-radius: 3px;
+}
+
+.dashboardtoolbar .timerange-select:focus {
+  outline: none;
+}
+
+.dashboardtoolbar select option {
+    border: 0px solid rgb(0,0,0);
+    border-radius: 3px;
+    margin: 40px;
+    background: rgba(52, 58, 64, 0.7);
+    color: #FFFFE0;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+select > option {
+  border-radius: 4px;
+  border: 0;
+}
+
+.dashboardtoolbar .timerange-select .select__menu::-webkit-scrollbar, *::-webkit-scrollbar {
+	width: 8px !important;
+	height: 8px !important;
+	border: 0;
+  background-color: transparent;
+}
+
+.dashboardtoolbar .timerange-select .select__menu-list::-webkit-scrollbar-track, *::-webkit-scrollbar-track {
+	border-radius: 10px !important;
+  background-color: transparent;
+}
+
+.dashboardtoolbar .timerange-select .select__menu-list::-webkit-scrollbar-thumb, *::-webkit-scrollbar-thumb {
+	border-radius: 10px !important;
+	z-index: 101 !important;
+  background-color: rgba(192, 192, 192, 0.7);
+}
+
+.dashboardtoolbar .timerange-select .select__menu-list::-webkit-scrollbar-corner, *::-webkit-scrollbar-corner {
+  background-color: transparent;
+}

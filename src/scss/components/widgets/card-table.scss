@@ -1,0 +1,254 @@
+/**
+  cardtable css
+*/
+@mixin caretFix() {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px dashed;
+  border-top: 4px solid \9;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.dash-cards-cardtable {
+  height: 100%;
+}
+
+.cardtable {
+  font-size: clamp(14px, 1.5cqw, 18px);
+  max-height: 135em;
+}
+
+.cardtable.table {
+  color: #ffffe0;
+  font-size: 12px;
+  height: 100%;
+}
+
+.cardtable.table-striped tbody td,
+.cardtable.table-striped tbody th {
+  border-width: 0;
+}
+
+// Luke Dev  - After the changes to the SOCATable.scss, this breaks the CAASM table
+// .soca-table.tbody-scroller .table-wrapper thead tr {
+//     display: flex;
+//     align-items: center;
+//     margin-inline: 0;
+// }
+
+.soca-table.tbody-scroller .table-wrapper thead th {
+    padding-bottom: 0;
+}
+
+.cardtable.table .table-wrapper-scroll-y {
+  display: block;
+}
+
+.cardtable .card-header.title {
+  height: 55px;
+  color: #ffffe0;
+  background-color: #343a40;
+  border-radius: 4px;
+  font-size: 24px;
+  line-height: 40px;
+  padding: 0.3rem 10px;
+  margin-bottom: 10px;
+}
+
+/**
+  react-bootstrap-table
+*/
+.react-bootstrap-table {
+  font-family: Roboto, Arial, monospace, Sans-Serif;
+  font-weight: normal;
+}
+
+.react-bootstrap-table thead th {
+  white-space: nowrap;
+  font-weight: normal;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  background-color: rgba(0, 0, 0, 0.01);
+  border-top: none;
+}
+
+.react-bootstrap-table td {
+  font-family: Roboto, Arial, Sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  border: none;
+}
+
+.react-bootstrap-table,
+.react-bootstrap-table .table-striped,
+.react-bootstrap-table .table-striped tbody {
+  background-color: transparent;
+}
+
+.react-bootstrap-table .table-striped tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+/**
+  These two are for expandRow non-highlight and border-top collapse support
+*/
+.react-bootstrap-table
+  .table-striped
+  tbody
+  tr:has(.reset-expansion-style):hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.react-bootstrap-table .table-striped tbody tr:has(.reset-expansion-style) td {
+  border-top: 0;
+}
+
+.react-bootstrap-table .table-striped tbody tr:nth-of-type(even) td {
+  border-radius: 2px;
+  border-top: 9px solid #343a40;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.react-bootstrap-table .table-striped tbody tr:nth-of-type(odd) td {
+  border-radius: 2px;
+  border-top: 9px solid #343a40;
+  background-color: rgba(0, 0, 0, 0.14);
+}
+
+.react-bootstrap-table .reset-expansion-style {
+  padding-bottom: 5px;
+}
+
+.react-bootstrap-table .row-expansion-style {
+  color: #4a4a4a;
+  font-size: 16px;
+  font-weight: normal;
+  background-color: rgba(255, 255, 235, 0.7);
+}
+
+.react-bootstrap-table .row-expansion-style p {
+  margin: 0px;
+}
+
+.react-bootstrap-table .form-control {
+  color: #eee;
+  font-size: 12px;
+  height: calc(1em + 0.75rem + 2px);
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* caret fix for Bootstrap 4 (not currently supported by table-next) */
+table thead .caret {
+  @include caretFix();
+}
+
+table thead .dropup .caret {
+  @include caretFix();
+}
+
+table thead .sortable .order {
+  visibility: hidden;
+}
+
+.cardtable .search-label {
+  margin-left: 10px;
+  width: 25%;
+}
+
+.cardtable .searchbar {
+  color: #eee;
+  height: calc(1em + 0.75rem + 2px);
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.cardtable .selection-cell input[type="checkbox"],
+.cardtable .selection-cell-header input[type="checkbox"] {
+  filter: invert(85%) hue-rotate(30deg) brightness(1.7);
+}
+
+.cardtable .pagination {
+  border-radius: 7px;
+}
+
+.cardtable .pagination-list-standalone {
+  float: right;
+}
+
+.cardtable #pageDropDown {
+  margin-left: 5px;
+}
+
+.cardtable .pagination .page-link {
+  height: 30px;
+  font-size: 17px;
+  font-weight: normal;
+  padding: 3px 8px 3px 8px;
+  border: none;
+  color: #ddd;
+  text-align: center;
+  min-width: 30px;
+  background-color: rgba(72, 114, 122, 0.3);
+}
+
+.cardtable .size-per-page-dropdown {
+  vertical-align: middle;
+  margin: 0;
+  padding: 0px 3px 0px 3px;
+  float: right;
+}
+
+.cardtable .size-per-page-dropdown .dropdown-toggle {
+  padding: 3px 6px 3px 6px;
+  height: calc(1em + 0.75rem + 2px);
+  background-color: rgba(72, 114, 122, 0.3);
+}
+
+.cardtable .size-per-page-dropdown .dropdown-menu {
+  background-color: rgba(72, 114, 122, 0.5);
+}
+
+.cardtable .size-per-page-dropdown .dropdown-item {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.cardtable .size-per-page-dropdown .dropdown-item a {
+  padding-left: 15%;
+  padding-right: 35%;
+  color: #ddd;
+}
+
+.cardtable .size-per-page-dropdown .dropdown-item:hover {
+  background-color: rgba(72, 114, 122, 1);
+}
+
+.cardtable .page-display {
+  display: block;
+  float: right;
+  width: auto;
+  line-height: 30px;
+  color: #ddd;
+  padding-right: 15px;
+  text-align: right;
+  font-size: 16px;
+}
+
+.cardtable .page-item a:hover {
+  filter: brightness(130%);
+}
+
+.cardtable .page-item a:focus {
+  box-shadow: none;
+}

@@ -1,0 +1,387 @@
+/* -------------------------------------------------------------------------
+ * ThreatLab Management Portal
+ * ---------------------------------------------------------------------- */
+
+.management-points-page, .dashboards-portal-page {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    width: 100%;
+    height: 100dvh !important;
+    min-height: 0;
+
+    box-sizing: border-box;
+    overflow: hidden;
+
+    color: #e7eeee;
+    background: #071315;
+
+    /* Enter from the right, travelling right-to-left. */
+    animation: management-portal-slide-in 260ms ease-out both;
+    will-change: transform;
+}
+
+@keyframes management-portal-slide-in {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.management-points-page.closing, .dashboards-portal-page.closing {
+    animation: management-portal-slide-out 260ms ease-in both;
+}
+
+@keyframes management-portal-slide-out {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.portal-card, .management-points-card, .portal-dashboard-card {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    background: rgba(11, 29, 31, 0.92);
+}
+
+/*
+ * Standalone copy of the main ThreatLab header look-and-feel.
+ * The normal page uses .datahelix-web-app .header; this portal is intentionally
+ * self-contained, so it duplicates only the visual/layout behaviour required.
+ */
+.portal-header, .management-points-header, .portal-dashboard-header {
+    display: flex;
+    flex: 0 0 55px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    width: 100%;
+    min-height: 55px;
+    margin: 0;
+    padding: 10px 15px;
+
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 0;
+
+    // background-color: var(--bg-dark);
+    background: rgba(11, 29, 31, 0.92);
+}
+
+.management-points-brand, .portal-dashboard-brand {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    height: 100%;
+
+    .logo {
+        display: flex;
+        flex-direction: row !important;
+        align-items: center !important;
+        margin: 0;
+    }
+
+    .default-branding.horizontal {
+        position: relative;
+        top: auto;
+        left: auto;
+    }
+}
+
+.management-points-back, .portal-dashboard-back {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 7px;
+
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+    outline: none;
+
+    color: #d6dfdf;
+    background: transparent;
+
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.management-points-back:hover,
+.management-points-back:focus-visible,
+.portal-dashboard-back:hover,
+.portal-dashboard-back:focus-visible {
+    color: #fff;
+    border: none;
+    outline:none;
+}
+
+.management-points-content, .portal-dashboard-content, .portal-eventbox-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    // padding: 28px 32px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+// .management-points-content, .portal-dashboard-content {
+//     .title-toolbar {
+//         display: none;
+//     }
+// }
+
+.portal-reports-content {
+    height: 100dvh!important;
+    min-height: 0;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+    background-color: rgb(52, 58, 64);
+}
+
+.portal-eventbox-content {
+    padding: 0 10px!important;
+
+    .soca-eventbox-scroller {
+        height: 100%!important;
+        max-height: 100%!important;
+    }
+}
+
+.management-points-heading, .portal-dashboard-heading {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+
+    margin-bottom: 24px;
+}
+
+.management-points-heading > svg {
+    margin-top: 4px;
+    color: #88b8b8;
+    font-size: 1.35rem;
+}
+
+.management-points-heading h2 {
+    margin: 0 0 6px;
+}
+
+.management-points-heading p {
+    margin: 0;
+    color: #aebcbc;
+}
+
+.management-points-loading,
+.management-points-empty {
+    padding: 28px;
+
+    border: 1px solid rgba(143, 199, 200, 0.11);
+    border-radius: 8px;
+
+    color: rgba(255, 255, 255, 0.64);
+    background: rgba(255, 255, 255, 0.025);
+
+    text-align: center;
+}
+
+.management-points-alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+
+    margin-bottom: 16px;
+    padding: 12px 14px;
+
+    border: 1px solid rgba(214, 116, 116, 0.28);
+    border-radius: 8px;
+
+    color: rgba(255, 205, 205, 0.94);
+    background: rgba(112, 43, 43, 0.11);
+}
+
+.management-points-alert button {
+    flex: 0 0 auto;
+
+    padding: 6px 10px;
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 5px;
+
+    color: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.04);
+
+    cursor: pointer;
+}
+
+.management-points-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+
+    border: 1px solid rgba(143, 199, 200, 0.12);
+    border-radius: 9px;
+}
+
+.management-points-table {
+    width: 100%;
+    min-width: 980px;
+
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.018);
+}
+
+.management-points-table th,
+.management-points-table td {
+    padding: 13px 14px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    vertical-align: middle;
+    text-align: left;
+}
+
+.management-points-table th {
+    color: rgba(255, 255, 255, 0.48);
+    background: rgba(255, 255, 255, 0.025);
+
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+}
+
+.management-points-table td {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.84rem;
+}
+
+.management-points-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.management-type-badge,
+.management-status {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 26px;
+    padding: 3px 8px;
+
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.management-type-badge {
+    color: #c7e0e0;
+    background: rgba(143, 199, 200, 0.09);
+    border: 1px solid rgba(143, 199, 200, 0.16);
+}
+
+.management-status {
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.045);
+}
+
+.management-status-active {
+    color: #bfe3cf;
+    background: rgba(84, 166, 119, 0.11);
+}
+
+.management-status-disabled,
+.management-status-expired {
+    color: #e4bcbc;
+    background: rgba(184, 91, 91, 0.1);
+}
+
+.management-endpoint {
+    display: block;
+    max-width: 420px;
+    overflow: hidden;
+
+    color: #c8dddd;
+    background: transparent;
+
+    font-size: 0.79rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.management-token-obscured {
+    color: rgba(255, 255, 255, 0.58);
+
+    font-family: monospace;
+    letter-spacing: 0.08em;
+}
+
+.management-actions {
+    text-align: right !important;
+}
+
+.management-regenerate {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-height: 34px;
+    padding: 0 10px;
+
+    border: 1px solid rgba(143, 199, 200, 0.24);
+    border-radius: 6px;
+    outline: none;
+
+    color: #dbe9e9;
+    background: rgba(143, 199, 200, 0.055);
+
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.management-regenerate:hover,
+.management-regenerate:focus-visible {
+    border-color: rgba(143, 199, 200, 0.42);
+    background: rgba(143, 199, 200, 0.1);
+}
+
+.management-regenerate:disabled {
+    opacity: 0.55;
+    cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .management-points-page,
+    .management-points-page.closing {
+        animation-duration: 1ms;
+    }
+}
+
+@media (max-width: 680px) {
+    .management-points-header {
+        padding-right: 18px;
+        padding-left: 18px;
+        gap: 14px;
+    }
+
+    // .management-points-content {
+    //     padding: 20px 18px;
+    // }
+}

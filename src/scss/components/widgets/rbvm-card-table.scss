@@ -1,0 +1,291 @@
+.incident-table .incident-summary {
+  line-height: normal;
+  margin: 0;
+}
+
+.incident-table .incident-summary tbody {
+    height: auto;
+    width: auto;
+}
+
+.incident-table .incident-summary tr {
+  font-family: "Roboto Light", Roboto, Arial, Sans-serif;
+  background-color: transparent !important;
+  line-height: 1.5rem;
+}
+
+.incident-table .incident-summary th {
+  font-weight: normal !important;
+  padding-right: 10px !important;
+  width: 25%;  
+}
+
+.incident-table .incident-summary td {
+  font-weight: normal !important;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.incident-table .incident-summary td pre {
+  font-family: "Roboto Light", Roboto, Arial, Sans-serif;
+  font-size: 1em;
+  color: var(--color);
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.incident-table .incident-summary th,
+.incident-table .incident-summary td {
+  font-size: 16px;
+  padding: 0px 0px;
+  background-color: transparent;
+  border: 0;
+}
+
+/* INCIDENT TABLE EXPAND ROW */
+.incident-table .reset-expansion-style {
+  background-color: transparent !important;
+  padding-bottom: 0 !important;
+}
+
+.incident-table .row-expansion-style {
+  background-color: rgba(255, 255, 240, 0);
+  padding: 0;
+  /*    background-color: rgba(52, 58, 64, 0.4);*/
+}
+
+.incident-table .expand-header-row {
+  margin-top: 0 !important;
+  border: none !important;
+}
+
+.incident-table .expand-header-row .badge {
+  font-size: 0.7em !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.5px;
+  padding: 3px 4px !important;
+  opacity: 0.8;
+}
+
+.incident-table .expand-header-row .col .title-cell {
+  /*font-size: clamp(14px, 1.61cqw, 18px) !important;
+  */
+  font-size: 2.2em !important;
+  /* padding-left: 25px;
+  */
+}
+
+.incident-table .expand-header-row .col {
+  border-top-left-radius:  0 !important;
+  border-top-right-radius:  0 !important;
+}
+
+.modal-content .incident-table .soca-table {
+  padding-top: 10px;
+}
+
+
+.incident-table {
+  color: var(--color);
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.incident-table .row {
+  margin: 8px 0px;
+}
+
+.theme.light {
+  .incident-table {
+    // background-color: #ddd;
+    .col {
+      background-color: #ffffff;
+    }
+    .col:last-child {
+      // margin-right: 5px !important;
+    }
+
+    .incident-summary {
+      td {
+        color: #333;
+      }
+      th {
+        color: #333;
+      }
+    }
+  }
+}
+
+.incident-table .col {
+  width: 100%;
+  padding: 5px 15px 5px 15px;
+  margin-right: 5px;
+  border-radius: 4px;
+}
+
+.dark .incident-table .col {
+  background-color: rgba(22, 29, 29, 0.9);
+}
+
+.dark .incident-table .col {
+  background-color: rgba(22, 29, 29, 0.9);
+}
+
+.light .incident-table .col {
+  background-color: rgba(255, 255, 255, 1);
+  .card-header {
+    color: #333;
+  }
+}
+
+// .light .incident-table .col {
+//   background-color: rgba(22, 29, 29, 0.2);
+// }
+
+.incident-table .col:last-child {
+  margin-right: 0;
+}
+
+.incident-table .col .title-cell {
+  font-size: 1.1em !important;
+}
+
+.assetview-container .incident-table {
+    margin-top:0;
+    padding-left:5px;
+}
+
+.chart-row-expand {
+  height: auto;
+}
+
+.chart-row-expand .chart-col-expand {
+  height: auto;
+}
+
+.chart-row-expand .chart-col-expand {
+  padding: 5px;
+}
+
+.sparkline-chart .highcharts-container {
+  padding-bottom: 0px;
+}
+
+.sparkline-chart .path {
+  stroke-width: 0.2;
+}
+
+.sparkline-chart .highcharts-axis-line {
+  visibility: hidden;
+}
+
+.chart-row-expand .chart-col-expand .dash-cards {
+  height: 100% !important;
+  background-color: transparent !important;
+  box-shadow: none;
+}
+
+.chart-row-expand .full .card-body {
+  height: 100%;
+}
+
+.chart-row-expand .full .smallstats .card-header {
+  font-weight: normal;
+}
+.chart-row-expand .full .smallstats .card-body .value {
+  height: 100%;
+  font-size: 96px !important;
+  margin: 17% 0 0 0 !important;
+}
+
+
+.chart-row-expand .chart-col-expand .dash-cards.chart-card div,
+.chart-row-expand .chart-col-expand .smallstats .card-body {
+  height: 4em !important;
+}
+
+.chart-row-expand .chart-col-expand .smallstats .card-body {
+  padding-top: 5px;
+}
+
+.chart-row-expand .chart-col-expand .smallstats .card-body .value {
+  font-size: 44px;
+}
+
+.chart-row-expand .chart-col-expand .smallstats .card-body .previous {
+  padding-top: 0;
+  line-height: 1;
+}
+
+.action-center .card-header {
+  font-weight: 500;
+  text-align: center;
+  font-family: "Roboto Light", Arial, Sans-Serif;
+  font-size: clamp(12px, calc((0.5593rem + 0.515vw)), 22px) !important;
+  padding: 5px 3px 0 3px;
+}
+
+.action-center .card-body {
+  padding: 0.5rem;
+}
+
+.action-center .action-table {
+  width: 100%;
+  line-height: 1;
+}
+
+.action-center .action-table td {
+  padding: 3px 0 3px 0;
+  background-color: transparent !important;
+}
+
+.col-action-center {
+  padding-left: clamp(2px, 5px, 12px) !important;
+  padding-right: clamp(2px, 5px, 12px) !important;
+}
+
+.row-expansion-style .card-header {
+  font-size: clamp(10px, calc((0.4593rem + 0.6005vw)), 18px);
+}
+
+.action-center .action-button {
+  font-size: clamp(8px, calc((0.4093rem + 0.3005vw)), 16px);
+  width: 100%;
+  padding: 1px 0 1px 0;
+  margin-bottom: 0.5rem;
+}
+
+.action-center .action-button:focus {
+  box-shadow: none;
+}
+
+.action-center .action-button-alt {
+  background-color: rgba(241, 187, 81, 0.6);
+}
+
+/** SPECIALIZED **/
+.risk-score-card .card-body {
+  margin-top: auto;
+/*
+PDS TEST Don't need this anymore
+  margin-bottom: 35%;
+*/
+}
+
+.chart-row-expand .risk-score-card.full.col .card-body .value {
+  height: 100%;
+  display: flex;
+  font-size: clamp(2em, calc((2.4593rem + 7.8005vw)), 10em) !important;
+  line-height: normal !important;
+}
+
+.chart-row-expand .risk-score-card.full.col .card-body .value svg {
+    max-height: unset;
+}
+
+/* PDS TEST*/
+.XXXchart-row-expand .card {
+  background-color: transparent !important;
+}

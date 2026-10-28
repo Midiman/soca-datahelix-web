@@ -1,0 +1,87 @@
+.SOCAMultistep {
+    .card-footer {
+        background-color: transparent;
+        border: none;
+        padding: 0px;
+        margin-top: 1rem;
+    }
+    .card-body {
+        padding: 0px;
+    }
+    .SOCAMultistep-wrapper {
+        // display: relative;
+        // Luke Dev - removed this margin for the summary of details tenancy
+        // margin-right: 1.25rem;
+        // margin-left: 1.25rem;
+        .SOCAMultistep-stepbutton-wrapper {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: .5rem;
+            margin-bottom: 1rem;  
+            max-width: 100%;
+            .SOCAMultistep-stepbutton-innerWrapper {
+                display: flex;
+                justify-content: center;
+                .SOCAMultistep-step-item {
+                    display: grid;
+                    justify-items: center;
+                    // This line is causing issue with the multistep not being responsive - causes an overflow
+                    // min-width: 150px;
+                    text-align: center;
+                    margin-left: 1rem;
+                    margin-right: 1rem;
+                    .SOCAMultistep-step-button {
+                        border-radius: 50%;
+                        border: none;
+                        height: 40px;
+                        width: 40px;
+                    }
+                    .SOCAMultistep-step-button.active {
+                        background-color: rgb(79, 113, 119);
+                        color: #EEE;
+                        border: 1px solid #EEE;
+                    }
+                    .SOCAMultistep-step-button.not-active {
+                        border: 1px solid #EEE;
+                    }
+    
+                    .SOCAMultistep-step-button.active:hover {
+                        background-color: rgba(79, 113, 119, 0.4);
+                    }
+    
+                    .SOCAMultistep-step-button:hover {
+                        background-color: rgba(211, 211, 211, 0.6);
+                    }
+    
+                    .SOCAMultistep-step-title {
+                        opacity: 70%;
+                        margin-top: .5rem;
+                        font-size: 1.1rem;
+                        max-width: 130px;
+                    }
+                }
+    
+                .SOCAMultistep-step-item:has(> .active) {
+                    .SOCAMultistep-step-title {
+                        opacity: 1;
+                    }
+                }
+                .separator {
+                    width: 2rem;
+                    height: 1px; 
+                    background-color: #ccc; 
+                } 
+            }
+            
+        }
+    }
+}
+
+
+.SOCAMultistep-navigation-btns {
+    margin-top: 1rem;
+    display: flex;
+    gap: .5rem;
+    justify-content: flex-end;
+}

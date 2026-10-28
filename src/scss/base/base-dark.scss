@@ -1,0 +1,134 @@
+/*
+CSS file for dark theme overrides
+*/
+body:has(.theme.dark) {
+  --bg: #3a4b4b;
+  --color: #eeeeee;
+  background-color: var(--bg);
+  color: var(--color);
+}
+
+.theme.dark {
+    --bg: #3a4b4b;
+    --color: #eeeeee;
+    
+    --btnbg: rgb(58, 75, 75);
+    --btncolor: #eee;
+    --stripebgeven: rgba(0,0,0, 0.35);
+    --stripebgodd: rgba(0,0,0,, 14);
+
+  .card {
+    --bg: #3a4b4b;
+    --color: #eeeeee;
+    box-shadow: none;
+  }
+
+  .card-header {
+    --bg: #343A40;
+    --color: #eeeeee;
+  }
+
+  .dash-cards {
+    --bg: #343a40;
+    --color: #eeeeee;
+    --textcolor: #eeeeee;
+    height: 100%;
+  }
+
+  .dashboardtoolbar {
+    --bg: #343A40;
+    --color: #eeeeee;
+  }
+
+  input[type="input"], .theme.dark input[type="password"], .theme.dark input[type="email"] {
+    border: none;
+    color: #FFFFFF !important;
+    background-color: rgba(255, 255, 255, 0.2);
+    opacity: 1;
+  }
+
+  input[type="checkbox"] {
+    opacity: 0.8;
+    margin-left: 5px !important;
+  }
+  
+  input[type='date'], input[type='time'] {
+      color-scheme: dark;
+  }
+
+  .login-form-card {
+    background-color: #3a4b4b;
+    padding: 4px;
+    border-radius: 5px;
+  }
+
+  input::placeholder {
+    color: #aaa;
+  }
+
+  .title {
+    color: #fff;
+  }
+
+  .desc {
+    color: #fff;
+  }
+
+  a {
+    color: #cccccc;
+    text-decoration-color: #cccccc;
+  }
+
+  .Toastify__toast {
+    margin-top: 5px;
+    color: #eed;
+    background-color: rgba(192, 192, 192, 0.5);
+  }
+
+  .Toastify__toast.success {
+    margin-top: 5px;
+    color: #eed;
+    background-color: rgba(192, 225, 192, 0.5);
+  }
+
+  .Toastify__toast .Toastify__close-button {
+    color: #fff;
+    opacity: 0.6;
+  }
+
+  .Toastify__toast.warning,
+  .Toastify__toast--warning {
+    margin-top: 5px;
+    color: #5a5a5a;
+    font-weight: 600;
+    background-color: rgba(158, 158, 2, 0.8);
+  }
+
+  .Toastify__toast.warning .Toastify__close-button {
+    color: #fff;
+    opacity: 0.8;
+  }
+
+  .Toastify__toast.error,
+  .Toastify__toast--error {
+    margin-top: 5px;
+    color: #ddd;
+    font-weight: 600;
+    background-color: rgba(142, 25, 25, 0.8);
+  }
+
+  .Toastify__toast.error .Toastify__close-button {
+    color: #fff;
+    opacity: 0.8;
+  }
+
+  .highcharts-axis-labels text {
+      font-size: 0.75em;
+      fill: #EEE!important;
+      color: #EEE!important;
+  }
+}
+
+.theme-container-dark {
+   --chart-selected-source-label: '#EEE' 
+}

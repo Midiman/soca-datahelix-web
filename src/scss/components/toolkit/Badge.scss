@@ -1,0 +1,35 @@
+.badge {
+    margin-top: 1px;
+    margin-bottom: 3px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    color: var(--filter-tgl-color);
+    background-color: var(--filter-tgl-bg);
+    cursor: default;
+    font-size: 0.8rem;
+    font-weight: normal;
+    white-space:nowrap;
+    line-height: normal;
+}
+
+.badge.inactive {
+    opacity: 0.2;
+}
+
+.badge-btn {
+    cursor: pointer
+}
+
+.badge-btn.disabled {
+    cursor: default
+}
+
+.badge-enabled {
+    background-color: #337700;
+    color: #eee;
+}
+
+.badge-disabled {
+    background-color: #883333;
+    color: #eee;
+}

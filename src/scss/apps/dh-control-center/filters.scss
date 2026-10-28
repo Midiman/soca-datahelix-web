@@ -1,0 +1,263 @@
+.dh-modal .body-contents {
+    display: flex;
+    flex-direction: column;
+}
+
+.dh-filter-modal-row {
+    margin: 10px 0;
+}
+
+.dh-filter-modal-row .dash_card {
+    height: 100%;
+}
+
+.dh-filter-modal-col textarea {
+    padding-top: 6px;
+}
+
+.dh-filter-modal-row .dash_card .card .card-header {
+    height: inherit;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 100%;
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+}
+
+.dh-filter-modal-col {
+    // margin-top: auto;
+    // margin-bottom: auto;
+}
+
+.dh-filter-modal-row .filter-desc {
+    font-size: 0.9rem;
+    margin-bottom: 5px;;
+}
+
+.dh-modal .infotip {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.dh-modal  .card-header .infotip svg {
+    font-size: 1.6rem !important;
+    color: rgb(228, 228, 228) !important
+}
+
+.dh-modal hr {
+    border-top: 1px solid rgb(153 153 153);
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.filter-enabled-container {
+    justify-content: flex-end;
+    padding: 20px 10px;
+}
+
+.filter-enabled-container .soca-switch {
+    margin-left: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.filter-error {
+    color: rgb(187 62 62);
+    font-weight: bold;
+}
+
+.dh-modal .dash_card.trigger-dc .card .card-header {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.dh-modal .dash_card.target-dc .card .card-header {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.dh-modal .dash_card.target-dc .card .dh-filter-modal-col:first-child {
+    padding-left: 0px;
+}
+
+.dh-modal .dash_card.target-dc .card .dh-filter-modal-col:last-child {
+    padding-right: 0px;
+}
+
+.dh-modal .dash_card.trigger-dc .card .dh-filter-modal-col:first-child {
+    padding-left: 0px;
+}
+
+.dh-modal .dash_card.trigger-dc .card .dh-filter-modal-col:last-child {
+    padding-right: 0px;
+}
+
+.filter-action {
+    font-size: 1.5rem;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.filter-action.disabled {
+    opacity: 0.15;
+}
+
+.filter-action.enabled {
+    cursor: pointer;
+}
+
+.filter-action.enabled:hover {
+    font-size: 1.5rem;
+}
+
+.filter-expand-dcard {
+
+}
+
+.theme.dark {
+
+    .dash_card.filter-expand-dcard .card .card-body {
+        background-color: #161d1de6;
+    }
+
+    .filter-expand-dcard .dcard-col .card .card-body {
+        background-color: inherit;
+    }
+
+    .filter-expand-dcard .label {
+        color: #dddddd;
+    }
+
+    .filter-action.enabled {
+        opacity: 0.6;
+    }
+
+    .filter-action.enabled:hover {
+        opacity: 1.0;
+    }
+}
+
+.theme.light {
+
+    .dh-filter-modal-col .dash_card .card {
+        box-shadow: none;
+    }
+
+    .dash_card.filter-expand-dcard .card .card-body {
+        background-color: rgb(218 218 218);
+    }
+
+    .filter-expand-dcard .dcard-col .card .card-body {
+        background-color: inherit;
+    }
+
+    .filter-expand-dcard .label {
+        color: inherit;
+    }
+
+    .filter-expand-dcard .trigger-card .card{
+        box-shadow: none;
+    }
+
+    .filter-expand-dcard .target-card .card{
+        box-shadow: none;
+    }
+
+    .filter-action.enabled:hover {
+        opacity: 0.5;
+    }
+
+    .dh-text-input.disabled {
+        opacity: 0.8;
+    }
+
+    .filter-select:disabled {
+        color: #5c5c5c;
+    }
+
+    .filter-select {
+        color: #3a3a3a;
+    }
+
+    .filter-select option{
+        background-color: #eee;
+    }
+}
+
+.dash_card.filter-expand-dcard .card .card-body {
+    padding: 10px;
+}
+
+
+.filter-expand-dcard .label {
+}
+
+.filter-expand-dcard .dcard-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-expand-dcard .dcard-col .dash_card {
+    flex: 1;
+}
+
+.filter-expand-dcard .dcard-col .dash_card .card {
+    overflow: hidden;
+}
+
+.filter-expand-dcard .dcard-col:first-child {
+    padding: 0px;
+    padding-right: 5px;
+}
+
+.filter-expand-dcard .dcard-col:last-child {
+    padding: 0px;
+    padding-left: 5px;
+}
+
+.dash_card.filter-expand-dcard .dcard-col .card .card-body {
+    padding: 15px 10px;
+}
+
+.dash_card.filter-expand-dcard .dcard-col .card hr {
+    margin-top: 8px;
+}
+
+.dash_card.filter-expand-dcard .dcard-col .card .card-body .dash_card .card-body{
+    padding: 10px 10px;
+}
+
+.filter-expand-dcard .badge {
+    opacity: 0.8;
+    cursor: pointer;
+    width: inherit;
+}
+
+.filter-expand-dcard .badge:hover {
+    opacity: 1.0;
+}
+
+.filter-expand-dcard .refresh-btn {
+    font-size: 1.1rem;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.filter-select {
+    padding: 8px 8px;
+    font-size: 0.8rem;
+    background-color: transparent;
+    color: #eee;
+    border-radius: 3px;
+    flex: 1;
+}
+
+.filter-select option {
+    border-radius: 0;
+    background-color: #3A4B4B;
+}
+
+select > option {
+    /* border-radius: 4px; */
+    /* border: 0; */
+}

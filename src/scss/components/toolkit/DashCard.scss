@@ -1,0 +1,140 @@
+.dash_card {
+    display: flex;
+  }
+  
+  .dash_card .card {
+    flex: 1;
+    top: 0px;
+    left: 0vh;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-radius: 6px;
+    font-family: "Roboto Light", Arial, Sans-Serif;
+  }
+  
+  .dash_card .card.chart-card div {
+    height: 100% !important;
+  }
+  
+  .dash_card .card.chart-card .highcharts-container {
+    height: 100% !important;
+    width: 100% !important;
+  }
+  
+  .dash_card .card.chart-card .highcharts-container svg {
+    height: 100% !important;
+    width: 100% !important;
+  }
+  
+  .dash_card .card .card-header .card-header-icon {
+    margin-right: 8px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .dash_card .card .card-header {
+    flex: 1;
+    font-size: 17px;
+    font-weight: normal;
+    letter-spacing: 0.07em;
+    background: transparent;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 8px;
+  }
+
+.dash_card .card .card-header hr {
+  margin-top: 12px;
+  margin-bottom: 0px;
+  border-top: 1px solid rgb(91 91 91);
+}
+
+  .dash_card .card .card-header .infotip {
+    padding-right: 5px;
+  }
+  
+  .dash_card .card .card-body {
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 12px;
+  }
+
+
+  .dash-cards.chart-card .card-header svg {
+    height: 100%;
+  }
+ 
+  .dash-cards.chart-card .card-header div {
+    height: auto;
+    z-index: 9999;
+  }
+  
+  .dash_card .card .card-body .highcharts-data-label,
+  .dash_card .card .card-body .highcharts-data-labels path {
+    visibility: visible;
+  }
+  
+  .dash_card .card .highcharts-background {
+    fill: none;
+  }
+  
+  .dash_card .card .alert {
+    font-size: 12px;
+    padding: 0.5em 1em;
+    margin-bottom: 0.5rem;
+  }
+  
+  @media (max-width: 56em) {
+    .dash_card .card .card-body {
+      height: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 12px;
+    }
+  }
+  
+  .theme.dark .dash_card .card {
+    background-color: var(--bg);
+    color: var(--color);
+  }
+  
+  .theme.dark .dash_card .card .card-header {
+    color: var(--color);
+  }
+  
+  .theme.dark .dash_card .card .card-body {
+    color: var(--color);
+  }
+  
+  .theme.dark {
+    .close-btn {
+      color: #EEE;
+    }
+  }
+  
+  /* Light theme */
+  .theme.light {
+    .dash_card {
+      .card {
+        background-color: var(--bg);
+        box-shadow: 2px 2px 2px #888888;
+        color: var(--color);
+  
+        .card-header {
+          color: var(--color);
+        }
+  
+        .card-body {
+          color: var(--color);
+        }
+      }
+    }
+  
+    .close-btn {
+      color: #6a949c;
+    }
+  }
+  
+  

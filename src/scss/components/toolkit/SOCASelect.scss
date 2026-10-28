@@ -1,0 +1,15 @@
+div[class*="-MenuPortal"] {
+    z-index: 99999 !important;
+}
+
+div[class*="-MenuPortal"] div[class*="-menu"] {
+    padding: 4px 0 !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+}
+
+div[class*="-MenuPortal"] div[class*="-option"] {
+    margin: 2px 6px !important;
+    width: auto !important;
+    border-radius: 6px !important;
+}

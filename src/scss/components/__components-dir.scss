@@ -1,0 +1,12 @@
+/*
+This file is used to contain all component imports.
+Files inside this folder should contain all styles relating to a reusable component.
+*/
+
+@forward "./signup/__signup-dir.scss";
+@forward "./profile/__profile-dir.scss";
+@forward "./appbar/__appbar-dir.scss";
+@forward "./management/__management-dir.scss";
+@forward "./widgets/__widgets-dir.scss";
+@forward "./util/__util-dir";
+@forward "./toolkit/__toolkit-dir";

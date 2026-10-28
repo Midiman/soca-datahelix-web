@@ -1,0 +1,63 @@
+/**
+  Main Filter Toggle Styles
+**/
+.filter-tgl-item {
+  display: flex;
+}
+
+.theme.light .filter-tgl-btn {
+  color: #eee;
+}
+
+.filter-tgl-btn {
+  display: flex;
+  margin-right: 2px;
+  margin-left: 2px;
+}
+
+.filter-tgl-btn .badge {
+  display: flex;
+}
+
+.filter-tgl-btn:last-child {
+  margin-right: 0;
+}
+
+.filter-tgl-btn.pulse {
+  animation: blinker 3s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/**
+  Filter Reverse Button Styles
+  **/
+.filter-reverse-btn-icon {
+    margin: auto 1px auto 1px;
+    font-size: 0.8rem;
+}
+
+/**
+  Filter Reset Button Styles
+  **/
+.filter-reset-btn-icon {
+    margin: auto 1px auto 1px;
+    font-size: 0.8rem;
+}
+
+/**
+  Filter Apply Button Styles
+  **/
+.filter-apply-btn-icon {
+    margin: auto 1px auto 1px;
+    font-size: 0.8rem;
+}
+
+.filter-apply-btn-icon {
+    margin: auto 1px auto 1px;
+    font-size: 0.8rem;
+}

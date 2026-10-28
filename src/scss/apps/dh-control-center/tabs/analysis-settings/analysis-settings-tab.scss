@@ -1,0 +1,202 @@
+.analysis-settings {
+    padding: 5px 0;
+}
+
+.analysis-settings .spinner {
+    margin-top: inherit;
+}
+
+.theme.dark .analysis-settings .card{
+    --bg: #343a40;
+}
+
+.theme.dark .analysis-settings .dash_card{
+    margin-bottom: 20px;
+    flex:1;
+}
+
+.theme.dark .analysis-settings .dash_card .card .card-header{
+    width:100%;
+    height: inherit;
+    padding: 5px;
+    display: flex;
+}
+
+.theme.dark .analysis-settings .dash_card .card .card-header .badge{
+    margin-top: auto;
+    margin-left: 10px;
+    margin-bottom: auto;
+}
+
+.analysis-settings .soca-form {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.analysis-settings .soca-form .slider {
+    font-size: 12px;
+}
+
+.analysis-settings .soca-form .slider-container {
+    display: flex;
+}
+
+.analysis-settings .soca-form .slider .value-text {
+    text-align: center;
+}
+
+.analysis-settings .soca-form .slider-container .slider-input-span {
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+}
+
+.analysis-settings .soca-form .slider-container input[type="range"]{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.analysis-settings .soca-form .soca-form-container {
+    height: auto;
+    margin-bottom: 10px;
+    gap: 0.8rem 1rem;
+}
+
+.analysis-settings .soca-form .flex-item {
+     width: 100%;
+     display: flex;
+     align-items: center;
+     min-height: initial;
+     margin-bottom: initial;
+}
+
+.analysis-settings .col {
+    display: flex;
+}
+
+.analysis-settings-section {
+    flex: 1;
+}
+
+.analysis-settings .soca-form .flex-item label{
+     flex: 1;
+     margin-top: auto;
+     margin-bottom: auto
+}
+
+.analysis-settings .soca-form .form-errors {
+     display: none;
+}
+
+.analysis-settings .soca-form .infotip {
+     display: flex;
+     margin-left: 10px;
+     margin-right: 10px;
+}
+
+.analysis-settings .soca-form .textfield {
+     width: 50%;
+}
+
+// ========================================================================
+// Start: Styling for Anchoring Form Submit Button to bottom
+// ========================================================================
+.analysis-settings .soca-form {
+    display: flex;
+    flex: 1;
+}
+
+.analysis-settings-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.analysis-settings-section hr {
+    margin-bottom: 5px;
+}
+
+.analysis-settings .soca-form form {
+    display: flex;
+    flex: 1;
+}
+
+.analysis-settings .soca-form-outer-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.analysis-settings .soca-form-container {
+    flex: 1;
+}
+
+.analysis-settings .soca-form .button-area {
+    margin-top:auto;
+}
+
+// ========================================================================
+// End: Styling for Anchoring Form Submit Button to bottom
+// ========================================================================
+
+// .analysis-settings .soca-form .form-errors {
+//     display: none;
+// }
+
+.analysis-settings .soca-form .button-area {
+    margin-top: 20px;
+    //position: absolute;
+    //bottom: 0;
+    //right: 0;
+}
+
+.analysis-settings hr {
+    margin-top: 5px;
+    background-color: #b5b5b5;
+}
+
+.analysis-settings .dash_card .card-body {
+    padding-top: 10px;
+}
+
+.analysis-settings .setting-section-heading {
+    margin-top: 10px;
+    display: flex;
+}
+
+.analysis-settings .setting-section-heading h5 {
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.analysis-settings .setting-section-heading .badge {
+    margin-left: 2px;
+}
+
+.analysis-settings .section-description {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 12px;
+}
+
+// ========================================================================
+// Theme: Dark
+// ========================================================================
+.theme.dark {
+    .analysis-settings .section-description {
+        color: #b7b7b7;
+    }
+
+}
+
+// ========================================================================
+// Theme: Light
+// ========================================================================
+.theme.dark {
+    .analysis-settings .section-description {
+        color: #eee;
+    }
+
+}

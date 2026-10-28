@@ -1,0 +1,124 @@
+.workflow-table .soca-table .table-row td {
+  vertical-align: top !important;
+}
+
+.workflow-table .soca-table .table-row td .automation {
+  color: rgba(170, 193, 198, 0.9);
+}
+
+.workflow-table .soca-table .table-row td .automation::after {
+  position: absolute;
+  font-size: 0.7em;
+  content: "\00a0 🛠️";
+}
+
+.workflow-table .soca-table .table-row td .contact::after {
+  position: absolute;
+  font-size: 0.7em;
+  content: "\00a0 👤";
+}
+
+.card-header .title .title-icon {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.card-header:has(.desc) {
+  padding: 0 !important;
+}
+
+.card-header:has(.desc) .title {
+  margin: 0;
+}
+
+.card-header:has(.desc) .title ~ .desc {
+  min-height: 0;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.8s ease-out, opacity 200ms 800ms ease-out;
+}
+
+.card-header:has(.desc) .title:hover ~ .desc {
+  max-height: 400px;
+  transition: max-height 500ms 0.4s ease-in, opacity 1000ms 0.4s;
+  opacity: 1;
+  color: white; // TODO: Quick fix - only works for dark theme 
+}
+
+.form-container .subtable {
+  border: 1px solid rgba(250, 250, 240, 0.05);
+  border-radius: 4px;
+  // border-top-left-radius: 0 !important;
+  // border-top-right-radius: 0 !important;
+  border-top-width: 0;
+  
+/*  background-color: rgba(250, 250, 240, 0.05);
+*/
+  padding: 4px !important;
+}
+
+.form-container .subtable-title {
+/*  border: 1px solid rgba(250, 250, 240, 0.05);
+*/
+  border-radius: 4px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-width: 0;
+/*  background-color: rgba(250, 250, 240, 0.05);
+*/
+  padding: 4px !important;
+}
+
+.form-container .subtable.inputs {
+  border-radius: 4px;
+/*  background-color: rgba(56, 66, 56, 0.437);
+*/
+  /*    background-color: rgba(155, 155, 96, 0.175);
+*/
+}
+
+.form-container .subtable.inputs .soca-table td {
+  color: inherit;
+}
+
+.form-container .subtable.outputs {
+  border-radius: 4px;
+/*  background-color: rgba(96, 155, 96, 0.175);
+*/
+}
+
+// Luke Dev - Removed these to match the rest of the sites tab buttons
+// .nav-tabs .nav-item button[id="tabs-tab-workflowTable"],
+// .nav-tabs .nav-item button[id="tabs-tab-myWorkflows"] {
+//   background-color: rgba(74, 95, 97, 0.9) !important;
+// }
+
+.leaflet-layer img {
+  filter: grayscale(50%);
+}
+
+.manager-table.inputs td {
+  vertical-align: middle !important;
+}
+
+.workflow-progress {
+  cursor: pointer;
+  margin: auto 25%;
+}
+
+.workflow-progress .progress {
+  background-color: rgba(240, 240, 240, 0.2);
+}
+
+.workflow-progress .progress .bg-info {
+  background-color: rgba(23, 162, 184, 0.5) !important;
+}
+
+.workflow-progress .progress .bg-success {
+  background-color: rgba(50, 137, 79, 0.8) !important;
+}
+
+.workflow-progress .progress .bg-warning {
+  color: #5a5a5a;
+  background-color: rgba(255, 193, 7, 0.7) !important;
+}

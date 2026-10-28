@@ -1,0 +1,320 @@
+.data-stream-levels-page {
+    width: 100%;
+    padding: 4px 0 28px;
+
+    color: #e8eeee;
+
+    button,
+    .btn,
+    button:focus,
+    button:active,
+    .btn:focus,
+    .btn:active {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+}
+
+.data-stream-levels-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 6px 0;
+
+    border: 0;
+    color: rgba(221, 237, 237, 0.68);
+    background: transparent;
+    font-size: 0.82rem;
+
+    &:hover,
+    &:focus,
+    &:active {
+        outline: none !important;
+        box-shadow: none !important;
+        color: #fff;
+    }
+}
+
+.data-stream-levels-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 17px;
+    max-width: 900px;
+    margin-bottom: 26px;
+
+    h1 {
+        margin: 3px 0 8px;
+        color: #f5f8f8;
+        font-size: clamp(1.75rem, 3vw, 2.35rem);
+        font-weight: 500;
+        letter-spacing: -0.025em;
+    }
+
+    p {
+        max-width: 800px;
+        margin: 0;
+        color: rgba(232, 242, 242, 0.62);
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+}
+
+.data-stream-levels-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    margin-top: 3px;
+
+    border: 1px solid rgba(132, 192, 193, 0.3);
+    border-radius: 10px;
+    color: #8fc7c8;
+    background: rgba(92, 157, 159, 0.08);
+
+    svg {
+        font-size: 1rem;
+    }
+}
+
+.data-stream-levels-kicker {
+    color: #8fc7c8;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.data-stream-levels-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.025);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.14);
+}
+
+.data-stream-levels-table {
+    width: 100%;
+    min-width: 920px;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+
+    th,
+    td {
+        padding: 15px 16px;
+        border-right: 1px solid rgba(255, 255, 255, 0.075);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+        vertical-align: middle;
+    }
+
+    th:last-child,
+    td:last-child {
+        border-right: 0;
+    }
+
+    tr:last-child th,
+    tr:last-child td {
+        border-bottom: 0;
+    }
+
+    thead th {
+        padding-top: 18px;
+        padding-bottom: 18px;
+        background: rgba(9, 27, 29, 0.7);
+    }
+
+    thead th:not(:first-child) {
+        width: 20.5%;
+    }
+
+    tbody th {
+        width: 18%;
+        color: rgba(232, 242, 242, 0.68);
+        background: rgba(0, 0, 0, 0.1);
+        font-size: 0.78rem;
+        font-weight: 500;
+        text-align: left;
+    }
+
+    tbody td {
+        color: rgba(240, 247, 247, 0.88);
+        font-size: 0.8rem;
+        text-align: center;
+    }
+
+    .featured {
+        background: rgba(88, 151, 153, 0.075);
+    }
+
+    thead .featured {
+        position: relative;
+        background:
+            linear-gradient(180deg, rgba(102, 173, 175, 0.14), rgba(75, 131, 133, 0.065));
+
+        &::before {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 2px;
+            content: '';
+            background: rgba(133, 204, 205, 0.8);
+        }
+    }
+}
+
+.data-stream-levels-feature-heading {
+    color: rgba(229, 241, 241, 0.56);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.data-stream-levels-plan-head {
+    display: flex;
+    min-height: 116px;
+    flex-direction: column;
+    text-align: left;
+
+    > span {
+        margin-bottom: 5px;
+        color: #83bfc0;
+        font-size: 0.63rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    strong {
+        color: #f4f8f8;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    small {
+        margin-top: 8px;
+        color: rgba(229, 241, 241, 0.52);
+        font-size: 0.72rem;
+        font-weight: 400;
+        line-height: 1.45;
+    }
+}
+
+.data-stream-levels-included {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    color: #b9d8d2;
+
+    svg {
+        color: #8fc7c8;
+        font-size: 0.66rem;
+    }
+}
+
+.data-stream-levels-actions-row {
+    th,
+    td {
+        padding-top: 17px;
+        padding-bottom: 17px;
+    }
+}
+
+.data-stream-levels-primary.btn,
+.data-stream-levels-secondary.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 38px;
+    padding: 7px 10px;
+
+    border-radius: 6px;
+    outline: none !important;
+    box-shadow: none !important;
+    font-size: 0.76rem;
+
+    &:focus,
+    &:active {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+}
+
+.data-stream-levels-primary.btn {
+    border: 1px solid rgba(152, 203, 203, 0.42) !important;
+    color: #f3f8f8;
+    background: rgba(66, 115, 117, 0.72);
+
+    &:hover,
+    &:focus,
+    &:active {
+        border-color: rgba(176, 223, 223, 0.72) !important;
+        color: #fff !important;
+        background: rgba(77, 132, 134, 0.94) !important;
+    }
+}
+
+.data-stream-levels-secondary.btn {
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    color: rgba(239, 246, 246, 0.88);
+    background: rgba(255, 255, 255, 0.025);
+
+    &:hover,
+    &:focus,
+    &:active {
+        border-color: rgba(255, 255, 255, 0.25) !important;
+        color: #fff !important;
+        background: rgba(255, 255, 255, 0.065) !important;
+    }
+}
+
+.data-stream-levels-note {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 14px;
+    padding: 13px 15px;
+
+    border: 1px solid rgba(132, 192, 193, 0.13);
+    border-radius: 8px;
+    background: rgba(132, 192, 193, 0.035);
+
+    strong {
+        flex: 0 0 auto;
+        color: rgba(239, 246, 246, 0.82);
+        font-size: 0.78rem;
+    }
+
+    span {
+        color: rgba(232, 242, 242, 0.52);
+        font-size: 0.75rem;
+        line-height: 1.45;
+    }
+}
+
+@media (max-width: 760px) {
+    .data-stream-levels-heading {
+        gap: 12px;
+    }
+
+    .data-stream-levels-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .data-stream-levels-note {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+    }
+}

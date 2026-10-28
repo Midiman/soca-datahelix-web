@@ -1,0 +1,61 @@
+/**
+ smallstats CSS
+*/
+.dash-cards .dash-cards-smallstats {
+  height: 120px;
+  // border: 1px solid purple;
+  padding: 0;
+  margin-top: 0;
+}
+
+.dash-cards.dash-cards-smallstats  {
+  border: 1px solid rgba(90, 106, 106, 0.5);
+  border-radius: 6px;
+  padding: 0 3px;
+  background-color: #343A40;
+}
+
+.dash-cards.dash-cards-smallstats .card-header {
+  font-size: 1.2cqw !important;
+  text-align: center;
+}
+
+.dash-cards-smallstats .card-body {
+  padding-top: 3px !important;
+}
+
+.dash-cards-smallstats .card-body .value.no-previous {
+  line-height: 4rem;
+  font-size: 4rem;
+}
+
+.dash-cards-smallstats .card-body .value {
+  cursor: default;
+  color: #FFFFE0;
+  padding-top: 0.1cqh !important;
+  margin: auto;
+  line-height: 2.5rem;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 7cqh !important;
+//  font-size: clamp(2rem, calc((0.4593rem + 2.8005vw)), 2rem) !important;
+  font-weight: bold;
+  text-align: center;
+  @include fadeIn(1.5s);
+}
+
+.dash-cards-smallstats .card-body .value.no-previous {
+  font-size: 9cqh !important;
+}
+
+.dash-cards-smallstats .card-body .previous {
+  /* width: 100%;
+  */
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+/*  padding-top: 3px;
+  margin: auto 0;
+*/
+  @include fadeIn(1.5s);
+}

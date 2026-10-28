@@ -1,0 +1,80 @@
+
+// All manager table css values are located here
+
+/************************************************************
+  MANAGER TABLE soca-table overrides
+************************************************************/
+.manager-table {
+    border-radius: 4px;
+    margin: 0;
+    padding: 0 !important;
+  }
+  
+  .manager-table.row {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+  .manager-table td {
+    cursor: default;
+  }
+
+  .clickable {
+    cursor: pointer !important;
+  }
+
+  .table-row .clickable {
+    cursor: pointer !important;
+    td {
+        cursor: pointer !important
+    }
+  }
+
+  .manager-table.expandable, .manager-table.expandable td {
+    cursor: pointer;
+  }
+
+  .manager-table .expand-row, .manager-table .expand-row td {
+    cursor: default;
+  }
+
+  .manager-table .va-middle td {
+    vertical-align: middle !important;
+  }
+  
+  .manager-table, .manager-table .soca-table {
+    margin: 0;
+    padding: 0 !important;
+  }
+
+  .manager-table, .manager-table .soca-table table {
+      margin: 0 !important;
+  }
+
+  .manager-table .table-hr, .manager-table .soca-table .table-hr {
+    display: none;
+  }
+  
+  .manager-table .control-row, .manager-table .soca-table .control-row {
+    // Luke Dev - This is messing with the responsive design and causing wrapping issues
+    // height: 2em;
+    margin: 0.3rem 0.3rem 0.3rem 0;
+  }
+  
+  // .manager-table thead tr, .manager-table thead .table-heading tr, 
+  // .manager-table .soca-table thead tr, .manager-table .soca-table thead .table-heading {
+  //   font-weight: normal !important;
+  //   border-bottom: 1px solid #888;
+  //   padding-bottom: 5px;
+  // }
+
+  // Luke Dev - This adds the border bottom back (removed from manager-table.scss)
+  // This is so we can have resizeable columns
+  .manager-table thead, 
+  .manager-table .soca-table thead {
+    box-shadow: 0 1px 0 0 #888;
+  }
+  
+  .manager-table .soca-table td {
+    vertical-align: top;
+  }

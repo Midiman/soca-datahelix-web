@@ -1,0 +1,169 @@
+.log-source {
+
+  // ── Title + subtitle ──────────────────────────────────────────────────────
+  .modal-header {
+    .dip-header-titles {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+    }
+
+    .dip-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .dip-subtitle {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: normal;
+      opacity: 0.55;
+      margin-top: 2px;
+    }
+  }
+
+  // ── Consistent label typography ───────────────────────────────────────────
+  .form-element label,
+  .plugin label,
+  .form-element .py-1,
+  .plugin .py-1,
+  .dip-label {
+    font-size: 0.8rem !important;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 3px;
+    padding-top: 0 !important;
+    opacity: 0.9;
+    display: block;
+  }
+
+  // Fix toolkit InputElement card-header padding-top
+  .source-container .form-element .card-header,
+  .plugin .form-element .card-header {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  // ── Outer form wrapper ────────────────────────────────────────────────────
+  .modal-body > .form-element {
+    padding: 4px 0 0 0;
+  }
+
+  .source-container {
+    align-items: flex-end;
+    margin-bottom: 10px;
+  }
+
+  .desc .card {
+    margin-bottom: 8px;
+  }
+
+  .plugin {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    &.card {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    > .card-header.plugin-header {
+      display: none;
+    }
+
+    > .card-body {
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+    }
+  }
+
+  .plugin .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    align-items: flex-start;
+  }
+
+  .log-sources-menu__single-value .base-label {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.5rem;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    font-weight: 600;
+    width: auto !important;
+  }
+
+  .source-container .log-sources-menu__control {
+    min-height: 38px !important;
+    height: 38px !important;
+  }
+  .source-container .log-sources-menu__value-container {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    align-items: center;
+  }
+  .source-container .log-sources-menu__single-value svg,
+  .source-container .log-sources-menu__single-value img {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .plugin .row > [class*="col"],
+  .source-container > [class*="col"] {
+    padding-left: 0 !important;
+    padding-right: 0.75rem !important;
+
+    &:last-child {
+      padding-right: 0 !important;
+    }
+  }
+}
+
+.log-sources-menu__option .menu-label {
+  display: flex !important;
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+.log-sources-menu__option .base-label {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  gap: 0.35rem;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0.25rem 0 !important;
+  font-weight: 600;
+}
+
+// Per-company full-card backgrounds — exact colours from typeOptionsData
+.log-sources-menu__option.log-source-api > div         { background: rgba(22,  72,  92,  0.7) !important; }
+.log-sources-menu__option.log-source-cribl > div       { background: rgba(0,   204, 204, 0.7) !important; }
+.log-sources-menu__option.log-source-sentinalone > div { background: rgba(170, 51,  170, 0.7) !important; }
+.log-sources-menu__option.log-source-crowdstrike > div { background: rgba(170, 24,  24,  0.7) !important; }
+.log-sources-menu__option.log-source-sophos > div      { background: rgba(24,  24,  170, 0.7) !important; }
+.log-sources-menu__option.log-source-aws-s3 > div      { background: rgba(247, 148, 0,   0.7) !important; }
+.log-sources-menu__option.log-source-ms-app-reg > div  { background: rgba(40,  168, 234, 0.7) !important; }
+.log-sources-menu__option.log-source-adaptiveshield > div { background: rgba(5,  200, 189, 0.5) !important; }
+.log-sources-menu__option.log-source-webhook > div     { background: rgba(5,   200, 189, 0.5) !important; }
+.log-sources-menu__option.log-source-syslog > div      { background: rgba(22,  72,  92,  0.7) !important; }
+
+// Focused/hovered: slightly brighter
+.log-sources-menu__option--is-focused.log-source-api > div         { background: rgba(30,  100, 130, 0.85) !important; }
+.log-sources-menu__option--is-focused.log-source-cribl > div       { background: rgba(0,   220, 220, 0.8)  !important; }
+.log-sources-menu__option--is-focused.log-source-sentinalone > div { background: rgba(185, 65,  185, 0.8)  !important; }
+.log-sources-menu__option--is-focused.log-source-crowdstrike > div { background: rgba(190, 35,  35,  0.85) !important; }
+.log-sources-menu__option--is-focused.log-source-sophos > div      { background: rgba(35,  35,  195, 0.85) !important; }
+.log-sources-menu__option--is-focused.log-source-aws-s3 > div      { background: rgba(255, 165, 0,   0.8)  !important; }
+.log-sources-menu__option--is-focused.log-source-ms-app-reg > div  { background: rgba(55,  185, 245, 0.8)  !important; }
+.log-sources-menu__option--is-focused.log-source-adaptiveshield > div { background: rgba(5,  220, 205, 0.65) !important; }
+.log-sources-menu__option--is-focused.log-source-webhook > div     { background: rgba(5,   220, 205, 0.65) !important; }
+.log-sources-menu__option--is-focused.log-source-syslog > div      { background: rgba(30,  100, 130, 0.85) !important; }

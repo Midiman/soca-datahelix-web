@@ -1,0 +1,169 @@
+.overview-tab {
+    padding: 3px 0;
+}
+
+.fade-in {
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.status-sparkline .dash-cards .card-body {}
+
+.overview-tab .spinner {
+    margin-top: inherit;
+}
+
+.overview-tab .dashboard-row {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.overview-tab .row .dashboard-col {
+    padding-left: 3px;
+    padding-right: 3px;
+    display: flex;
+    flex-direction: column;
+}
+
+.overview-tab .row .dashboard-col:first-of-type {
+    padding-left: 0;
+}
+
+.overview-tab .row .dashboard-col:last-of-type {
+    padding-right: 0;
+}
+
+// Luke Dev - removed so that the value sizes match other sub app small-stats 
+
+// .overview-tab .stats-widget .value {
+//     font-size: 1.2rem !important;
+// }
+
+.overview-tab .dash-cards.dash-cards-smallstats .card-header {
+    font-size: clamp(0.7em, 0.9cqw, 1.2em) !important
+}
+
+.theme.dark .overview-tab .card {
+    --bg: #343a40;
+}
+
+.overview-tab .dash_card {
+    flex: 1;
+}
+
+.theme.dark .overview-tab .dash_card .card .card-header {
+    width: 100%;
+    height: inherit;
+    padding: 5px;
+    display: flex;
+}
+
+.theme.dark .overview-tab .dash_card .card .card-header .badge {
+    margin-top: auto;
+    margin-left: 10px;
+    margin-bottom: auto;
+}
+
+.blink_me {
+    animation: blinker 10s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0.25;
+    }
+}
+
+.filter-good {
+    filter: invert(48%) sepia(79%) saturate(1476%) hue-rotate(56deg) brightness(118%) contrast(89%);
+}
+
+.filter-warning {
+    filter: invert(48%) sepia(79%) saturate(3476%) hue-rotate(35deg) brightness(118%) contrast(119%);
+}
+
+.soca-table.top-entries-table th {
+    font-size: 0.8rem;
+}
+
+.soca-table.top-entries-table {
+    font-size: 0.8rem;
+}
+
+.soca-table.top-entries-table table {
+    border-spacing: 0 0.5rem;
+}
+
+.soca-table.top-entries-table .table-row td {
+    padding: 8px 10px;
+}
+
+.theme.dark .soca-table.top-entries-table .table-row td {
+    background-color: #373c43;
+}
+
+.theme.light .soca-table.top-entries-table .table-row td {
+    background-color: #eeeeee;
+}
+
+// ========================================================================
+// Toolbar Styles
+// ========================================================================
+.theme.light .overview-toolbar {
+    background-color: #FFFFFF;
+    padding: 5px;
+    display: flex;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.theme.dark .overview-toolbar {
+    background-color: #343a40;
+    padding: 5px;
+    display: flex;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.timespan-select {
+    padding: 4px 4px;
+    font-size: 0.8rem;
+    background-color: transparent;
+    border-radius: 3px;
+}
+
+.timespan-select option {
+    background-color: #3A4B4B;
+}
+
+
+.theme.dark {
+
+    .timespan-select {
+        color: #eee;
+    }
+
+    .timespan-select option {
+        background-color: #3A4B4B;
+    }
+}
+
+.theme.light {
+
+    .timespan-select {
+        color: #3a3a3a;
+    }
+
+    .timespan-select option {
+        background-color: #eee;
+    }
+}

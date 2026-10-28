@@ -1,0 +1,27 @@
+/**
+  portal CSS
+*/
+.portal-container {
+  padding: 0 !important;
+}
+
+.portal-row {
+  margin: 0 !important;
+}
+
+.portal-col {
+  padding: 0 !important;
+  height: 100vh !important;
+}
+
+.portal-frame {
+  height: 100%;
+  width: 100%;
+}
+
+/*XXX
+iframe {
+  display: block;
+  XXXheight: 100vh !important;
+}
+*/

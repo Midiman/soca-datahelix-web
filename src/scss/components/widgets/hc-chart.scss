@@ -1,0 +1,79 @@
+/**
+  HCChart css
+*/
+/* Wrapping etc for highcharts data labels */
+.theme.light .highcharts-data-labels span, 
+.highcharts-data-label span {
+  font-family: Arial, sans-serif !important;
+  line-height: normal !important;
+  font-size: 0.65em !important;
+  font-weight:normal !important;
+  word-break: break-all !important;
+  white-space: normal !important;
+  color: #333 !important;
+}
+
+.theme.dark .highcharts-data-labels span, 
+.highcharts-data-label span {
+  font-family: Arial, sans-serif !important;
+  line-height: normal !important;
+  font-size: 0.65em !important;
+  font-weight:normal !important;
+  word-break: break-all !important;
+  white-space: normal !important;
+  color: #EEE !important;
+}
+
+/* Wrapping etc for highcharts X Axis labels */
+.highcharts-xaxis-labels span {
+  font-family: Arial, sans-serif !important;
+  font-size: 0.70em !important;
+  text-align: right;
+  line-height: normal !important;
+  min-width: 60px !important; 
+  word-break: break-word !important;
+  white-space: normal !important;
+}
+
+.theme.light {
+ .highcharts-xaxis-labels {
+    span {
+      color: #333 !important;
+    }
+ }
+//  .highcharts-data-labels span {
+//     .highcharts-data-label {
+//       span {
+//         filter: invert(100%);
+//       }
+//     }
+//   }
+}  
+
+.highcharts-xaxis-labels {
+    span {
+        color: #EEE;
+    }
+}
+
+/* Wrapping etc for highcharts Y Axis labels */
+.highcharts-yaxis-labels span {
+  font-family: Arial, sans-serif !important;
+  text-align: right;
+  font-size: 0.70em !important;
+  line-height: normal;
+  min-width: 60px !important; 
+  word-break: break-word !important;
+  white-space: normal !important;
+}
+
+.theme.dark .hcchart .highcharts-tooltip-box {
+  fill: rgba(192, 192, 192, 0.4);;
+  fill-opacity: 0.6;
+  stroke-width: 0;
+}
+
+.theme.dark .hcchart .highcharts-tooltip text {
+  fill: white;
+  text-shadow: 0 0 3px #555;
+}

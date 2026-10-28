@@ -1,0 +1,583 @@
+.mfa-setup,
+.mfa-challenge {
+    position: relative;
+    width: min(620px, 100%);
+    margin: 0 auto;
+    color: #e7eeee;
+    text-align: center;
+}
+
+.mfa-title {
+    margin-bottom: 22px;
+}
+
+.mfa-title h2,
+.mfa-method-heading h3 {
+    margin: 0 0 6px 0;
+}
+
+.mfa-title p,
+.mfa-method-heading p,
+.mfa-method-panel p {
+    margin: 0;
+    color: #aebcbc;
+}
+
+.mfa-method-selector {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.mfa-method-selector button {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 72px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    color: #d8e1e1;
+    background: rgba(255, 255, 255, 0.035);
+    text-align: left;
+}
+
+.mfa-method-selector button.selected {
+    border-color: #408080;
+    background: rgba(64, 128, 128, 0.14);
+}
+
+.mfa-method-selector button svg {
+    flex: 0 0 auto;
+    font-size: 1.25rem;
+}
+
+.mfa-method-selector button span {
+    display: flex;
+    flex-direction: column;
+}
+
+.mfa-method-selector button small {
+    margin-top: 2px;
+    color: #93a3a3;
+}
+
+.mfa-method-selector.compact button {
+    min-height: 44px;
+}
+
+.mfa-method-panel {
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.14);
+    text-align: left;
+}
+
+.mfa-method-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.mfa-method-heading > svg {
+    margin-top: 3px;
+    font-size: 1.35rem;
+}
+
+.mfa-authenticator-grid {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 22px;
+    align-items: center;
+}
+
+.mfa-qr-wrap {
+    padding: 10px;
+    border-radius: 7px;
+    background: #fff;
+}
+
+.mfa-qr {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.mfa-authenticator-copy ol {
+    margin: 0 0 16px 20px;
+    padding: 0;
+}
+
+.mfa-authenticator-copy li {
+    margin-bottom: 7px;
+}
+
+.mfa-secret-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.mfa-secret-row code {
+    flex: 1;
+    padding: 8px 10px;
+    overflow-wrap: anywhere;
+    border-radius: 5px;
+    color: #dfeaea;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.mfa-secret-row button,
+.mfa-link-button,
+.mfa-skip {
+    border: 0;
+    color: #b9d0d0;
+    background: transparent;
+}
+
+.mfa-code-form,
+.mfa-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.mfa-code-form input,
+.mfa-field input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    margin: 0 auto;
+    border-radius: 6px;
+    outline: none;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.mfa-code-form input {
+    max-width: 190px;
+    font-size: 1.2rem;
+    letter-spacing: 0.2rem;
+    text-align: center;
+}
+
+.mfa-code-form input:focus,
+.mfa-field input:focus {
+    border-color: #408080;
+}
+
+.mfa-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: fit-content;
+    min-width: 160px;
+    margin-top: 8px;
+    margin-inline: auto;
+    padding: 9px 14px;
+    border: 1px solid #408080;
+    border-radius: 6px;
+    color: #fff;
+    background: #408080;
+}
+
+.mfa-primary:disabled {
+    opacity: 0.55;
+    cursor: default;
+}
+
+.mfa-alert,
+.mfa-status {
+    margin-top: 12px;
+    padding: 9px 11px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.mfa-error,
+.mfa-alert {
+    color: #f0bbbb;
+}
+
+.mfa-skip {
+    display: block;
+    margin: 14px auto 0 auto;
+    text-decoration: underline;
+}
+
+.mfa-back-link,
+.mfa-link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    padding: 0;
+    border: 0;
+    color: #b9d0d0;
+    background: transparent;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.mfa-back-link:disabled,
+.mfa-link-button:disabled {
+    opacity: 0.55;
+    cursor: default;
+}
+
+.mfa-setup-back {
+    position: absolute;
+    top: -4px;
+    left: 0;
+    margin-top: 0;
+    text-decoration: none;
+}
+
+.mfa-alternate-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mfa-alternate-panel h3 {
+    margin: 0 0 6px 0;
+}
+
+.mfa-alternate-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 11px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 7px;
+    color: #d8e1e1;
+    background: rgba(255, 255, 255, 0.035);
+    text-align: left;
+    cursor: pointer;
+}
+
+.mfa-alternate-option:hover {
+    border-color: #408080;
+    background: rgba(64, 128, 128, 0.10);
+}
+
+.auth-reset-sent {
+    margin: 0 0 24px;
+    padding: 14px 16px;
+    border: 1px solid rgba(143, 199, 200, 0.16);
+    border-radius: 8px;
+    color: #cbd8d8;
+    background: rgba(143, 199, 200, 0.055);
+    text-align: center;
+}
+
+.auth-reset-sent p {
+    margin: 0;
+}
+
+.account-security-page {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    padding: 48px 20px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    color: #e7eeee;
+    background: #071315;
+}
+
+.account-security-card {
+    width: min(720px, 100%);
+    margin: 0 auto 48px;
+    padding: 28px;
+    border: 1px solid rgba(143, 199, 200, 0.14);
+    border-radius: 12px;
+    background: rgba(11, 29, 31, 0.92);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+}
+
+.account-security-brand {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 28px;
+}
+
+.account-security-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 0 20px;
+    padding: 0;
+    border: 0;
+    color: #b9d0d0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.account-security-back:focus,.account-security-back:active {
+    outline: none !important;
+}
+
+.account-security-heading {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    margin-bottom: 24px;
+}
+
+.account-security-heading > svg {
+    margin-top: 4px;
+    color: #88b8b8;
+    font-size: 1.35rem;
+}
+
+.account-security-heading h2,
+.account-security-section h3 {
+    margin: 0 0 6px;
+}
+
+.account-security-heading p,
+.account-security-section p {
+    margin: 0;
+    color: #aebcbc;
+}
+
+.account-security-heading strong {
+    color: #dce9e9;
+}
+
+.account-security-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.account-security-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.account-security-form label {
+    color: #d7e1e1;
+    font-size: 0.88rem;
+}
+
+.account-security-form input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 6px;
+    outline: none;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.account-security-form input:focus {
+    border-color: #408080;
+}
+
+.account-security-form input:disabled {
+    opacity: 0.48;
+}
+
+#account-security-code {
+    display:flex;
+    max-width: 190px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    letter-spacing: 0.2rem;
+    text-align: center;
+}
+
+.account-security-primary {
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    min-width: 190px;
+    max-width: 190px;
+    margin-top: 16px;
+    margin-inline: auto;
+    padding: 0 16px;
+    border: 1px solid #408080;
+    border-radius: 6px;
+    color: #fff;
+    background: #408080;
+}
+
+.account-security-primary:disabled {
+    opacity: 0.55;
+    cursor: default;
+}
+
+.account-security-link {
+    width: fit-content;
+    margin: 10px auto 0;
+    padding: 0;
+    border: 0;
+    color: #b9d0d0;
+    background: transparent;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.account-security-mfa-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.account-security-mfa-action {
+    margin-top: 10px;
+    color: #c8d6d6;
+    font-size: 0.86rem;
+}
+
+.account-security-switch {
+    position: relative;
+    flex: 0 0 auto;
+    width: 42px;
+    height: 24px;
+}
+
+.account-security-switch input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.account-security-switch span {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    cursor: pointer;
+    transition: background 150ms ease;
+}
+
+.account-security-switch span::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #e8eeee;
+    transition: transform 150ms ease;
+}
+
+.account-security-switch input:checked + span {
+    background: #408080;
+}
+
+.account-security-switch input:checked + span::after {
+    transform: translateX(18px);
+}
+
+.account-security-alert,
+.account-security-success {
+    margin-top: 16px;
+    padding: 10px 12px;
+    border-radius: 6px;
+}
+
+.account-security-alert {
+    color: #f0bbbb;
+    background: rgba(144, 48, 48, 0.12);
+}
+
+.account-security-success {
+    color: #c6e5d1;
+    background: rgba(48, 128, 78, 0.12);
+}
+
+.account-security-section .mfa-method-panel {
+    margin-top: 16px;
+}
+
+@media (max-width: 620px) {
+    .mfa-method-selector,
+    .mfa-authenticator-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mfa-qr-wrap {
+        width: 190px;
+        margin: 0 auto;
+    }
+
+    .account-security-page {
+        padding: 20px 10px;
+    }
+
+    .account-security-card {
+        padding: 20px 16px;
+    }
+
+    .account-security-mfa-heading {
+        align-items: flex-start;
+    }
+}
+
+.account-security-switch input:disabled + span {
+    opacity: 0.45;
+    cursor: default;
+}
+
+.account-security-mfa-actions {
+    margin-top: 12px;
+}
+
+.account-security-mfa-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    width: 190px;
+    padding: 7px 12px;
+    border: 1px solid rgba(143, 199, 200, 0.34);
+    border-radius: 6px;
+    color: #dbe7e7;
+    background: rgba(64, 128, 128, 0.12);
+    font-size: 0.88rem;
+    cursor: pointer;
+}
+
+.account-security-mfa-button:hover {
+    border-color: #408080;
+    background: rgba(64, 128, 128, 0.22);
+}
+
+.account-security-mfa-button:disabled {
+    opacity: 0.55;
+    cursor: default;
+}
+
+.account-security-page button:focus,
+.account-security-page button:active,
+.mfa-setup button:focus,
+.mfa-setup button:active,
+.mfa-challenge button:focus,
+.mfa-challenge button:active {
+    outline: none !important;
+}

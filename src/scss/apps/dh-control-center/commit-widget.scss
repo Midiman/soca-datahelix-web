@@ -1,0 +1,169 @@
+/*
+PDS TEST TBD
+*/
+
+// ========================================================================
+// Theme: Dark
+// ========================================================================
+.theme.dark {
+
+    .commit-widget-modal.modal-dialog.proto .modal-content .card {
+        --bg: rgba(192, 192, 192, 0.8);
+    }
+
+}
+
+// ========================================================================
+// Theme: Light
+// ========================================================================
+.theme.light {
+
+
+    .commit-widget-modal.modal-dialog.proto .modal-content .card {
+        --bg: rgba(192, 192, 192, 0.8);
+    }
+}
+
+.commit-widget-modal .modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-dialog.commit-widget-modal .modal-content {
+    width: 80%;
+}
+
+.modal-dialog.dark.commit-widget-modal .modal-content {
+    background-color: rgba(38, 80, 88, 1.0) !important;
+}
+
+.commit-widget-modal .modal-content .card-body{
+    padding-bottom: 0;
+}
+
+.commit-widget-modal .card .modal-header.card-header {
+    padding: 6px 10px;
+}
+
+.commit-widget-modal .spinner {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.commit-widget-modal .modal-footer {
+    margin-top:0;
+}
+
+.commit-widget {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.commit-widget .dash_card {
+    flex: 1;
+}
+
+.commit-widget .dash_card .card .card-header {
+    width:100%;
+    height: inherit;
+    padding: 5px 15px;
+    border: 1px solid #515151;
+}
+
+#body-base .modal-dialog .commit-widget .dash_card .card .card-body {
+    padding: 12px 10px 0 10px !important; // Important is BAD, but we have no choice >:-(
+}
+
+.modal-dialog .commit-widget .dash_card .card .card-body {
+    padding: 12px 10px 0 10px !important; // Important is BAD, but we have no choice >:-(
+}
+
+.commit-widget .dash_card .card .card-body {
+    border-left: 1px solid #515151;
+    border-bottom: 1px solid #515151;
+    border-right: 1px solid #515151;
+    border-radius: 1px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.commit-widget-modal button {
+    border-radius: 6px;
+    border: 1px solid;
+    font-family: inherit;
+    font-size: inherit;
+    background-color: rgb(62, 86, 93);
+    color: #eee;
+    border-color: rgb(99, 99, 99);
+}
+
+.commit-widget-modal button:disabled {
+    opacity: 0.8;
+    cursor:inherit;
+}
+
+.commit-widget-modal button:hover:enabled {
+    opacity: 0.8;
+}
+
+.commit-widget-modal .commit-and-deploy-btn {
+}
+
+.commit-widget .table-container {
+    overflow: auto;
+    margin: 0;
+    padding: 10px 0;
+    background-color: #3c4349;
+    border-radius: 5px;
+    border: 1px solid #48727a;
+    height: 100%;
+}
+
+.btns-container {
+    margin-top: 15px;
+    display: flex;
+}
+
+.unstage-btns-container {
+    margin: 10px 0;
+    float: left;
+}
+
+.unstage-btns-container button:first-child{
+    margin-left: 0;
+}
+
+.unstage-btns-container button:last-of-type{
+    margin-right: 0;
+}
+
+.unstage-btns-container button {
+    margin-left: 8px;
+}
+
+.confirmation-btns-container {
+    margin: 10px 0;
+    float: right;
+}
+.confirmation-btns-container button:first-of-type{
+    margin-left: 0;
+}
+
+.confirmation-btns-container button {
+    margin-left: 8px;
+}
+
+.commit-widget .dash_card {
+    overflow: auto;
+}
+
+.commit-widget .dash_card .card-body {
+    overflow: auto;
+}
+
+.commit-widget .soca-table {
+    overflow: auto;
+}

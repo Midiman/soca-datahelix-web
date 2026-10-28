@@ -1,0 +1,98 @@
+import React from 'react';
+
+import { searchService } from '../../_services/search.service';
+import { EmailVerification } from '../auth/EmailVerification';
+
+
+const SignupVerifyEmail = ({
+    email,
+    plan = null,
+    termsVersion = null,
+    showBusy = false,
+    alert = null,
+    onBack = null,
+    onClearAlert = null,
+    onVerified = null
+}) =>
+{
+    function getResponseError(response, fallback)
+    {
+        if (!response)
+            return fallback;
+
+        if (response?.ok === false || response?.status >= 400 || response?.error)
+            return response.error || response.message || fallback;
+
+        return null;
+    }
+
+
+    async function verifyCode(code)
+    {
+        const response = await searchService.verifyThreatLabSignupCode({
+            email: email.trim().toLowerCase(),
+            code
+        });
+
+        const responseError = getResponseError(
+            response,
+            'That verification code is invalid or has expired.'
+        );
+
+        if (responseError)
+            throw new Error(responseError);
+
+        if (!response?.verificationToken)
+            throw new Error('Verification succeeded but no verification token was returned.');
+
+        return response;
+    }
+
+
+    async function resendCode()
+    {
+        const response = await searchService.requestThreatLabSignupCode({
+            email: email.trim().toLowerCase(),
+            plan: plan?.id || plan || null,
+            billingPeriod: plan?.billingPeriod || null,
+            currency: plan?.currency || null,
+            termsVersion
+        });
+
+        const responseError = getResponseError(
+            response,
+            'Unable to resend the verification code.'
+        );
+
+        if (responseError)
+            throw new Error(responseError);
+
+        return response;
+    }
+
+
+    async function handleVerified(response)
+    {
+        await onVerified?.(response.verificationToken);
+    }
+
+
+    return (
+        <EmailVerification
+            email={email}
+            alert={alert}
+            onBack={onBack}
+            onClearAlert={onClearAlert}
+            onVerify={verifyCode}
+            onVerified={handleVerified}
+            onResend={resendCode}
+            verifyLabel="Verify and create account"
+            verifyBusyLabel="Verifying"
+            completeBusyLabel="Creating account"
+            disabled={showBusy}
+        />
+    );
+};
+
+
+export { SignupVerifyEmail };
